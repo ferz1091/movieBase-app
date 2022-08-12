@@ -7,10 +7,12 @@ import { rootSaga } from './rootSaga';
 
 // Reducers
 import general from '../../bus/general/slice';
+import movies from '../../bus/movies/slice';
 
 export const store = configureStore({
     reducer: {
-        general
+        general,
+        movies
     },
     middleware
 })
