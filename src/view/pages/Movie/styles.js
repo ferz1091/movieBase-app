@@ -1,33 +1,29 @@
 // Core
 import styled from 'styled-components';
 
-// Assets
-import Spectral from '../../../assets/fonts/Spectral-Regular.ttf';
-
 export const MoviePageWrapper = styled.main`
-@font-face {
-    font-family: 'Spectral';
-    src: url(${Spectral}) format('ttf');
-}
 position: relative;
 margin-top: 16vh;
 box-sizing: border-box;
 min-height: 84vh;
 display: flex;
 flex-direction: column;
+color: white;
+overflow: auto;
+.info-header {
 background-image: url(${props => props.backgroundURL});
 background-position: center;
 background-size: cover;
 background-repeat: no-repeat;
 background-attachment: scroll;
-color: white;
-overflow: auto;
-font-family: Spectral;
+}
 h1 {
     position: relative;
     margin: 0;
     background: rgba(50, 50, 50, 0.75);
     padding: 20px 0 20px 15px;
+    font-size: 30px;
+    font-style: italic;
     .title {
         font-family: Spectral ,Arial, Helvetica, sans-serif;
         letter-spacing: 0.1em;
@@ -91,5 +87,22 @@ h1 {
 .original-title {
     padding: 10px 25px;
     font-size: 20px;
+}
+.cast {
+    background: rgba(50, 50, 50, 0.2);
+    .cast-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    h2 {
+        color: black;
+        margin: 0;
+        padding: 20px 0 20px 15px;
+        img {
+            vertical-align: bottom;
+            padding-right: 10px;
+        }
+    }
 }
 `;

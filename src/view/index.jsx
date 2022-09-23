@@ -13,16 +13,21 @@ import { Main, MoviePage } from './pages';
 // Components
 import { Header } from './components';
 
+// Assets
+import Spectral from '../assets/fonts/Spectral-Regular.ttf';
+
 const AppWrapper = styled.div`
+@font-face {
+    font-family: 'Spectral';
+    src: url(${Spectral}) format('ttf');
+}
 position: absolute;
+font-family: Spectral ,Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 top: 0; left: 0;
 width: 100%;
-/* height: 100%; */
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
-/* background: linear-gradient(to bottom, #355c7d, #6c5b7b, #c06c84); */
-
 background-size: cover;
 background-repeat: no-repeat;
 background-attachment: fixed;
@@ -32,9 +37,7 @@ background-position: center;
 const ContentWrapper = styled.section`
 position: relative;
 z-index: 1;
-/* top: 15vh; */
 width: 90vw;
-/* height: 85vh; */
 @media (max-width: 768px) {
     width: 100vw;
 }

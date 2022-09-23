@@ -8,7 +8,10 @@ import { useParams } from 'react-router-dom';
 import { useGeneral } from '../../../bus/general';
 
 // Component
-import { InfoProperty, InfoBar } from '../../components';
+import { InfoProperty, ActorCard } from '../../components';
+
+// Assets
+import actors from '../../../assets/icons/actors.png';
 
 // Styles
 import { MoviePageWrapper } from './styles';
@@ -43,113 +46,128 @@ export const MoviePage = () => {
                         </div>
                         :
                         <>
-                            <h1>
-                                <div className='title'>
-                                    {currentMovie.title}
-                                </div>
-                                <span className='rating'>
-                                    ★ {currentMovie.vote_average.toFixed(1)}
-                                </span>
-                            </h1>
-                            <div className='genres'>
-                                {currentMovie.genres.map(genre =>
-                                    <span key={genre.id}>
-                                        {genre.name}
+                            <section className='info-header'>
+                                <h1>
+                                    <div className='title'>
+                                        {currentMovie.title}
+                                    </div>
+                                    <span className='rating'>
+                                        ★ {currentMovie.vote_average.toFixed(1)}
                                     </span>
-                                )}
-                            </div>
-                            {
-                                currentMovie.title !== currentMovie.original_title ?
-                                <div className='original-title'>
-                                    {currentMovie.original_title}
+                                </h1>
+                                <div className='genres'>
+                                    {currentMovie.genres.map(genre =>
+                                        <span key={genre.id}>
+                                            {genre.name}
+                                        </span>
+                                    )}
                                 </div>
-                                :
-                                null
-                            }
-                            {currentMovie.tagline ?
-                                <div className='tagline'>
-                                    {`"${currentMovie.tagline}"`}
-                                </div>
-                                :
-                                null
-                            }
-                            <div className='movie-info'>
-                                <InfoProperty
-                                    class='release-date'
-                                    name='Release date: '
-                                    value={new Date(currentMovie.release_date).toLocaleDateString()}
-                                />
-                                {currentMovie.production_countries.length > 0 ?
-                                    <InfoProperty 
-                                        class = 'production-country'
-                                        name = 'Country: '
-                                        value = {currentMovie.production_countries.map((country, index, countries) =>
-                                                <span key={index}>
-                                                    {
-                                                        index + 1 === countries.length ?
-                                                        <>
-                                                            {` ${country.name}`}
-                                                        </>
-                                                        :
-                                                        <>
-                                                            {` ${country.name},`}
-                                                        </>
-                                                    }
-                                                </span>
-                                            )}
-                                    />
-                                    :
-                                    null
+                                {
+                                    currentMovie.title !== currentMovie.original_title ?
+                                        <div className='original-title'>
+                                            {currentMovie.original_title}
+                                        </div>
+                                        :
+                                        null
                                 }
-                                {currentMovie.spoken_languages.length > 0 ? 
-                                    <InfoProperty
-                                        class = 'language'
-                                        name = 'Language: '
-                                        value = {currentMovie.spoken_languages.map((language, index, languages) => 
-                                            <span key={index}>
-                                                {
-                                                    index + 1 === languages.length ? 
-                                                    <>
-                                                        {` ${language.english_name}`}
-                                                    </>
-                                                    :
-                                                    <>
-                                                        {` ${language.english_name},`}
-                                                    </>
-                                                }
-                                            </span>
-                                            )}
-                                    />
-                                    :
-                                    null
-                                }
-                                {currentMovie.crew.find(member => member.job === 'Director') ? 
-                                    <InfoProperty 
-                                        class = 'director'
-                                        name = 'Director: '
-                                        value = {currentMovie.crew.find(member => member.job === 'Director').original_name}
-                                    />
-                                    :
-                                    null
-                                }
-                                <InfoProperty 
-                                    class = 'time'
-                                    name = 'Time: '
-                                    value = {`${currentMovie.runtime} min.`}
-                                />
-                                {currentMovie.overview ? 
-                                    <div className='overview'>
-                                        What is the movie about?<br/>{currentMovie.overview}
+                                {currentMovie.tagline ?
+                                    <div className='tagline'>
+                                        {`"${currentMovie.tagline}"`}
                                     </div>
                                     :
                                     null
                                 }
+                                <div className='movie-info'>
+                                    <InfoProperty
+                                        class='release-date'
+                                        name='Release date: '
+                                        value={new Date(currentMovie.release_date).toLocaleDateString()}
+                                    />
+                                    {currentMovie.production_countries.length > 0 ?
+                                        <InfoProperty
+                                            class='production-country'
+                                            name='Country: '
+                                            value={currentMovie.production_countries.map((country, index, countries) =>
+                                                <span key={index}>
+                                                    {
+                                                        index + 1 === countries.length ?
+                                                            <>
+                                                                {` ${country.name}`}
+                                                            </>
+                                                            :
+                                                            <>
+                                                                {` ${country.name},`}
+                                                            </>
+                                                    }
+                                                </span>
+                                            )}
+                                        />
+                                        :
+                                        null
+                                    }
+                                    {currentMovie.spoken_languages.length > 0 ?
+                                        <InfoProperty
+                                            class='language'
+                                            name='Language: '
+                                            value={currentMovie.spoken_languages.map((language, index, languages) =>
+                                                <span key={index}>
+                                                    {
+                                                        index + 1 === languages.length ?
+                                                            <>
+                                                                {` ${language.english_name}`}
+                                                            </>
+                                                            :
+                                                            <>
+                                                                {` ${language.english_name},`}
+                                                            </>
+                                                    }
+                                                </span>
+                                            )}
+                                        />
+                                        :
+                                        null
+                                    }
+                                    {currentMovie.crew.find(member => member.job === 'Director') ?
+                                        <InfoProperty
+                                            class='director'
+                                            name='Director: '
+                                            value={currentMovie.crew.find(member => member.job === 'Director').original_name}
+                                        />
+                                        :
+                                        null
+                                    }
+                                    <InfoProperty
+                                        class='time'
+                                        name='Time: '
+                                        value={`${currentMovie.runtime} min.`}
+                                    />
+                                    {currentMovie.overview ?
+                                        <div className='overview'>
+                                            <u>What is the movie about?</u><br />{currentMovie.overview}
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                </div>
+                            </section>
+                            <div className='cast'>
+                                <h2>
+                                    <img 
+                                        src={actors}
+                                        alt=''
+                                    />
+                                   Cast
+                                </h2>
+                                <div className='cast-list'>
+                                    {currentMovie.cast.map(actor =>
+                                        <ActorCard {...actor} />
+                                    )}
+                                </div>
                             </div>
                         </>
                     :
                     null
                 }
-                <InfoBar movie={currentMovie}/>
             </MoviePageWrapper>
         )
     }
