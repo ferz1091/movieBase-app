@@ -7,7 +7,10 @@ const generalSlice = createSlice({
     reducers,
     initialState: {
         lang: 'en',
-        isFetching: false
+        isFetching: false,
+        mode: 'popular',
+        genres: [],
+        currentMovie: null
     }
 });
 

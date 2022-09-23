@@ -9,7 +9,20 @@ export const useGeneral = () => {
     function toggleIsFetching(isFetching) {
         dispatch(generalActions.toggleIsFetching(isFetching))
     }
+    function switchMode(mode) {
+        dispatch(generalActions.switchMode(mode))
+    }
+    function getGenres(lang) {
+        dispatch(generalActions.getGenres(lang))
+    }
+    function getCurrentMovie(id, lang) {
+        dispatch(generalActions.getCurrentMovie({id, lang}))
+    }
+
     return {
-        toggleIsFetching
+        toggleIsFetching,
+        switchMode,
+        getGenres,
+        getCurrentMovie
     }
 }

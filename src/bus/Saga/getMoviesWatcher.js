@@ -5,9 +5,8 @@ import * as effects from 'redux-saga/effects';
 import { movieAPI } from '../../api';
 
 // Actions
-import { moviesActions } from './slice';
+import { moviesActions } from '../movies/slice';
 import { generalActions } from '../general/slice';
-
 
 function* GetMovies(action) {
     const payload = action.payload;
@@ -17,6 +16,15 @@ function* GetMovies(action) {
     });
     try {
         const response = yield effects.call(() => movieAPI.getMovies(payload.mode, payload.page, payload.lang));
+        if (!payload.totalPages) {
+            yield effects.put({
+                type: moviesActions.setTotalPages.type,
+                payload: {
+                    mode: payload.mode,
+                    totalPages: response.data.total_pages > 500 ? 500 : response.data.total_pages
+                }
+            })
+        }
         yield effects.put({
             type: moviesActions.setMovies.type, 
             payload: {

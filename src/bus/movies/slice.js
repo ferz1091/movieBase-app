@@ -6,10 +6,10 @@ const moviesSlice = createSlice({
     name: 'movies',
     reducers,
     initialState: [
-        { name: 'popular', data: []},
-        { name: 'top', data: []},
-        { name: 'upcoming', data: []},
-        { name: 'nowPlaying', data: []}
+        { name: 'popular', data: [], totalPages: null},
+        { name: 'top_rated', data: [], totalPages: null},
+        { name: 'upcoming', data: [], totalPages: null},
+        { name: 'now_playing', data: [], totalPages: null}
     ]
 });
 
