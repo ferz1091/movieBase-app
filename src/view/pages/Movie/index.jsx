@@ -1,6 +1,6 @@
 // Core
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux/es/exports';
 import { useParams } from 'react-router-dom';
 
@@ -8,17 +8,20 @@ import { useParams } from 'react-router-dom';
 import { useGeneral } from '../../../bus/general';
 
 // Component
-import { InfoProperty, ActorCard } from '../../components';
+import { InfoProperty, ActorCard, VideoPlayer } from '../../components';
 
 // Assets
 import actors from '../../../assets/icons/actors.png';
+import videos from '../../../assets/icons/videos.png';
 
 // Styles
-import { MoviePageWrapper } from './styles';
+import { MoviePageWrapper, YTPreviewWrapper } from './styles';
 
 export const MoviePage = () => {
+    const [videoPlayerMode, setVideoPlayerMode] = useState({isOn: false, key: null});
     const { lang, currentMovie, isFetching, genres } = useSelector(state => state.general);
     const { id } = useParams();
+    const clipsRef = useRef();
     const { getCurrentMovie } = useGeneral();
     useEffect(() => {
         if (!currentMovie || currentMovie.id !== id)
@@ -38,6 +41,8 @@ export const MoviePage = () => {
                 backgroundURL={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
                 vote={currentMovie.vote_average}
                 title_length={currentMovie.title.length}
+                videoPlayerIsOn={videoPlayerMode.isOn}
+                videosAmount={currentMovie.videos.filter(video => video.site === 'YouTube').length}
             >
                 {currentMovie ?
                     currentMovie.error ?
@@ -150,7 +155,7 @@ export const MoviePage = () => {
                                     }
                                 </div>
                             </section>
-                            <div className='cast'>
+                            <section className='cast'>
                                 <h2>
                                     <img 
                                         src={actors}
@@ -159,11 +164,56 @@ export const MoviePage = () => {
                                    Cast
                                 </h2>
                                 <div className='cast-list'>
-                                    {currentMovie.cast.map(actor =>
-                                        <ActorCard {...actor} />
+                                    {currentMovie.cast.slice(0, 18).map(actor =>
+                                        <ActorCard key={actor.id} {...actor} />
                                     )}
                                 </div>
-                            </div>
+                            </section>
+                            <section className='videos'> 
+                                <h2>
+                                    <img 
+                                        src={videos}
+                                        alt=''
+                                    />
+                                    Clips
+                                </h2>
+                                <div 
+                                    className='videos-container'
+                                    ref={clipsRef}                               
+                                >
+                                    <span 
+                                        className='right arrow' 
+                                        onClick={() => clipsRef.current.scrollBy(200, 0)}
+                                    >
+                                    </span>
+                                    <span 
+                                        className='left arrow' 
+                                        onClick={() => clipsRef.current.scrollBy(-200, 0)}
+                                    >
+                                    </span>
+                                    {currentMovie.videos.filter(video => video.site === "YouTube").map(video => 
+                                    <YTPreviewWrapper
+                                        key={video.key}
+                                        logo={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
+                                        onClick={() => setVideoPlayerMode({isOn: true, key: video.key})}
+                                    >
+                                        <span className='play'>
+                                        </span>
+                                        <span className='video-name'>
+                                            {video.name}
+                                        </span>
+                                    </YTPreviewWrapper>
+                                    )}
+                                </div>
+                            </section>
+                            {videoPlayerMode.isOn ? 
+                                <VideoPlayer 
+                                    src_key={videoPlayerMode.key}
+                                    setVideoPlayerMode={setVideoPlayerMode}
+                                />
+                                :
+                                null
+                            }
                         </>
                     :
                     null

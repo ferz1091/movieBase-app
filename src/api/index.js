@@ -29,5 +29,10 @@ export const movieAPI = {
         return (
             instance.get(`/movie/${id}/credits?api_key=${API_KEY}&language=${lang}`)
         )
+    },
+    getMovieVideos(id, lang) {
+        return (
+            instance.get(`/movie/${id}/videos?api_key=${API_KEY}&language=${lang}`)
+        )
     }
 }

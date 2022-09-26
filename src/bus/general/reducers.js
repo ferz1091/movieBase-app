@@ -37,3 +37,9 @@ export const setCurrentMovieCredits = (state, action) => {
         currentMovie: {...state.currentMovie, ...action.payload}
     }
 }
+export const setCurrentMovieVideos = (state, action) => {
+    return {
+        ...state,
+        currentMovie: {...state.currentMovie, videos: [...action.payload]}
+    }
+}

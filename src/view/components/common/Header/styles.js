@@ -6,7 +6,7 @@ position: fixed;
 z-index: 2;
 width: 90vw;
 height: 15vh;
-background-color: rgba(50, 50, 50, 1);
+background: rgba(200, 200, 200, 1);
 .Switch-mode {
     position: absolute;
     bottom: 5px; left:0;

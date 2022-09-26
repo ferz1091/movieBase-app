@@ -19,9 +19,15 @@ function* getCurrentMovie(action) {
             payload: response.data
         });
         const movieCredits = yield effects.call(() => movieAPI.getMovieCredits(action.payload.id, action.payload.lang));
+        console.log(movieCredits.data);
         yield effects.put({
             type: generalActions.setCurrentMovieCredits.type,
             payload: movieCredits.data
+        });
+        const movieVideos = yield effects.call(() => movieAPI.getMovieVideos(action.payload.id, action.payload.lang));
+        yield effects.put({
+            type: generalActions.setCurrentMovieVideos.type,
+            payload: movieVideos.data.results
         })
     } catch (error) {
         yield effects.put({
