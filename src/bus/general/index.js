@@ -6,9 +6,6 @@ import { generalActions } from './slice';
 
 export const useGeneral = () => {
     const dispatch = useDispatch();
-    function toggleIsFetching(isFetching) {
-        dispatch(generalActions.toggleIsFetching(isFetching))
-    }
     function switchMode(mode) {
         dispatch(generalActions.switchMode(mode))
     }
@@ -18,11 +15,14 @@ export const useGeneral = () => {
     function getCurrentMovie(id, lang) {
         dispatch(generalActions.getCurrentMovie({id, lang}))
     }
+    function getCurrentMovieReviewsByPage(id, lang, page, func, arg) {
+        dispatch(generalActions.getCurrentMovieReviewsByPage({id, lang, page, func, arg}))
+    }
 
     return {
-        toggleIsFetching,
         switchMode,
         getGenres,
-        getCurrentMovie
+        getCurrentMovie,
+        getCurrentMovieReviewsByPage
     }
 }

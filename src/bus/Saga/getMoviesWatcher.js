@@ -11,7 +11,7 @@ import { generalActions } from '../general/slice';
 function* GetMovies(action) {
     const payload = action.payload;
     yield effects.put({
-        type: generalActions.toggleIsFetching.type,
+        type: generalActions.toggleIsFetchingMain.type,
         payload: true
     });
     try {
@@ -35,7 +35,7 @@ function* GetMovies(action) {
                 }
             })
         yield effects.put({
-            type: generalActions.toggleIsFetching.type,
+            type: generalActions.toggleIsFetchingMain.type,
             payload: false
         })
     } catch (error) {
@@ -49,7 +49,7 @@ function* GetMovies(action) {
             }
         })
         yield effects.put({
-            type: generalActions.toggleIsFetching.type,
+            type: generalActions.toggleIsFetchingMain.type,
             payload: false
         })
     }

@@ -30,7 +30,7 @@ export const Main = () => {
         }
     }, [mode, page, lang])
     
-    if (isFetching) {
+    if (isFetching.main) {
         return (
             <div>
                 SPINNER

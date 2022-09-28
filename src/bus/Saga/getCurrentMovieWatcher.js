@@ -9,7 +9,7 @@ import { generalActions } from '../general/slice';
 
 function* getCurrentMovie(action) {
     yield effects.put({
-        type: generalActions.toggleIsFetching.type,
+        type: generalActions.toggleIsFetchingMain.type,
         payload: true
     })
     try {
@@ -19,7 +19,6 @@ function* getCurrentMovie(action) {
             payload: response.data
         });
         const movieCredits = yield effects.call(() => movieAPI.getMovieCredits(action.payload.id, action.payload.lang));
-        console.log(movieCredits.data);
         yield effects.put({
             type: generalActions.setCurrentMovieCredits.type,
             payload: movieCredits.data
@@ -29,6 +28,11 @@ function* getCurrentMovie(action) {
             type: generalActions.setCurrentMovieVideos.type,
             payload: movieVideos.data.results
         })
+        const movieReviews = yield effects.call(() => movieAPI.getMovieReviews(action.payload.id, action.payload.lang, 1));
+        yield effects.put({
+            type: generalActions.setCurrentMovieReviews.type,
+            payload: { totalPages: movieReviews.data.total_pages, reviews: movieReviews.data.results, page: 1 }
+        })
     } catch (error) {
         yield effects.put({
             type: generalActions.setCurrentMovie.type,
@@ -36,7 +40,7 @@ function* getCurrentMovie(action) {
         })
     }
     yield effects.put({
-        type: generalActions.toggleIsFetching.type,
+        type: generalActions.toggleIsFetchingMain.type,
         payload: false
     })
 }

@@ -8,27 +8,30 @@ import { useParams } from 'react-router-dom';
 import { useGeneral } from '../../../bus/general';
 
 // Component
-import { InfoProperty, ActorCard, VideoPlayer } from '../../components';
+import { InfoProperty, ActorCard, VideoPlayer, Review } from '../../components';
 
 // Assets
 import actors from '../../../assets/icons/actors.png';
 import videos from '../../../assets/icons/videos.png';
+import reviews from '../../../assets/icons/reviews.png';
 
 // Styles
 import { MoviePageWrapper, YTPreviewWrapper } from './styles';
 
 export const MoviePage = () => {
     const [videoPlayerMode, setVideoPlayerMode] = useState({isOn: false, key: null});
+    const [reviewPage, setReviewPage] = useState(1);
     const { lang, currentMovie, isFetching, genres } = useSelector(state => state.general);
     const { id } = useParams();
     const clipsRef = useRef();
-    const { getCurrentMovie } = useGeneral();
+    const { getCurrentMovie, getCurrentMovieReviewsByPage } = useGeneral();
     useEffect(() => {
-        if (!currentMovie || currentMovie.id !== id)
+        if (!currentMovie || currentMovie.id !== id) {
             getCurrentMovie(id, lang);
+        }
     }, [id, lang])
 
-    if (isFetching) {
+    if (isFetching.main) {
         return (
             <div>
                 SPINNER
@@ -43,6 +46,7 @@ export const MoviePage = () => {
                 title_length={currentMovie.title.length}
                 videoPlayerIsOn={videoPlayerMode.isOn}
                 videosAmount={currentMovie.videos.filter(video => video.site === 'YouTube').length}
+                isArrowsVisible={currentMovie.videos.filter(video => video.site === 'YouTube').length * 300 > window.innerWidth}
             >
                 {currentMovie ?
                     currentMovie.error ?
@@ -141,6 +145,28 @@ export const MoviePage = () => {
                                         :
                                         null
                                     }
+                                    {currentMovie.production_companies.length > 0 ?
+                                        <InfoProperty
+                                            class='prod_companies'
+                                            name='Companies: '
+                                            value={currentMovie.production_companies.map((company, index, companies) =>
+                                                <span key={index}>
+                                                    {
+                                                        index + 1 === companies.length ?
+                                                            <>
+                                                                {` ${company.name}`}
+                                                            </>
+                                                            :
+                                                            <>
+                                                                {` ${company.name},`}
+                                                            </>
+                                                    }
+                                                </span>
+                                            )}
+                                        />
+                                        :
+                                        null
+                                    }
                                     <InfoProperty
                                         class='time'
                                         name='Time: '
@@ -161,10 +187,10 @@ export const MoviePage = () => {
                                         src={actors}
                                         alt=''
                                     />
-                                   Cast
+                                   Starring
                                 </h2>
                                 <div className='cast-list'>
-                                    {currentMovie.cast.slice(0, 18).map(actor =>
+                                    {currentMovie.cast.slice(0, 12).map(actor =>
                                         <ActorCard key={actor.id} {...actor} />
                                     )}
                                 </div>
@@ -205,6 +231,58 @@ export const MoviePage = () => {
                                     </YTPreviewWrapper>
                                     )}
                                 </div>
+                            </section>
+                            <section className='reviews'> 
+                                <h2>
+                                    <img
+                                        src={reviews}
+                                        alt=''
+                                    />
+                                    Reviews
+                                </h2>
+                                {currentMovie.reviews.data.length > 0 ?
+                                    <>
+                                        {currentMovie.reviews.totalPages > 1 ?
+                                            <div
+                                                className='reviewPage-changer'
+                                            >
+                                                {reviewPage > 1 ?
+                                                    <span 
+                                                        className='prev-reviewPage'
+                                                        onClick={() => setReviewPage(reviewPage - 1)}
+                                                    >
+                                                        {`< Previous`}
+                                                    </span>
+                                                    :
+                                                    null
+                                                }
+                                                {currentMovie.reviews.totalPages !== reviewPage ?
+                                                    <span
+                                                        className='next-reviewPage'
+                                                        onClick={() => getCurrentMovieReviewsByPage(id, lang, reviewPage + 1, (arg) => setReviewPage(arg), reviewPage + 1)}
+                                                    >
+                                                        {`Next >`}
+                                                    </span>
+                                                    : 
+                                                    null
+                                                }
+                                            </div>
+                                            :
+                                            null
+                                        }
+                                        {currentMovie.reviews.data[reviewPage - 1].reviews.length > 0 ?
+                                            <dl className='review-list'>
+                                                {currentMovie.reviews.data[reviewPage - 1].reviews.map(review =>
+                                                    <Review key={review.author} {...review} />
+                                                )}
+                                            </dl>
+                                            : 
+                                            null
+                                        }
+                                    </> 
+                                    :
+                                    null
+                                }
                             </section>
                             {videoPlayerMode.isOn ? 
                                 <VideoPlayer 

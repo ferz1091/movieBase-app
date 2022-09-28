@@ -5,7 +5,8 @@ import { all } from 'redux-saga/effects';
 import { watchFetchMovies } from '../../bus/Saga/getMoviesWatcher';
 import { getGenresWatcher } from '../../bus/Saga/getGenresWatcher';
 import { getCurrentMovieWatcher } from '../../bus/Saga/getCurrentMovieWatcher';
+import { getCurrentMovieReviewsByPageWatcher } from '../../bus/Saga/getCurrentMovieReviewsByPage';
 
 export function* rootSaga() {
-    yield all([watchFetchMovies(), getGenresWatcher(), getCurrentMovieWatcher()]);
+    yield all([watchFetchMovies(), getGenresWatcher(), getCurrentMovieWatcher(), getCurrentMovieReviewsByPageWatcher()]);
 }

@@ -28,13 +28,13 @@ background-attachment: scroll;
 h1 {
     position: relative;
     margin: 0;
-    background: rgba(50, 50, 50, 0.75);
+    background: rgba(50, 50, 50, 0.5);
     padding: 20px 0 20px 15px;
     font-size: 30px;
-    font-style: italic;
     .title {
         font-family: Spectral ,Arial, Helvetica, sans-serif;
         letter-spacing: 0.1em;
+        font-style: italic;
     }
 }
 .movie-info {
@@ -89,14 +89,13 @@ h1 {
 }
 .overview {
     text-shadow: 1px 1px 2px black;
-    background: rgba(50, 50, 50, 0.6);
+    background: rgba(50, 50, 50, 0.5);
 }
 .original-title {
     padding: 10px 25px;
     font-size: 20px;
 }
 .cast {
-    background-color: rgb(200, 200, 200);
     .cast-list {
         background: rgba(50, 50, 50, 0.2);
         display: flex;
@@ -104,7 +103,8 @@ h1 {
         justify-content: center;
     }
 }
-.cast, .videos {
+.cast, .videos, .reviews {
+    background-color: rgb(200, 200, 200);
     h2 {
         color: black;
         margin: 0;
@@ -119,7 +119,6 @@ h1 {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: rgb(200, 200, 200);
     .videos-container {
         display: flex;
         overflow-x: auto;
@@ -129,6 +128,7 @@ h1 {
     height: 0;
 }
 .arrow {
+    display: ${props => props.isArrowsVisible ? 'inline' : 'none'};
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -151,6 +151,40 @@ h1 {
 }
 .left:hover {
     background-image: url(${left_hover});
+}
+.review-list {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    background-color: rgba(50,50,50,0.2);
+    padding: 10px;
+    margin: 0;
+}
+.reviewPage-changer {
+    min-height: 21px;
+    position: relative;
+    padding-bottom: 5px;
+}
+.prev-reviewPage, .next-reviewPage {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: black;
+}
+.prev-reviewPage:hover, .next-reviewPage:hover {
+    color: white;
+}
+.prev-reviewPage {
+    padding-left: 15px;
+}
+.next-reviewPage {
+    position: absolute;
+    right: 15px;
+}
+@media (max-width: 768px) {
+    .review-list {
+        grid-template-columns: 100px 1fr;
+    }
 }
 `;
 

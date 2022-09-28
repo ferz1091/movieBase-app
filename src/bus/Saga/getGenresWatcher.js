@@ -9,7 +9,7 @@ import { generalActions } from '../general/slice';
 
 function* getGenres(action) {
     yield effects.put({
-        type: generalActions.toggleIsFetching.type,
+        type: generalActions.toggleIsFetchingMain.type,
         payload: true
     })
     try {
@@ -22,7 +22,7 @@ function* getGenres(action) {
         console.log(`Genre loading error:\n${error.message}`);
     }
     yield effects.put({
-        type: generalActions.toggleIsFetching.type,
+        type: generalActions.toggleIsFetchingMain.type,
         payload: false
     })
 }

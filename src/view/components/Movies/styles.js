@@ -3,9 +3,6 @@ import styled from 'styled-components';
 
 export const MovieWrapper = styled.figure`
 position: relative;
-/* img {
-    min-height: 249px;
-} */
 .movie-info {
     position: absolute;
     top: 0;
