@@ -21,7 +21,7 @@ export const Review = (review) => {
                 <span className='avatar'>
                 </span>
                 <span className='user'>
-                    <span>
+                    <span className='author'>
                         {review.author}
                     </span>
                     <span className='username'>

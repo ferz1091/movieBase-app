@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 // Bus
-import { useGeneral } from '../../../bus/general';
+import { useGeneral } from '../../../../bus/general';
 
 // Assets
-import poster_null from '../../../assets/poster_null.jpg';
+import poster_null from '../../../../assets/poster_null.jpg';
 
 // Styles
 import { MovieWrapper } from './styles';

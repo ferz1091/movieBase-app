@@ -1,2 +1,2 @@
 export * from './common';
-export * from './Movies';
+export * from './MoviePageComponents';

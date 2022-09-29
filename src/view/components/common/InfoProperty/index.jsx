@@ -5,14 +5,17 @@ import React from 'react';
 import { PropertyWrapper } from './styles';
 
 export const InfoProperty = (property) => {
-    return (
-        <PropertyWrapper className={property.class}>
-            <span className='prop'>
-                {property.name}
-            </span>
-            <span className='value'>
-                {property.value}
-            </span>
-        </PropertyWrapper>
-    )
+    if (property.isVisible) {
+        return (
+            <PropertyWrapper className={property.class}>
+                <span className='prop'>
+                    {property.name}
+                </span>
+                <span className='value'>
+                    {property.value}
+                </span>
+            </PropertyWrapper>
+        )
+    }
+    return null;
 }

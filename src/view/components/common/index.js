@@ -4,3 +4,4 @@ export * from './InfoProperty';
 export * from './ActorCard';
 export * from './VideoPlayer';
 export * from './Review';
+export * from './Movies';
