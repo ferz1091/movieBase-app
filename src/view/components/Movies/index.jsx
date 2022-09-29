@@ -1,8 +1,11 @@
 // Core
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+
+// Bus
+import { useGeneral } from '../../../bus/general';
 
 // Assets
 import poster_null from '../../../assets/poster_null.jpg';
@@ -12,8 +15,14 @@ import { MovieWrapper } from './styles';
 
 export const Movies = (movie) => {
     const genres = useSelector(state => state.general.genres);
+    const { getGenres } = useGeneral();
     const [isHover, toggleIsHover] = useState(false);
     const [isMovieOverviewOpen, toggleIsMovieOverviewOpen] = useState(false);
+    useEffect(() => {
+        if (!genres.length) {
+            getGenres();
+        }
+    }, [])
     return (
         <NavLink to={`/movie/${movie.id}`}>
             <MovieWrapper
@@ -24,13 +33,13 @@ export const Movies = (movie) => {
             >
                     <img
                         src={movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : poster_null}
-                        alt={``}
+                        alt=''
                     />
                 <figcaption>
                     {movie.title.length < 60 ? movie.title : movie.title.slice(0, 59) + '...'}
                 </figcaption>
                 {isHover ?
-                    <div className='movie-info'>
+                    <div className='movie-info-header'>
                         <div className='genre'>
                             {movie.genre_ids.length > 0 ?
                                 <span>
@@ -48,7 +57,7 @@ export const Movies = (movie) => {
                             }
                         </div>
                         <div className='vote'>
-                            ★ {movie.vote_average}
+                            ★ {movie.vote_average % 1 === 1 ? movie.vote_average : movie.vote_average.toFixed(1)}
                         </div>
                     </div>
                     : 

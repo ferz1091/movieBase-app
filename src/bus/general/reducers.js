@@ -64,3 +64,9 @@ export const setCurrentMovieReviews = (state, action) => {
         }
     }
 }
+export const setSimilarMovies = (state, action) => {
+    return {
+        ...state,
+        currentMovie: {...state.currentMovie, similar: action.payload}
+    }
+}

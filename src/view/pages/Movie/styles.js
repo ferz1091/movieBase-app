@@ -103,7 +103,7 @@ h1 {
         justify-content: center;
     }
 }
-.cast, .videos, .reviews {
+.cast, .videos, .reviews, .similar {
     background-color: rgb(200, 200, 200);
     h2 {
         color: black;
@@ -122,6 +122,7 @@ h1 {
     .videos-container {
         display: flex;
         overflow-x: auto;
+        justify-content: ${props => props.videosAmount === 1 ? 'center;' : 'start;'};
     }
 }
 .videos-container::-webkit-scrollbar {
@@ -180,6 +181,23 @@ h1 {
 .next-reviewPage {
     position: absolute;
     right: 15px;
+}
+.similar {
+    .similar-list {
+        padding-top: 15px;
+        background: rgba(50,50,50,0.2);
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        a {
+            text-decoration: none;
+        }
+        a:visited, a:link {
+            color: black;
+        }
+    }
 }
 @media (max-width: 768px) {
     .review-list {

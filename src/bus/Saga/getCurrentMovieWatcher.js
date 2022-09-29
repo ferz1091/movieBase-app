@@ -33,6 +33,11 @@ function* getCurrentMovie(action) {
             type: generalActions.setCurrentMovieReviews.type,
             payload: { totalPages: movieReviews.data.total_pages, reviews: movieReviews.data.results, page: 1 }
         })
+        const similarMovies = yield effects.call(() => movieAPI.getSimilarMovies(action.payload.id, action.payload.lang));
+        yield effects.put({
+            type: generalActions.setSimilarMovies.type,
+            payload: similarMovies.data.results
+        })
     } catch (error) {
         yield effects.put({
             type: generalActions.setCurrentMovie.type,

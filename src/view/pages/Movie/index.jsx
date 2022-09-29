@@ -8,12 +8,13 @@ import { useParams } from 'react-router-dom';
 import { useGeneral } from '../../../bus/general';
 
 // Component
-import { InfoProperty, ActorCard, VideoPlayer, Review } from '../../components';
+import { InfoProperty, ActorCard, VideoPlayer, Review, Movies } from '../../components';
 
 // Assets
 import actors from '../../../assets/icons/actors.png';
 import videos from '../../../assets/icons/videos.png';
 import reviews from '../../../assets/icons/reviews.png';
+import similar from '../../../assets/icons/similar.png';
 
 // Styles
 import { MoviePageWrapper, YTPreviewWrapper } from './styles';
@@ -283,6 +284,23 @@ export const MoviePage = () => {
                                     :
                                     null
                                 }
+                            </section>
+                            <section className='similar'>
+                                <h2>
+                                    <img 
+                                        src={similar}
+                                        alt=''
+                                    />
+                                    Similar
+                                </h2>
+                                <div className='similar-list'>
+                                    {currentMovie.similar.map(movie =>
+                                        <Movies
+                                            key={movie.id}
+                                            {...movie}
+                                        />
+                                    )}
+                                </div>
                             </section>
                             {videoPlayerMode.isOn ? 
                                 <VideoPlayer 

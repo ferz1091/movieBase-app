@@ -3,7 +3,23 @@ import styled from 'styled-components';
 
 export const MovieWrapper = styled.figure`
 position: relative;
-.movie-info {
+height: 100%;
+margin: 5px 8px;
+figcaption {
+    text-align: center;
+    height: 50px;
+    width: calc(18vw - 16px);
+}
+img {
+    width: calc(18vw - 16px);
+}
+a {
+    text-decoration: none;
+}
+a:visited, a:link {
+    color: black;
+}
+.movie-info-header {
     position: absolute;
     top: 0;
     display: flex;
@@ -22,8 +38,9 @@ position: relative;
 }
 .vote {
     position: absolute;
-    top: 0;
+    top: 50%;
     right: 0;
+    transform: translate(0, -50%);
     padding: 5px;
     color: ${props => props.vote < 3 ? '#cc0000' : 
                 props.vote < 5 ? '#e69138' : 
@@ -50,6 +67,13 @@ position: relative;
     text-shadow: none;
 }
 @media (max-width: 768px) {
+    width: calc(45vw - 16px);
+    figcaption {
+        width: calc(45vw - 16px);
+    }
+    img {
+        width: calc(45vw - 16px);
+    }
     .overview-text {
         min-width: calc(45vw - 16px);
     }
