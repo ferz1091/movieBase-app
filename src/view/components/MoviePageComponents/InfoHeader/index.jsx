@@ -119,6 +119,12 @@ export const InfoHeader = (props) => {
                     value={`${props.currentMovie.runtime} min.`}
                     isVisible={props.currentMovie.runtime}
                 />
+                <InfoProperty 
+                    class='collection'
+                    name='Collection: '
+                    value={props.currentMovie.collection ? props.currentMovie.collection.name : ''}
+                    isVisible={props.currentMovie.collection}
+                />
                 <Social {...props.currentMovie.social} />
                 {props.currentMovie.overview ?
                     <div className='overview'>

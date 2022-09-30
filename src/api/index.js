@@ -49,5 +49,10 @@ export const movieAPI = {
         return (
             instance.get(`/movie/${id}/external_ids?api_key=${API_KEY}`)
         )
+    },
+    getCollection(id, lang) {
+        return (
+            instance.get(`/collection/${id}?api_key=${API_KEY}&language=${lang}`)
+        )
     }
 }

@@ -53,7 +53,7 @@ export const Reviews = (props) => {
                     {props.currentMovie.reviews.data[props.reviewPage - 1].reviews.length > 0 ?
                         <dl className='review-list'>
                             {props.currentMovie.reviews.data[props.reviewPage - 1].reviews.map(review =>
-                                <Review key={review.author} {...review} />
+                                <Review key={review.id} {...review} />
                             )}
                         </dl>
                         :

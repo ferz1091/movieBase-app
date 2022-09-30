@@ -76,3 +76,9 @@ export const setSocialIds = (state, action) => {
         currentMovie: {...state.currentMovie, social: action.payload}
     }
 }
+export const setCollection = (state, action) => {
+    return {
+        ...state,
+        currentMovie: {...state.currentMovie, collection: action.payload}
+    }
+}
