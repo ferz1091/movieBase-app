@@ -59,6 +59,7 @@ padding: 5px;
 display: flex;
 align-items: center;
 .hide-button {
+    cursor: pointer;
     transition: all linear 0.2s;
     display: inline-block;
     width: 20px;

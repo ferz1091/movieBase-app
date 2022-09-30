@@ -35,11 +35,13 @@ export const Review = (review) => {
             <ReviewContent 
                 showFullReview={showFullReview}
                 review_length={review.content.length}
-                onClick={() => toggleShowFullReview(!showFullReview)}
             >
                 {review.content.length > 300 ? showFullReview ? review.content : `${review.content.slice(0, 300)}...` : review.content}
                 {review.content.length > 300 ?
-                    <span className='hide-button'>
+                    <span 
+                        className='hide-button'
+                        onClick={() => toggleShowFullReview(!showFullReview)}
+                    >
                     </span>
                     :
                     null

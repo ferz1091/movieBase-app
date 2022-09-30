@@ -70,3 +70,9 @@ export const setSimilarMovies = (state, action) => {
         currentMovie: {...state.currentMovie, similar: action.payload}
     }
 }
+export const setSocialIds = (state, action) => {
+    return {
+        ...state,
+        currentMovie: {...state.currentMovie, social: action.payload}
+    }
+}

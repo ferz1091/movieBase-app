@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import { InfoProperty } from '../../common';
+import { InfoProperty, Social } from '../../common';
 
 // Styles
 import { InfoHeaderWrapper } from './styles';
@@ -119,6 +119,7 @@ export const InfoHeader = (props) => {
                     value={`${props.currentMovie.runtime} min.`}
                     isVisible={props.currentMovie.runtime}
                 />
+                <Social {...props.currentMovie.social} />
                 {props.currentMovie.overview ?
                     <div className='overview'>
                         <u>What is the movie about?</u><br />{props.currentMovie.overview}

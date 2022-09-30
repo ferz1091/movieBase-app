@@ -44,5 +44,10 @@ export const movieAPI = {
         return (
             instance.get(`/movie/${id}/similar?api_key=${API_KEY}&language=${lang}&page=1`)
         )
+    },
+    getSocialIds(id) {
+        return (
+            instance.get(`/movie/${id}/external_ids?api_key=${API_KEY}`)
+        )
     }
 }
