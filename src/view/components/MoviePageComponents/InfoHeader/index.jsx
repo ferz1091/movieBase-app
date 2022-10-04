@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 // Components
 import { InfoProperty, Social } from '../../common';
@@ -7,7 +8,7 @@ import { InfoProperty, Social } from '../../common';
 // Styles
 import { InfoHeaderWrapper } from './styles';
 
-export const InfoHeader = (props) => {
+export const MovieInfoHeader = (props) => {
     return (
         <InfoHeaderWrapper 
             className='info-header'
@@ -91,7 +92,11 @@ export const InfoHeader = (props) => {
                 <InfoProperty
                     class='director'
                     name='Director: '
-                    value={props.currentMovie.crew.find(member => member.job === 'Director').original_name}
+                    value={
+                            <NavLink to={`/person/${props.currentMovie.crew.find(member => member.job === 'Director').id}`}>
+                                {props.currentMovie.crew.find(member => member.job === 'Director').original_name}
+                            </NavLink>
+                            }
                     isVisible={props.currentMovie.crew.find(member => member.job === 'Director')}
                 />
                 <InfoProperty

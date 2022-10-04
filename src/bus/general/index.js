@@ -18,11 +18,15 @@ export const useGeneral = () => {
     function getCurrentMovieReviewsByPage(id, lang, page, func, arg) {
         dispatch(generalActions.getCurrentMovieReviewsByPage({id, lang, page, func, arg}))
     }
+    function getCurrentPerson(id, lang) {
+        dispatch(generalActions.getCurrentPerson({id, lang}))
+    }
 
     return {
         switchMode,
         getGenres,
         getCurrentMovie,
-        getCurrentMovieReviewsByPage
+        getCurrentMovieReviewsByPage,
+        getCurrentPerson
     }
 }

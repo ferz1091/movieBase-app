@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export const PropertyWrapper = styled.div`
 display: grid;
 grid-template-columns: 110px 1fr;
-background: rgba(50, 50, 50, 0.5);
 .prop, .value {
     text-shadow: 1px 1px 2px black;
     margin: 5px 0;
@@ -19,5 +18,6 @@ background: rgba(50, 50, 50, 0.5);
     font-size: calc(12px + 6 * (100vw / 1400));
     font-style: oblique;
     padding-left: 0;
+    word-wrap: break-word;
 }
 `;

@@ -13,7 +13,10 @@ const SocialBackground = (props) => {
 
 export const Social = (props) => {
     return (
-        <SocialWrapper ids={props}>
+        <SocialWrapper
+            className='social'
+            ids={props}
+        >
             {props.imdb_id ?
                 <a
                     target='_blank'

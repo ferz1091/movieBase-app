@@ -70,7 +70,7 @@ export const setSimilarMovies = (state, action) => {
         currentMovie: {...state.currentMovie, similar: action.payload}
     }
 }
-export const setSocialIds = (state, action) => {
+export const setMovieSocialIds = (state, action) => {
     return {
         ...state,
         currentMovie: {...state.currentMovie, social: action.payload}
@@ -80,5 +80,32 @@ export const setCollection = (state, action) => {
     return {
         ...state,
         currentMovie: {...state.currentMovie, collection: action.payload}
+    }
+}
+export const getCurrentPerson = (state, action) => {
+
+}
+export const setCurrentPerson = (state, action) => {
+    return {
+        ...state,
+        currentPerson: action.payload
+    }
+}
+export const setPersonSocialIds = (state, action) => {
+    return {
+        ...state,
+        currentPerson: {...state.currentPerson, social: action.payload}
+    }
+}
+export const setPersonMovieCredits = (state, action) => {
+    return {
+        ...state,
+        currentPerson: {...state.currentPerson, credits: {...state.currentPerson.credits, movie: action.payload}}
+    }
+}
+export const setPersonTVCredits = (state, action) => {
+    return {
+        ...state,
+        currentPerson: {...state.currentPerson, credits: {...state.currentPerson.credits, tv: action.payload}}
     }
 }

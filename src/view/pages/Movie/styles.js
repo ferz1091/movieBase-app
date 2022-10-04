@@ -9,7 +9,9 @@ min-height: 84vh;
 display: flex;
 flex-direction: column;
 color: white;
-overflow: auto;
+.movie-info {
+    background: rgba(50, 50, 50, 0.5);
+}
 .cast, .clips, .reviews, .similar {
     background-color: rgb(200, 200, 200);
     h2 {

@@ -20,6 +20,12 @@ h1 {
         text-shadow: 1px 1px 2px black;
     }
 }
+a, a:visited, a:link {
+    color: white;
+}
+a:hover {
+    color: rgb(150,150,150); 
+}
 .movie-info {
     display: flex;
     flex-direction: column;

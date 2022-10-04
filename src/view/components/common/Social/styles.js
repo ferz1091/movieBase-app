@@ -12,7 +12,6 @@ import facebook from '../../../../assets/icons/facebook.png';
 import facebook_nonactive from '../../../../assets/icons/facebook_nonactive.png';
 
 export const SocialWrapper = styled.div`
-background-color: rgba(50,50,50,0.5);
 span {
     display: inline-block;
     width: 50px;

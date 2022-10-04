@@ -24,7 +24,7 @@ export const Movies = (movie) => {
         }
     }, [])
     return (
-        <NavLink to={`/movie/${movie.id}`}>
+        <NavLink to={movie.tv ? `/tv/${movie.id}` : `/movie/${movie.id}`}>
             <MovieWrapper
                 className='movie'
                 vote={movie.vote_average}
@@ -36,7 +36,7 @@ export const Movies = (movie) => {
                         alt=''
                     />
                 <figcaption>
-                    {movie.title.length < 60 ? movie.title : movie.title.slice(0, 59) + '...'}
+                    {movie.title ? movie.title.length < 50 ? movie.title : movie.title.slice(0, 49) + '...' : movie.name.length < 50 ? movie.name : movie.name.slice(0, 49)}
                 </figcaption>
                 {isHover ?
                     <div className='movie-info-header'>

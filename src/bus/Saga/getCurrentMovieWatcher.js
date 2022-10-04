@@ -38,9 +38,9 @@ function* getCurrentMovie(action) {
             type: generalActions.setSimilarMovies.type,
             payload: similarMovies.data.results
         })
-        const socialIds = yield effects.call(() => movieAPI.getSocialIds(action.payload.id));
+        const socialIds = yield effects.call(() => movieAPI.getMovieSocialIds(action.payload.id));
         yield effects.put({
-            type: generalActions.setSocialIds.type,
+            type: generalActions.setMovieSocialIds.type,
             payload: socialIds.data
         })
         if (response.data.belongs_to_collection) {

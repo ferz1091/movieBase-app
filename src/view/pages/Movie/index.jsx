@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Component
-import { VideoPlayer, InfoHeader, Cast, Clips, Reviews, Similar } from '../../components';
+import { VideoPlayer, MovieInfoHeader, Cast, Clips, Reviews, Similar } from '../../components';
 
 // Tools
 import { useMovie } from '../../../tools';
@@ -48,7 +48,7 @@ export const MoviePage = () => {
                         </div>
                         :
                         <>
-                            <InfoHeader currentMovie={currentMovie}/>
+                            <MovieInfoHeader currentMovie={currentMovie}/>
                             <Clips 
                                 currentMovie={currentMovie}
                                 setVideoPlayerMode={setVideoPlayerMode}

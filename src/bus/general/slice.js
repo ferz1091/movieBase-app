@@ -8,10 +8,10 @@ const generalSlice = createSlice({
     initialState: {
         lang: 'en',
         isFetching: {main: false, reviews: false},
-        da: true,
         mode: 'popular',
         genres: [],
-        currentMovie: null
+        currentMovie: null,
+        currentPerson: null
     }
 });
 
