@@ -9,6 +9,7 @@ min-height: 84vh;
 display: flex;
 flex-direction: column;
 color: white;
+background-color: rgba(50,50,50,0.2);
 .movie-info {
     background: rgba(50, 50, 50, 0.5);
 }
@@ -23,5 +24,8 @@ color: white;
             padding-right: 10px;
         }
     }
+}
+.error {
+    color: black;
 }
 `;

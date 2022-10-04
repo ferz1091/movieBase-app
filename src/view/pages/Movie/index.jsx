@@ -11,17 +11,17 @@ import { useMovie } from '../../../tools';
 import { MoviePageWrapper } from './styles';
 
 export const MoviePage = () => {
-    const { reviewPage, 
-            setReviewPage, 
-            videoPlayerMode, 
-            setVideoPlayerMode, 
-            currentMovie, 
-            lang, 
-            isFetching, 
-            id,
-            clipsRef,
-            getCurrentMovie,
-            getCurrentMovieReviewsByPage } = useMovie();
+    const { reviewPage,
+        setReviewPage,
+        videoPlayerMode,
+        setVideoPlayerMode,
+        currentMovie,
+        lang,
+        isFetching,
+        id,
+        clipsRef,
+        getCurrentMovie,
+        getCurrentMovieReviewsByPage } = useMovie();
     useEffect(() => {
         if (!currentMovie || currentMovie.id !== id) {
             getCurrentMovie(id, lang);
@@ -35,47 +35,44 @@ export const MoviePage = () => {
             </div>
         )
     }
-    else if (currentMovie) {
+    else if (currentMovie && !currentMovie.error) {
         return (
             <MoviePageWrapper
                 videoPlayerIsOn={videoPlayerMode.isOn}
-                videosAmount={currentMovie.videos.filter(video => video.site === 'YouTube').length}
+                videosAmount={!currentMovie.error ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
             >
-                {currentMovie ?
-                    currentMovie.error ?
-                        <div>
-                            {currentMovie.error}
-                        </div>
-                        :
-                        <>
-                            <MovieInfoHeader currentMovie={currentMovie}/>
-                            <Clips 
-                                currentMovie={currentMovie}
-                                setVideoPlayerMode={setVideoPlayerMode}
-                                clipsRef={clipsRef}
-                            />
-                            <Cast currentMovie={currentMovie}/>
-                            <Reviews 
-                                currentMovie={currentMovie}
-                                getCurrentMovieReviewsByPage={getCurrentMovieReviewsByPage}
-                                reviewPage={reviewPage}
-                                setReviewPage={setReviewPage}
-                                id={id}
-                                lang={lang}
-                            />
-                            <Similar currentMovie={currentMovie}/>
-                            {videoPlayerMode.isOn ? 
-                                <VideoPlayer 
-                                    src_key={videoPlayerMode.key}
-                                    setVideoPlayerMode={setVideoPlayerMode}
-                                />
-                                :
-                                null
-                            }
-                        </>
+                <MovieInfoHeader currentMovie={currentMovie} />
+                <Clips
+                    currentMovie={currentMovie}
+                    setVideoPlayerMode={setVideoPlayerMode}
+                    clipsRef={clipsRef}
+                />
+                <Cast currentMovie={currentMovie} />
+                <Reviews
+                    currentMovie={currentMovie}
+                    getCurrentMovieReviewsByPage={getCurrentMovieReviewsByPage}
+                    reviewPage={reviewPage}
+                    setReviewPage={setReviewPage}
+                    id={id}
+                    lang={lang}
+                />
+                <Similar currentMovie={currentMovie} />
+                {videoPlayerMode.isOn ?
+                    <VideoPlayer
+                        src_key={videoPlayerMode.key}
+                        setVideoPlayerMode={setVideoPlayerMode}
+                    />
                     :
                     null
                 }
+            </MoviePageWrapper>
+        )
+    } else if (currentMovie && currentMovie.error) {
+        return (
+            <MoviePageWrapper>
+                <div className='error'>
+                    {currentMovie.error}
+                </div>
             </MoviePageWrapper>
         )
     }

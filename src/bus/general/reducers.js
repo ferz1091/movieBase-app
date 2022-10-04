@@ -109,3 +109,11 @@ export const setPersonTVCredits = (state, action) => {
         currentPerson: {...state.currentPerson, credits: {...state.currentPerson.credits, tv: action.payload}}
     }
 }
+export const getCurrentTVShow = (state, action) => {
+}
+export const setCurrentTVShow = (state, action) => {
+    return {
+        ...state,
+        currentTVShow: action.payload
+    }
+}

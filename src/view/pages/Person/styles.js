@@ -92,6 +92,9 @@ h2 {
     top: 50%; left: 15px;
     transform: translate(0, -50%);
 }
+.error {
+    color: black;
+}
 @media (max-width: 768px) {
     .person-header {
         grid-template-columns: 160px 1fr;

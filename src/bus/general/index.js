@@ -21,12 +21,15 @@ export const useGeneral = () => {
     function getCurrentPerson(id, lang) {
         dispatch(generalActions.getCurrentPerson({id, lang}))
     }
-
+    function getCurrentTVShow(id, lang) {
+        dispatch(generalActions.getCurrentTVShow({id, lang}))
+    }
     return {
         switchMode,
         getGenres,
         getCurrentMovie,
         getCurrentMovieReviewsByPage,
-        getCurrentPerson
+        getCurrentPerson,
+        getCurrentTVShow
     }
 }

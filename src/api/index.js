@@ -79,5 +79,10 @@ export const movieAPI = {
         return (
             instance.get(`/person/${id}/external_ids?api_key=${API_KEY}&language=${lang}`)
         )
+    },
+    getCurrentTVShow(id, lang) {
+        return (
+            instance.get(`/tv/${id}?api_key=${API_KEY}&language=${lang}`)
+        )
     }
 }

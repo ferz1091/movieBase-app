@@ -37,9 +37,9 @@ function* getCurrentPerson(action) {
             payload: socialIds.data
         })
     } catch (error) {
-        effects.put({
+        yield effects.put({
             type: generalActions.setCurrentPerson.type,
-            payload: {error: error}
+            payload: {error: error.message}
         })
     }
     yield effects.put({

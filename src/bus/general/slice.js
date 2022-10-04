@@ -11,6 +11,7 @@ const generalSlice = createSlice({
         mode: 'popular',
         genres: [],
         currentMovie: null,
+        currentTVShow: null,
         currentPerson: null
     }
 });

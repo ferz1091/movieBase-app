@@ -9,8 +9,8 @@ import { useGeneral } from '../bus/general';
 export const useMovie = () => {
     const [reviewPage, setReviewPage] = useState(1);
     const [videoPlayerMode, setVideoPlayerMode] = useState({ isOn: false, key: null });
-    const { lang, currentMovie, isFetching } = useSelector(state => state.general);
-    const { getCurrentMovie, getCurrentMovieReviewsByPage } = useGeneral();
+    const { lang, currentMovie, isFetching, currentTVShow } = useSelector(state => state.general);
+    const { getCurrentMovie, getCurrentMovieReviewsByPage, getCurrentTVShow } = useGeneral();
     const clipsRef = useRef();
     const { id } = useParams();
     return {
@@ -20,10 +20,12 @@ export const useMovie = () => {
         setVideoPlayerMode,
         lang,
         currentMovie,
+        currentTVShow,
         isFetching,
         id,
         clipsRef,
         getCurrentMovie,
-        getCurrentMovieReviewsByPage
+        getCurrentMovieReviewsByPage,
+        getCurrentTVShow
     }
 }

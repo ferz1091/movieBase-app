@@ -30,8 +30,12 @@ export const PersonPage = () => {
         }
     }, [id, lang])
     if (isFetching.main) {
-        return <div>SPINNER</div>
-    } else if (currentPerson) {
+        return (
+            <div>
+                SPINNER
+            </div>
+        )
+    } else if (currentPerson && !currentPerson.error) {
         return (
             <PersonWrapper>
                 <h2>
@@ -171,6 +175,14 @@ export const PersonPage = () => {
                         </div>
                     }
                 </section>
+            </PersonWrapper>
+        )
+    } else if (currentPerson && currentPerson.error) {
+        return (
+            <PersonWrapper>
+                <div className='error'>
+                    {currentPerson.error}
+                </div>
             </PersonWrapper>
         )
     }
