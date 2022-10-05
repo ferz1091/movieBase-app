@@ -18,12 +18,21 @@ function* getCurrentTVShow(action) {
             type: generalActions.setCurrentTVShow.type,
             payload: currentTVShow.data
         })
+        const socialIds = yield effects.call(() => movieAPI.getTVShowSocialIds(action.payload.id, action.payload.lang))
+        yield effects.put({
+            type: generalActions.setCurrentTVShowSocialIds.type,
+            payload: socialIds.data
+        })
     } catch (error) {
         yield effects.put({
             type: generalActions.setCurrentTVShow.type,
             payload: {error: error.message}
         })
     }
+    yield effects.put({
+        type: generalActions.toggleIsFetchingMain.type,
+        payload: false
+    })
 }
 
 export function* getCurrentTVShowWatcher() {

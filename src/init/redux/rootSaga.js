@@ -8,6 +8,7 @@ import { getCurrentMovieWatcher } from '../../bus/Saga/getCurrentMovieWatcher';
 import { getCurrentMovieReviewsByPageWatcher } from '../../bus/Saga/getCurrentMovieReviewsByPage';
 import { getCurrentPersonWatcher } from '../../bus/Saga/getCurrentPersonWatcher';
 import { getCurrentTVShowWatcher } from '../../bus/Saga/getCurrentTVShowWatcher';
+import { getCurrentTVShowSeason } from '../../bus/Saga/getCurrentTVShowSeasonWatcher';
 
 export function* rootSaga() {
     yield all([
@@ -16,6 +17,7 @@ export function* rootSaga() {
                 getCurrentMovieWatcher(), 
                 getCurrentMovieReviewsByPageWatcher(),
                 getCurrentPersonWatcher(),
-                getCurrentTVShowWatcher()
+                getCurrentTVShowWatcher(),
+                getCurrentTVShowSeason()
             ]);
 }

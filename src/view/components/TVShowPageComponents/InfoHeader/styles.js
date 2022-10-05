@@ -24,11 +24,12 @@ a, a:visited, a:link {
     color: white;
 }
 a:hover {
-    color: rgb(150,150,150);
+    color: rgb(150,150,150); 
 }
 .movie-info {
     display: flex;
     flex-direction: column;
+    background: rgba(50,50,50,0.5);
     div {
         padding: 10px 15px;
     }
@@ -62,6 +63,10 @@ a:hover {
         background-color: rgb(100, 100, 100);
     }
 }
+.original-title {
+    padding: 10px 25px;
+    font-size: 20px;
+}
 .tagline {
     padding: 30px 15px;
     font-size: 20px;
@@ -73,8 +78,15 @@ a:hover {
     text-shadow: 1px 1px 2px black;
     background: rgba(50, 50, 50, 0.5);
 }
-.original-title {
-    padding: 10px 25px;
-    font-size: 20px;
+.status {
+    .value {
+        font-weight: 600;
+    }
+}
+.network {
+    img {
+        width: 30px;
+        height: 20px;
+    }
 }
 `;

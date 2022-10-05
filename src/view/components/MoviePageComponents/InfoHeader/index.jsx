@@ -13,6 +13,7 @@ export const MovieInfoHeader = (props) => {
         <InfoHeaderWrapper 
             className='info-header'
             vote={props.currentMovie.vote_average}
+            background={props.currentMovie.backdrop_path}
             backgroundURL={`https://image.tmdb.org/t/p/original${props.currentMovie.backdrop_path}`}
         >
             <h1>

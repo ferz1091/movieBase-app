@@ -117,3 +117,29 @@ export const setCurrentTVShow = (state, action) => {
         currentTVShow: action.payload
     }
 }
+export const setCurrentTVShowSocialIds = (state, action) => {
+    return {
+        ...state,
+        currentTVShow: {...state.currentTVShow, social: action.payload}
+    }
+}
+export const getSeason = (state, action) => {
+}
+export const setSeason = (state, action) => {
+    return {
+        ...state,
+        currentTVShow: {...state.currentTVShow, seasons: state.currentTVShow.seasons.map(season => {
+            if (season.season_number === action.payload.season_number) {
+                return {...season, ...action.payload, isLoaded: true}
+            } else {
+                return season
+            }
+        })}
+    }
+}
+export const toggleIsFetchingSeasons = (state, action) => {
+    return {
+        ...state,
+        isFetching: {...state.isFetching, seasons: action.payload}
+    }
+}

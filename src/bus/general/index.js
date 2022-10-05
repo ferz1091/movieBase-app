@@ -24,12 +24,20 @@ export const useGeneral = () => {
     function getCurrentTVShow(id, lang) {
         dispatch(generalActions.getCurrentTVShow({id, lang}))
     }
+    function getSeason(id, season, lang) {
+        dispatch(generalActions.getSeason({id, season, lang}))
+    }
+    function createSeasonsInfo(length) {
+        dispatch(generalActions.createSeasonsInfo(length))
+    }
     return {
         switchMode,
         getGenres,
         getCurrentMovie,
         getCurrentMovieReviewsByPage,
         getCurrentPerson,
-        getCurrentTVShow
+        getCurrentTVShow,
+        createSeasonsInfo,
+        getSeason
     }
 }

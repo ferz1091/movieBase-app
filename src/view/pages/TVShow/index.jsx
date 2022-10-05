@@ -4,6 +4,9 @@ import React, { useEffect } from 'react';
 // Tools
 import { useMovie } from '../../../tools';
 
+// Components
+import { TVShowInfoHeader, Seasons } from '../../components';
+
 // Styles
 import { TVShowWrapper } from './styles';
 
@@ -23,7 +26,8 @@ export const TVShowPage = () => {
     } else if (currentTVShow) {
         return (
             <TVShowWrapper>
-
+                <TVShowInfoHeader currentTVShow={currentTVShow} />
+                <Seasons />
             </TVShowWrapper>
         )
     }
