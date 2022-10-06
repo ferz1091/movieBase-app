@@ -22,6 +22,28 @@ background: rgb(200,200,200);
     border-bottom: 2px solid black;
     color: black;
     transition: all 0.1s linear;
+    h2 {
+        position: relative;
+        margin: 0 5px;
+        background: rgba(50,50,50,0.2);
+        select {
+            border-radius: 10px;
+            position: absolute;
+            top: 50%; right: 5px;
+            transform: translate(0, -50%);
+            background: rgb(200,200,200);
+            ::-webkit-scrollbar {
+                width: 5px;
+            }
+            ::-webkit-scrollbar-thumb {
+            background-color: rgba(50,50,50, 0.5);
+            border-radius: 5px;
+            }
+            option {
+                font-size: 14px;
+            }
+        }
+    }
     .season-name {
         padding-left: 10px;
     }
@@ -33,7 +55,6 @@ background: rgb(200,200,200);
 .season:hover {
     background: rgb(200,200,200);
     .season-name {
-        /* color: white; */
         font-weight: 600;
     }
 }
@@ -51,14 +72,45 @@ background: rgb(200,200,200);
     display: grid;
     grid-template-columns: 1fr 220px;
     color: white;
+    ul {
+        list-style-type: square;
+        list-style-position: inside;
+        padding-left: 0px;
+        margin: 0;
+    }
+    a, a:visited, a:link {
+        color: white;
+    }
+    a:hover {
+        color: rgb(150,150,150); 
+    }
     .poster {
         padding: 5px 10px;
     }
 }
 .overview {
     padding: 5px 0 5px 10px;
+    margin: 0 0 5px 5px;
     text-shadow: 1px 1px 2px black;
     font-style: italic;
+    background: rgba(50, 50, 50, 0.2);
+}
+.cast-list {
+    margin: 0 5px;
+    background: none;
+}
+.episodes {
+    color: white;
+}
+.episode-info {
+    margin-left: 10px;
+    .episode-name {
+        padding-left: 15px;
+        margin: 5px 0;
+        text-shadow: 1px 1px 2px black;
+        font-style: italic;
+        font-weight: 600;
+    }
 }
 .arrow-down, .arrow-up {
     position: absolute;
@@ -83,6 +135,9 @@ background: rgb(200,200,200);
     }
     .season-header {
     grid-template-columns: 1fr 160px;
+    ul {
+        list-style-position: outside;
+    }
     .poster {
         max-width: 150px;
         padding: 5px;

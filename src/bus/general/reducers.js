@@ -143,3 +143,17 @@ export const toggleIsFetchingSeasons = (state, action) => {
         isFetching: {...state.isFetching, seasons: action.payload}
     }
 }
+export const setSeasonCredits = (state, action) => {
+    return {
+        ...state,
+        currentTVShow: {...state.currentTVShow, seasons: state.currentTVShow.seasons.map(season => {
+            if (season.season_number === action.payload.season_number) {
+                return {...season, credits: action.payload.credits}
+            } else {
+                return {
+                    ...season
+                }
+            }
+        })}
+    }
+}

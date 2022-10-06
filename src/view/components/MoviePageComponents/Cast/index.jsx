@@ -21,7 +21,7 @@ export const Cast = (props) => {
                 Starring
             </h2>
             <div className='cast-list'>
-                {props.currentMovie.cast.slice(0, 12).map(actor =>
+                {props.cast.slice(0, 12).map(actor =>
                     <ActorCard key={actor.id} {...actor} />
                 )}
             </div>

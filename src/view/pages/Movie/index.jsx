@@ -47,7 +47,7 @@ export const MoviePage = () => {
                     setVideoPlayerMode={setVideoPlayerMode}
                     clipsRef={clipsRef}
                 />
-                <Cast currentMovie={currentMovie} />
+                <Cast cast={currentMovie.cast} />
                 <Reviews
                     currentMovie={currentMovie}
                     getCurrentMovieReviewsByPage={getCurrentMovieReviewsByPage}
