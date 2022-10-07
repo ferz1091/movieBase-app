@@ -30,6 +30,9 @@ export const useGeneral = () => {
     function createSeasonsInfo(length) {
         dispatch(generalActions.createSeasonsInfo(length))
     }
+    function getCurrentTVShowReviewsByPage(id, lang, page, func, arg) {
+        dispatch(generalActions.getCurrentTVShowReviewsByPage({id, lang, page, func, arg}))
+    }
     return {
         switchMode,
         getGenres,
@@ -38,6 +41,7 @@ export const useGeneral = () => {
         getCurrentPerson,
         getCurrentTVShow,
         createSeasonsInfo,
-        getSeason
+        getSeason,
+        getCurrentTVShowReviewsByPage
     }
 }

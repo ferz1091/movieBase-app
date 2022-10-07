@@ -5,13 +5,20 @@ import React, { useEffect } from 'react';
 import { useMovie } from '../../../tools';
 
 // Components
-import { TVShowInfoHeader, Seasons } from '../../components';
+import { TVShowInfoHeader, Seasons, Reviews } from '../../components';
 
 // Styles
 import { TVShowWrapper } from './styles';
 
 export const TVShowPage = () => {
-    const { currentTVShow, id, lang, getCurrentTVShow, isFetching } = useMovie();
+    const { currentTVShow, 
+            id, 
+            lang,
+            getCurrentTVShow, 
+            isFetching, 
+            reviewPage, 
+            setReviewPage, 
+            getCurrentTVShowReviewsByPage } = useMovie();
     useEffect(() => {
         if (!currentTVShow || currentTVShow.id !== id) {
             getCurrentTVShow(id, lang);
@@ -27,6 +34,14 @@ export const TVShowPage = () => {
         return (
             <TVShowWrapper>
                 <TVShowInfoHeader currentTVShow={currentTVShow} />
+                <Reviews
+                    currentMovie={currentTVShow}
+                    getCurrentMovieReviewsByPage={getCurrentTVShowReviewsByPage}
+                    reviewPage={reviewPage}
+                    setReviewPage={setReviewPage}
+                    id={id}
+                    lang={lang}
+                />
                 <Seasons />
             </TVShowWrapper>
         )

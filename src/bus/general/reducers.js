@@ -157,3 +157,18 @@ export const setSeasonCredits = (state, action) => {
         })}
     }
 }
+export const getCurrentTVShowReviewsByPage = (state, action) => {
+}
+export const setCurrentTVShowReviews = (state, action) => {
+    if (state.currentTVShow.reviews) {
+        return {
+            ...state,
+            currentTVShow: { ...state.currentTVShow, reviews: { totalPages: action.payload.totalPages, data: [...state.currentTVShow.reviews.data, { page: action.payload.page, reviews: action.payload.reviews }] } }
+        }
+    } else {
+        return {
+            ...state,
+            currentTVShow: { ...state.currentTVShow, reviews: { totalPages: action.payload.totalPages, data: [{ page: action.payload.page, reviews: action.payload.reviews }] } }
+        }
+    }
+}

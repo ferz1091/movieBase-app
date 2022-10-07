@@ -9,6 +9,7 @@ min-height: 84vh;
 display: flex;
 flex-direction: column;
 color: white;
+background: rgb(200,200,200);
 h2 {
     color: black;
     margin: 0;
