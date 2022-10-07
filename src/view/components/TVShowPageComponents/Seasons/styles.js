@@ -47,25 +47,11 @@ background: rgb(200,200,200);
     .season-name {
         padding-left: 10px;
     }
-    .head {
-        cursor: pointer;
-        padding: 5px 0;
-    }
-}
-.season:hover {
-    background: rgb(200,200,200);
-    .season-name {
-        font-weight: 600;
-    }
 }
 .active {
     background: rgb(200,200,200);
     .season-name {
         font-weight: 600;
-    }
-    .head {
-        background: rgba(50,50,50,0.2);
-        margin: 0 5px;
     }
 }
 .season-header {
@@ -103,13 +89,21 @@ background: rgb(200,200,200);
     color: white;
 }
 .episode-info {
-    margin-left: 10px;
+    margin-left: 5px;
+    .episode-header {
+        background: rgba(50,50,50,0.2);
+        position: relative;
+        padding: 5px 0 5px 5px;
+        margin: 5px 5px 5px 0;
+    }
     .episode-name {
-        padding-left: 15px;
-        margin: 5px 0;
+        padding-left: 10px;
         text-shadow: 1px 1px 2px black;
         font-style: italic;
         font-weight: 600;
+    }
+    .overview {
+        margin: 0 5px 5px 0;
     }
 }
 .arrow-down, .arrow-up {
@@ -143,5 +137,31 @@ background: rgb(200,200,200);
         padding: 5px;
     }
 }
+}
+`;
+
+export const RatingWrapper = styled.span`
+position: absolute;
+top: 50%; right: 5px;
+transform: translate(0, -50%);
+text-shadow: 1px 1px 2px black;
+font-size: 18px;
+color: ${props => props.vote < 3 ? '#cc0000' :
+        props.vote < 5 ? '#e69138' :
+            props.vote < 7 ? '#f7f10c' :
+                props.vote < 8 ? '#8fce00' : '#00a105'};
+`;
+
+export const SeasonHeadWrapper = styled.div`
+cursor: pointer;
+padding: 5px 0;
+background: rgba(50,50,50,0.2);
+margin: 0 5px;
+transition: 0.1s all linear;
+:hover {
+    background: ${props => props.isHoverActive ? 'rgb(200, 200, 200);' : 'rgba(50,50,50,0.2);'};
+    .season-name {
+        font-weight: ${props => props.isHoverActive ? '600;' : 'normal;'};
+    }
 }
 `;

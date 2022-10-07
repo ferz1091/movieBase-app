@@ -1,9 +1,9 @@
 // Core
 import React, { useEffect, useState, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Components
-import { InfoProperty, Cast } from '../../';
+import { InfoProperty, Cast, GuestCast } from '../../';
 
 // Tools
 import { useMovie, deleteDuplicates } from '../../../../tools';
@@ -13,7 +13,7 @@ import seasons from '../../../../assets/icons/seasons.png';
 import episodes from '../../../../assets/icons/episodes.png';
 
 // Styles
-import { SeasonsWrapper } from './styles';
+import { SeasonsWrapper, RatingWrapper, SeasonHeadWrapper } from './styles';
 
 export const Seasons = () => {
     const { currentTVShow, lang, getSeason, id, isFetching } = useMovie();
@@ -40,29 +40,35 @@ export const Seasons = () => {
                         key={season.id}
                         className={activeSeason === index ? 'season active' : 'season'}
                     >
-                        <div 
+                        <SeasonHeadWrapper
                             className='head'
+                            isHoverActive={season.name && season.poster_path || season.name && season.overview}
                             onClick={() => {
-                                if (activeSeason === index) {
-                                    setActiveSeason(null);
-                                    setActiveEpisode(null);
-                                } else {
-                                    setActiveSeason(index);
-                                    setActiveEpisode(null);
+                                if (season.name && season.poster_path || season.name && season.overview) {
+                                    if (activeSeason === index) {
+                                        setActiveSeason(null);
+                                        setActiveEpisode(null);
+                                    } else {
+                                        setActiveSeason(index);
+                                        setActiveEpisode(null);
+                                    }
                                 }
                             }}
                         >
                             <span className='season-name'>
                                 {season.name}
                             </span>
-                            {activeSeason === index ?
-                                <span className='arrow-up'>
-                                </span>
+                            {season.name && season.poster_path || season.name && season.overview ?
+                                activeSeason === index ?
+                                    <span className='arrow-up'>
+                                    </span>
+                                    :
+                                    <span className='arrow-down'>
+                                    </span>
                                 :
-                                <span className='arrow-down'>
-                                </span>
+                                null
                             }
-                        </div>
+                        </SeasonHeadWrapper>
                         {activeSeason === index ?
                             isFetching.seasons ?
                                 <div>
@@ -75,7 +81,7 @@ export const Seasons = () => {
                                 </div>
                                 :
                                 <>
-                                    <div className='season-header'>
+                                    <section className='season-header'>
                                         <div>
                                             <InfoProperty
                                                 class='air-date'
@@ -92,9 +98,12 @@ export const Seasons = () => {
                                                     )).map(person => 
                                                         <li key={person.id}>
                                                             {person.id ?
-                                                                <NavLink to={`/person/${person.id}`}>
+                                                                <Link 
+                                                                    target='_blank'
+                                                                    to={`/person/${person.id}`}
+                                                                >
                                                                     {person.name}
-                                                                </NavLink>
+                                                                </Link>
                                                                 :
                                                                 person.name
                                                             }
@@ -123,7 +132,7 @@ export const Seasons = () => {
                                             src={`https://image.tmdb.org/t/p/w200${season.poster_path}`}
                                             alt=''
                                         />
-                                    </div>
+                                    </section>
                                     {season.credits && season.credits.cast.length ?
                                         <Cast cast={season.credits.cast}/>
                                         :
@@ -138,7 +147,8 @@ export const Seasons = () => {
                                                 />
                                                 Episodes
                                                 <select
-                                                    ref={ref}                                                        onChange={() => setActiveEpisode(ref.current.value)}
+                                                    ref={ref}
+                                                    onChange={() => setActiveEpisode(ref.current.value)}
                                                 >
                                                     <option value=''>
                                                         -
@@ -155,9 +165,17 @@ export const Seasons = () => {
                                             </h2>
                                             {activeEpisode ?
                                                 <div className='episode-info'>
-                                                    {season.episodes[activeEpisode - 1].name ?
-                                                        <div className='episode-name'>
-                                                            "{season.episodes[activeEpisode - 1].name}"
+                                                    {season.episodes[activeEpisode - 1].name && season.episodes[activeEpisode - 1].vote_average ?
+                                                        <div className='episode-header'>
+                                                            <span className='episode-name'>
+                                                                "{season.episodes[activeEpisode - 1].name}"
+                                                            </span>
+                                                            <RatingWrapper 
+                                                                className='episode-rating'
+                                                                vote={season.episodes[activeEpisode - 1].vote_average}
+                                                            >
+                                                                ★{season.episodes[activeEpisode - 1].vote_average.toFixed(1)}
+                                                            </RatingWrapper>
                                                         </div>
                                                         :
                                                         null
@@ -168,11 +186,19 @@ export const Seasons = () => {
                                                         value={`${season.episodes[activeEpisode - 1].runtime} min.`}
                                                         isVisible={season.episodes[activeEpisode - 1].runtime}
                                                     />
+                                                    <div className='overview'>
+                                                        <u>What is this series about?</u><br />{season.episodes[activeEpisode - 1].overview}
+                                                    </div>
                                                 </div>
                                                 :
                                                 null
                                             }
                                         </section>
+                                        :
+                                        null
+                                    }
+                                    {activeEpisode && season.episodes[activeEpisode - 1].guest_stars.length ?
+                                            <GuestCast guests={season.episodes[activeEpisode - 1].guest_stars} />
                                         :
                                         null
                                     }

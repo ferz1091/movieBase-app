@@ -1,6 +1,6 @@
 // Core
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Components
 import { InfoProperty, Social } from '../../common';
@@ -94,9 +94,12 @@ export const MovieInfoHeader = (props) => {
                     class='director'
                     name='Director: '
                     value={
-                            <NavLink to={`/person/${props.currentMovie.crew.find(member => member.job === 'Director').id}`}>
+                            <Link 
+                                to={`/person/${props.currentMovie.crew.find(member => member.job === 'Director').id}`}
+                                target='_blank'
+                            >
                                 {props.currentMovie.crew.find(member => member.job === 'Director').original_name}
-                            </NavLink>
+                            </Link>
                             }
                     isVisible={props.currentMovie.crew.find(member => member.job === 'Director')}
                 />
