@@ -104,5 +104,10 @@ export const movieAPI = {
         return (
             instance.get(`/tv/${id}/season/${season}/credits?api_key=${API_KEY}&language=${lang}`)
         )
+    },
+    getSeasonVideos(id, season, lang) {
+        return (
+            instance.get(`/tv/${id}/season/${season}/videos?api_key=${API_KEY}&language=${lang}`)
+        )
     }
 }

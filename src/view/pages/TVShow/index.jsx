@@ -18,7 +18,7 @@ export const TVShowPage = () => {
             isFetching, 
             reviewPage, 
             setReviewPage, 
-            getCurrentTVShowReviewsByPage } = useMovie();
+            getCurrentTVShowReviewsByPage} = useMovie();
     useEffect(() => {
         if (!currentTVShow || currentTVShow.id !== id) {
             getCurrentTVShow(id, lang);

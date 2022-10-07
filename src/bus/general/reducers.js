@@ -172,3 +172,17 @@ export const setCurrentTVShowReviews = (state, action) => {
         }
     }
 }
+export const setSeasonVideos = (state, action) => {
+    return {
+        ...state,
+        currentTVShow: {...state.currentTVShow, seasons: state.currentTVShow.seasons.map(season => {
+            if (season.season_number === action.payload.season_number) {
+                return {...season, videos: action.payload.videos}
+            } else {
+                return {
+                    ...season
+                }
+            }
+        })}
+    }
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 // Components
-import { InfoProperty, Cast, GuestCast } from '../../';
+import { InfoProperty, Cast, GuestCast, Clips, VideoPlayer } from '../../';
 
 // Tools
 import { useMovie, deleteDuplicates } from '../../../../tools';
@@ -16,7 +16,7 @@ import episodes from '../../../../assets/icons/episodes.png';
 import { SeasonsWrapper, RatingWrapper, SeasonHeadWrapper } from './styles';
 
 export const Seasons = () => {
-    const { currentTVShow, lang, getSeason, id, isFetching } = useMovie();
+    const { currentTVShow, lang, getSeason, id, isFetching, videoPlayerMode, setVideoPlayerMode, clipsRef} = useMovie();
     const [activeSeason, setActiveSeason] = useState(null);
     const [activeEpisode, setActiveEpisode] = useState(null);
     const ref = useRef();
@@ -133,6 +133,15 @@ export const Seasons = () => {
                                             alt=''
                                         />
                                     </section>
+                                    {season.videos && season.videos.length ?
+                                        <Clips
+                                        currentMovie={season}
+                                        setVideoPlayerMode={setVideoPlayerMode}
+                                        clipsRef={clipsRef}
+                                        /> 
+                                        : 
+                                        null
+                                    }
                                     {season.credits && season.credits.cast.length ?
                                         <Cast cast={season.credits.cast}/>
                                         :
@@ -210,6 +219,14 @@ export const Seasons = () => {
                     </div>
                 )}
             </div>
+            {videoPlayerMode.isOn ?
+                <VideoPlayer
+                    src_key={videoPlayerMode.key}
+                    setVideoPlayerMode={setVideoPlayerMode}
+                />
+                :
+                null
+            }
         </SeasonsWrapper>
     )
 }

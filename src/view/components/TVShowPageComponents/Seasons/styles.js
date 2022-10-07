@@ -123,6 +123,12 @@ background: rgb(200,200,200);
     background-image: url(${arrow_down});
     transform: rotate(180deg) translate(0, 25%);
 }
+.clips {
+    margin: 0 5px;
+    h2 {
+        margin: 0;
+    }
+}
 @media (max-width: 768px) {
     .season {
         margin: 0;
@@ -153,7 +159,7 @@ color: ${props => props.vote < 3 ? '#cc0000' :
 `;
 
 export const SeasonHeadWrapper = styled.div`
-cursor: pointer;
+cursor: ${props => props.isHoverActive ? 'pointer;' : 'auto;'};
 padding: 5px 0;
 background: rgba(50,50,50,0.2);
 margin: 0 5px;

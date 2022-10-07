@@ -23,6 +23,11 @@ function* getSeason(action) {
             type: generalActions.setSeasonCredits.type,
             payload: {season_number: action.payload.season, credits: seasonCredits.data}
         })
+        const seasonVideos = yield effects.call(() => movieAPI.getSeasonVideos(action.payload.id, action.payload.season, action.payload.lang))
+        yield effects.put({
+            type: generalActions.setSeasonVideos.type,
+            payload: {season_number: action.payload.season, videos: seasonVideos.data.results}
+        })
     } catch (error) {
         yield effects.put({
             type: generalActions.setSeason.type,
