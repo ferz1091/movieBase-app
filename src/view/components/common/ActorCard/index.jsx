@@ -18,6 +18,13 @@ export const ActorCard = (actor) => {
                 <span>
                     {actor.name}
                 </span>
+                {actor.character ?
+                <span className='character'>
+                    {actor.character}
+                </span>
+                :
+                null
+                }
         </ActorCardWrapper>
     )
 }

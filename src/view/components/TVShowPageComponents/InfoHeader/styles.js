@@ -20,9 +20,6 @@ h1 {
         text-shadow: 1px 1px 2px black;
     }
 }
-h2 {
-    background: rgba(50,50,50,0.2);
-}
 a, a:visited, a:link {
     color: white;
 }

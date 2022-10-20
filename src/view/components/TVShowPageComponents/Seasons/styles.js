@@ -10,16 +10,11 @@ background: rgb(200,200,200);
     background: rgba(50,50,50,0.2);
     padding: 5px 0;
 }
-.seasons-list {
-    .season:first-child {
-        border-top: 2px solid black;
-    }
-}
 .season {
     position: relative;
     padding: 5px 0 5px 0;
     margin: 0 5px 0 15px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     color: black;
     transition: all 0.1s linear;
     h2 {

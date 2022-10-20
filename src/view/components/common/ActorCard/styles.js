@@ -17,4 +17,8 @@ padding: calc(1px + 19 * (100vw / 1400));
     background-size: cover;
     background-repeat: no-repeat;
 }
+.character {
+    font-size: 12px;
+    font-style: oblique;
+}
 `;
