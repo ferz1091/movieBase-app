@@ -6,14 +6,10 @@ import { moviesActions } from './slice';
 
 export const useMovies = () => {
     const dispatch = useDispatch();
-    function getMovies(mode, page, lang, totalPages) {
-        dispatch(moviesActions.getMovies({mode, page, lang, totalPages}))
-    }
-    function setMovies(mode, page, data, error) {
-        dispatch(moviesActions.setMovies({mode, page, data, error}))
+    function getMovies(category, page, lang, totalPages) {
+        dispatch(moviesActions.getMovies({category, page, lang, totalPages}))
     }
     return {
-        getMovies,
-        setMovies
+        getMovies
     }
 }

@@ -3,9 +3,9 @@ export const getMovies = (state, action) => {
 
 export const setMovies = (state, action) => {
     return [
-        ...state.filter(item => item.name !== action.payload.mode),
-        {...state.find(item => item.name === action.payload.mode),
-            data: [...(state.find(item => item.name === action.payload.mode).data),
+        ...state.filter(item => item.name !== action.payload.category),
+        {...state.find(item => item.name === action.payload.category),
+            data: [...(state.find(item => item.name === action.payload.category).data),
                 {
                     page: action.payload.page,
                     data: action.payload.data,
@@ -18,10 +18,9 @@ export const setMovies = (state, action) => {
 
 export const setTotalPages = (state, action) => {
     return [
-        ...state.filter(item => item.name !== action.payload.mode),
-        {...state.find(item => item.name === action.payload.mode),
+        ...state.filter(item => item.name !== action.payload.category),
+        {...state.find(item => item.name === action.payload.category),
             totalPages: action.payload.totalPages    
         }
     ]
 }
-

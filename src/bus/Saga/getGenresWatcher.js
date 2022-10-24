@@ -7,9 +7,6 @@ import { movieAPI } from '../../api';
 // Actions
 import { generalActions } from '../general/slice';
 
-// Tools
-import { deleteDuplicates } from '../../tools';
-
 function* getGenres(action) {
     yield effects.put({
         type: generalActions.toggleIsFetchingMain.type,

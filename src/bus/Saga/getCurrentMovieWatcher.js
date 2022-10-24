@@ -13,6 +13,14 @@ function* getCurrentMovie(action) {
         payload: true
     })
     try {
+        if (action.payload.isGenresLoaded) {
+            const movieGenres = yield effects.call(() => movieAPI.getMovieGenres(action.payload.lang));
+            const tvGenres = yield effects.call(() => movieAPI.getTVGenres(action.payload.lang));
+            yield effects.put({
+                type: generalActions.setGenres.type, 
+                payload: movieGenres.data.genres.concat(tvGenres.data.genres)
+            })
+        }
         const response = yield effects.call(() => movieAPI.getCurrentMovie(action.payload.id, action.payload.lang));
         yield effects.put({
             type: generalActions.setCurrentMovie.type,

@@ -6,3 +6,4 @@ export * from './VideoPlayer';
 export * from './Review';
 export * from './Movies';
 export * from './Social';
+export * from './CompositionsList';

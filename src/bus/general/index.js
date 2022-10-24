@@ -6,23 +6,20 @@ import { generalActions } from './slice';
 
 export const useGeneral = () => {
     const dispatch = useDispatch();
-    function switchMode(mode) {
-        dispatch(generalActions.switchMode(mode))
-    }
     function getGenres(lang) {
         dispatch(generalActions.getGenres(lang))
     }
-    function getCurrentMovie(id, lang) {
-        dispatch(generalActions.getCurrentMovie({id, lang}))
+    function getCurrentMovie(id, lang, isGenresLoaded) {
+        dispatch(generalActions.getCurrentMovie({id, lang, isGenresLoaded}))
     }
     function getCurrentMovieReviewsByPage(id, lang, page, func, arg) {
         dispatch(generalActions.getCurrentMovieReviewsByPage({id, lang, page, func, arg}))
     }
-    function getCurrentPerson(id, lang) {
-        dispatch(generalActions.getCurrentPerson({id, lang}))
+    function getCurrentPerson(id, lang, isGenresLoaded) {
+        dispatch(generalActions.getCurrentPerson({ id, lang, isGenresLoaded }))
     }
-    function getCurrentTVShow(id, lang) {
-        dispatch(generalActions.getCurrentTVShow({id, lang}))
+    function getCurrentTVShow(id, lang, isGenresLoaded) {
+        dispatch(generalActions.getCurrentTVShow({ id, lang, isGenresLoaded}))
     }
     function getSeason(id, season, lang) {
         dispatch(generalActions.getSeason({id, season, lang}))
@@ -32,6 +29,9 @@ export const useGeneral = () => {
     }
     function getCurrentTVShowReviewsByPage(id, lang, page, func, arg) {
         dispatch(generalActions.getCurrentTVShowReviewsByPage({id, lang, page, func, arg}))
+    }
+    function switchMode(mode) {
+        dispatch(generalActions.switchMode(mode))
     }
     return {
         switchMode,

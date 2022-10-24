@@ -7,7 +7,7 @@ z-index: 2;
 width: 90vw;
 height: 15vh;
 background: rgba(200, 200, 200, 1);
-.Switch-mode {
+.Switch-category {
     position: absolute;
     bottom: 5px; left:0;
     a {
@@ -16,6 +16,17 @@ background: rgba(200, 200, 200, 1);
     }
     a:visited, a:link {
         color: black;
+    }
+}
+.Switch-mode {
+    position: absolute;
+    bottom: 30px; left: 0;
+    span {
+        cursor: pointer;
+        padding: 0 5px;
+    }
+    .active {
+        font-weight: bolder;
     }
 }
 @media (max-width: 768px) {

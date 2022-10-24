@@ -52,7 +52,7 @@ export const App = () => {
                     <ContentWrapper className='Content-container'>
                         <Routes>
                             <Route 
-                                path='/:mode/:page'
+                                path='/:category/:page'
                                 element={<Main />}
                             />
                             <Route 

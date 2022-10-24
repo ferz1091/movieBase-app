@@ -20,11 +20,12 @@ export const MoviePage = () => {
         isFetching,
         id,
         clipsRef,
+        genres,
         getCurrentMovie,
         getCurrentMovieReviewsByPage } = useMovie();
     useEffect(() => {
         if (!currentMovie || currentMovie.id !== id) {
-            getCurrentMovie(id, lang);
+            getCurrentMovie(id, lang, !genres.length);
         }
     }, [id, lang])
 
@@ -39,7 +40,7 @@ export const MoviePage = () => {
         return (
             <MoviePageWrapper
                 videoPlayerIsOn={videoPlayerMode.isOn}
-                videosAmount={!currentMovie.error ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
+                videosAmount={!currentMovie.error && currentMovie.videos ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
             >
                 <MovieInfoHeader currentMovie={currentMovie} />
                 <Clips

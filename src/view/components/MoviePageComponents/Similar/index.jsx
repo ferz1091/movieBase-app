@@ -25,6 +25,7 @@ export const Similar = (props) => {
                     <Movies
                         key={movie.id}
                         {...movie}
+                        tv={props.tv ? true : false}
                     />
                 )}
             </div>

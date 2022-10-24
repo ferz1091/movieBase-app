@@ -1,11 +1,8 @@
 // Core
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
-// Bus
-import { useGeneral } from '../../../../bus/general';
 
 // Assets
 import poster_null from '../../../../assets/poster_null.jpg';
@@ -15,14 +12,8 @@ import { MovieWrapper } from './styles';
 
 export const Movies = (movie) => {
     const genres = useSelector(state => state.general.genres);
-    const { getGenres } = useGeneral();
     const [isHover, toggleIsHover] = useState(false);
     const [isMovieOverviewOpen, toggleIsMovieOverviewOpen] = useState(false);
-    useEffect(() => {
-        if (!genres.length) {
-            getGenres();
-        }
-    }, [])
     return (
         <NavLink to={movie.tv ? `/tv/${movie.id}` : `/movie/${movie.id}`}>
             <MovieWrapper

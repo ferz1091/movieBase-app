@@ -10,9 +10,14 @@ const instance = axios.create({
 });
 
 export const movieAPI = {
-    getMovies(mode, page, lang) {
+    getMovies(category, page, lang) {
         return (
-            instance.get(`/movie/${mode}?api_key=${API_KEY}&language=${lang}&page=${page}`)
+            instance.get(`/movie/${category}?api_key=${API_KEY}&language=${lang}&page=${page}`)
+        )
+    },
+    getTVShows(category, page, lang) {
+        return (
+            instance.get(`/tv/${category}?api_key=${API_KEY}&language=${lang}&page=${page}`)
         )
     },
     getMovieGenres(lang) {
@@ -108,6 +113,11 @@ export const movieAPI = {
     getSeasonVideos(id, season, lang) {
         return (
             instance.get(`/tv/${id}/season/${season}/videos?api_key=${API_KEY}&language=${lang}`)
+        )
+    },
+    getSimilarTVShows(id, lang) {
+        return (
+            instance.get(`/tv/${id}/similar?api_key=${API_KEY}&language=${lang}&page=1`)
         )
     }
 }

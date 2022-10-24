@@ -10,27 +10,16 @@ export const toggleIsFetchingReviews = (state, action) => {
         isFetching: { ...state.isFetching, reviews: action.payload }
     }
 }
-
-export const switchMode = (state, action) => {
-    return {
-        ...state,
-        mode: state.mode !== action.payload ? action.payload : state.mode
-    }
-}
-
 export const getGenres = (state, action) => {
 }
-
 export const setGenres = (state, action) => {
     return {
         ...state,
         genres: [...action.payload]
     }
 }
-
 export const getCurrentMovie = (state, action) => {
 }
-
 export const setCurrentMovie = (state, action) => {
     return {
         ...state,
@@ -184,5 +173,17 @@ export const setSeasonVideos = (state, action) => {
                 }
             }
         })}
+    }
+}
+export const switchMode = (state, action) => {
+    return {
+        ...state,
+        mode: action.payload
+    }
+}
+export const setSimilarTVShows = (state, action) => {
+    return {
+        ...state,
+        currentTVShow: {...state.currentTVShow, similar: action.payload}
     }
 }

@@ -8,7 +8,7 @@ import { PageSwitcherWrapper } from './styles';
 export const PageSwitcher = (props) => {
     return (
         <PageSwitcherWrapper>
-            <NavLink to={`/${props.mode}/1`}>
+            <NavLink to={`/${props.category}/1`}>
                 1
             </NavLink>
             {props.page > 6 ?
@@ -20,31 +20,31 @@ export const PageSwitcher = (props) => {
             }
             {props.page <= 6 ?
                 <>
-                    <NavLink to={`/${props.mode}/2`}>
+                    <NavLink to={`/${props.category}/2`}>
                         2
                     </NavLink>
-                    <NavLink to={`/${props.mode}/3`}>
+                    <NavLink to={`/${props.category}/3`}>
                         3
                     </NavLink>
-                    <NavLink to={`/${props.mode}/4`}>
+                    <NavLink to={`/${props.category}/4`}>
                         4
                     </NavLink>
-                    <NavLink to={`/${props.mode}/5`}>
+                    <NavLink to={`/${props.category}/5`}>
                         5
                     </NavLink>
-                    <NavLink to={`/${props.mode}/6`}>
+                    <NavLink to={`/${props.category}/6`}>
                         6
                     </NavLink>
-                    <NavLink to={`/${props.mode}/7`}>
+                    <NavLink to={`/${props.category}/7`}>
                         7
                     </NavLink>
-                    <NavLink to={`/${props.mode}/8`}>
+                    <NavLink to={`/${props.category}/8`}>
                         8
                     </NavLink>
-                    <NavLink to={`/${props.mode}/9`}>
+                    <NavLink to={`/${props.category}/9`}>
                         9
                     </NavLink>
-                    <NavLink to={`/${props.mode}/10`}>
+                    <NavLink to={`/${props.category}/10`}>
                         10
                     </NavLink>
                 </>
@@ -53,31 +53,31 @@ export const PageSwitcher = (props) => {
             }
             {props.page > 6 && props.page < props.totalPages - 5 ?
                 <>
-                    <NavLink to={`/${props.mode}/${props.page - 4}`}>
+                    <NavLink to={`/${props.category}/${props.page - 4}`}>
                         {props.page - 4}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page - 3}`}>
+                    <NavLink to={`/${props.category}/${props.page - 3}`}>
                         {props.page - 3}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page - 2}`}>
+                    <NavLink to={`/${props.category}/${props.page - 2}`}>
                         {props.page - 2}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page - 4}`}>
+                    <NavLink to={`/${props.category}/${props.page - 4}`}>
                         {props.page - 1}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page}`}>
+                    <NavLink to={`/${props.category}/${props.page}`}>
                         {props.page}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page + 1}`}>
+                    <NavLink to={`/${props.category}/${props.page + 1}`}>
                         {props.page + 1}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page + 2}`}>
+                    <NavLink to={`/${props.category}/${props.page + 2}`}>
                         {props.page + 2}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page + 3}`}>
+                    <NavLink to={`/${props.category}/${props.page + 3}`}>
                         {props.page + 3}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.page + 4}`}>
+                    <NavLink to={`/${props.category}/${props.page + 4}`}>
                         {props.page + 4}
                     </NavLink>
                 </>
@@ -86,31 +86,31 @@ export const PageSwitcher = (props) => {
             }
             {props.page >= props.totalPages - 5 ? 
                 <>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 9}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 9}`}>
                         {props.totalPages - 9}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 8}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 8}`}>
                         {props.totalPages - 8}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 7}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 7}`}>
                         {props.totalPages - 7}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 6}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 6}`}>
                         {props.totalPages - 6}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 5}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 5}`}>
                         {props.totalPages - 5}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 4}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 4}`}>
                         {props.totalPages - 4}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 3}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 3}`}>
                         {props.totalPages - 3}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 2}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 2}`}>
                         {props.totalPages - 2}
                     </NavLink>
-                    <NavLink to={`/${props.mode}/${props.totalPages - 1}`}>
+                    <NavLink to={`/${props.category}/${props.totalPages - 1}`}>
                         {props.totalPages - 1}
                     </NavLink>
                 </>
@@ -124,7 +124,7 @@ export const PageSwitcher = (props) => {
                 :
                 null
             }
-            <NavLink to={`/${props.mode}/${props.totalPages}`}>
+            <NavLink to={`/${props.category}/${props.totalPages}`}>
                 {props.totalPages}
             </NavLink>
         </PageSwitcherWrapper>

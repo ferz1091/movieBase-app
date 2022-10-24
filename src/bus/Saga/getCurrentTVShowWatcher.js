@@ -13,6 +13,14 @@ function* getCurrentTVShow(action) {
         payload: true
     })
     try {
+        if (action.payload.isGenresLoaded) {
+            const movieGenres = yield effects.call(() => movieAPI.getMovieGenres(action.payload.lang));
+            const tvGenres = yield effects.call(() => movieAPI.getTVGenres(action.payload.lang));
+            yield effects.put({
+                type: generalActions.setGenres.type,
+                payload: movieGenres.data.genres.concat(tvGenres.data.genres)
+            })
+        }
         const currentTVShow = yield effects.call(() => movieAPI.getCurrentTVShow(action.payload.id, action.payload.lang))
         yield effects.put({
             type: generalActions.setCurrentTVShow.type,
@@ -27,6 +35,11 @@ function* getCurrentTVShow(action) {
         yield effects.put({
             type: generalActions.setCurrentTVShowReviews.type,
             payload: { totalPages: TVShowReviews.data.total_pages, reviews: TVShowReviews.data.results, page: 1 }
+        })
+        const similarTVShows = yield effects.call(() => movieAPI.getSimilarTVShows(action.payload.id, action.payload.lang));
+        yield effects.put({
+            type: generalActions.setSimilarTVShows.type,
+            payload: similarTVShows.data.results
         })
     } catch (error) {
         yield effects.put({

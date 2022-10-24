@@ -5,20 +5,20 @@ import * as effects from 'redux-saga/effects';
 import { movieAPI } from '../../api';
 
 // Actions
-import { moviesActions } from '../movies/slice';
+import { tvActions } from '../tv_shows/slice';
 import { generalActions } from '../general/slice';
 
-function* GetMovies(action) {
+function* GetTVShows (action) {
     const payload = action.payload;
     yield effects.put({
         type: generalActions.toggleIsFetchingMain.type,
         payload: true
     });
     try {
-        const response = yield effects.call(() => movieAPI.getMovies(payload.category, payload.page, payload.lang));
+        const response = yield effects.call(() => movieAPI.getTVShows(payload.category, payload.page, payload.lang));
         if (!payload.totalPages) {
             yield effects.put({
-                type: moviesActions.setTotalPages.type,
+                type: tvActions.setTotalPages.type,
                 payload: {
                     category: payload.category,
                     totalPages: response.data.total_pages > 500 ? 500 : response.data.total_pages
@@ -26,17 +26,17 @@ function* GetMovies(action) {
             })
         }
         yield effects.put({
-            type: moviesActions.setMovies.type, 
+            type: tvActions.setTVShows.type,
             payload: {
-                category: payload.category, 
-                page: payload.page, 
-                data: response.data.results, 
+                category: payload.category,
+                page: payload.page,
+                data: response.data.results,
                 error: null
             }
         })
     } catch (error) {
         yield effects.put({
-            type: moviesActions.setMovies.type,
+            type: tvActions.setTVShows.type,
             payload: {
                 category: payload.category,
                 page: payload.page,
@@ -48,9 +48,9 @@ function* GetMovies(action) {
     yield effects.put({
         type: generalActions.toggleIsFetchingMain.type,
         payload: false
-    })
-};
+    });
+}
 
-export function* getMoviesWatcher() {
-    yield effects.takeLatest(moviesActions.getMovies.type, GetMovies);
+export function* getTVShowsWatcher() {
+    yield effects.takeLatest(tvActions.getTVShows.type, GetTVShows)
 }

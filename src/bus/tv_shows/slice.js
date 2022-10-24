@@ -7,9 +7,7 @@ const tvSlice = createSlice({
     reducers,
     initialState: [
         { name: 'popular', data: [], totalPages: null },
-        { name: 'top_rated', data: [], totalPages: null },
-        { name: 'upcoming', data: [], totalPages: null },
-        { name: 'now_playing', data: [], totalPages: null }
+        { name: 'top_rated', data: [], totalPages: null }
     ]
 });
 
