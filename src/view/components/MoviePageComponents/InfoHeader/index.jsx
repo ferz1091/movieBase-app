@@ -131,8 +131,8 @@ export const MovieInfoHeader = (props) => {
                 <InfoProperty 
                     class='collection'
                     name='Collection: '
-                    value={props.currentMovie.collection ? props.currentMovie.collection.name : ''}
-                    isVisible={props.currentMovie.collection}
+                    value={props.currentMovie.belongs_to_collection ? <Link to={`/collection/${props.currentMovie.belongs_to_collection.id}`}>{props.currentMovie.belongs_to_collection.name}</Link> : ''}
+                    isVisible={props.currentMovie.belongs_to_collection}   
                 />
                 <Social {...props.currentMovie.social} />
                 {props.currentMovie.overview ?

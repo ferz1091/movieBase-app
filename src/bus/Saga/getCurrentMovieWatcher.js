@@ -51,13 +51,6 @@ function* getCurrentMovie(action) {
             type: generalActions.setMovieSocialIds.type,
             payload: socialIds.data
         })
-        if (response.data.belongs_to_collection) {
-            const collection = yield effects.call(() => movieAPI.getCollection(response.data.belongs_to_collection.id, action.payload.lang));
-            yield effects.put({
-                type: generalActions.setCollection.type,
-                payload: collection.data
-            })
-        }
     } catch (error) {
         yield effects.put({
             type: generalActions.setCurrentMovie.type,

@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { store } from '../init/redux';
 
 // Pages
-import { Main, MoviePage, PersonPage, TVShowPage } from './pages';
+import { Main, MoviePage, PersonPage, TVShowPage, CollectionPage } from './pages';
 
 // Components
 import { Header } from './components';
@@ -66,6 +66,10 @@ export const App = () => {
                             <Route 
                                 path='/tv/:id'
                                 element={<TVShowPage />}
+                            />
+                            <Route 
+                                 path='/collection/:id'
+                                 element={<CollectionPage />}
                             />
                             <Route 
                                 path='*'

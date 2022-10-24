@@ -12,7 +12,8 @@ const generalSlice = createSlice({
         genres: [],
         currentMovie: null,
         currentTVShow: null,
-        currentPerson: null
+        currentPerson: null,
+        currentCollection: null
     }
 });
 

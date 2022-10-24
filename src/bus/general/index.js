@@ -33,6 +33,9 @@ export const useGeneral = () => {
     function switchMode(mode) {
         dispatch(generalActions.switchMode(mode))
     }
+    function getCurrentCollection(id, lang, isGenresLoaded) {
+        dispatch(generalActions.getCurrentCollection({id, lang, isGenresLoaded}))
+    }
     return {
         switchMode,
         getGenres,
@@ -42,6 +45,7 @@ export const useGeneral = () => {
         getCurrentTVShow,
         createSeasonsInfo,
         getSeason,
-        getCurrentTVShowReviewsByPage
+        getCurrentTVShowReviewsByPage,
+        getCurrentCollection
     }
 }

@@ -21,12 +21,12 @@ import { PersonWrapper } from './styles';
 export const PersonPage = () => {
     const [moviePage, setMoviePage] = useState(1);
     const [mode, toggleMode] = useState(1);
-    const { currentPerson, isFetching, lang } = useSelector(state => state.general);
+    const { currentPerson, isFetching, lang, genres } = useSelector(state => state.general);
     const { id } = useParams();
     const { getCurrentPerson } = useGeneral();
     useEffect(() => {
         if (!currentPerson || currentPerson.id !== id) {
-            getCurrentPerson(id, lang);
+            getCurrentPerson(id, lang, !genres.length);
         }
     }, [id, lang])
     if (isFetching.main) {
