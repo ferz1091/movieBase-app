@@ -62,7 +62,7 @@ export const movieAPI = {
     },
     getCollection(id, lang) {
         return (
-            instance.get(`/collecstion/${id}?api_key=${API_KEY}&language=${lang}`)
+            instance.get(`/collection/${id}?api_key=${API_KEY}&language=${lang}`)
         )
     },
     getCurrentPerson(id, lang) {
