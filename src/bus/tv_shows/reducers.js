@@ -1,5 +1,3 @@
-export const getTVShows = (state, action) => {
-}
 export const setTVShows = (state, action) => {
     return [
         ...state.filter(item => item.name !== action.payload.category),

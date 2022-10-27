@@ -31,22 +31,26 @@ export const Movies = (movie) => {
                 </figcaption>
                 {isHover ?
                     <div className='movie-info-header'>
-                        <div className='genre'>
-                            {movie.genre_ids.length > 0 ?
-                                <span>
-                                    {genres.find(genre => genre.id === movie.genre_ids[0]).name}
-                                </span>
-                                :
-                                null
-                            }
-                            {movie.genre_ids.length > 1 ?
-                                <span>
-                                    {genres.find(genre => genre.id === movie.genre_ids[1]).name}
-                                </span>
-                                :
-                                null
-                            }
-                        </div>
+                        {!genres.error ?
+                            <div className='genre'>
+                                {movie.genre_ids.length > 0 ?
+                                    <span>
+                                        {genres.find(genre => genre.id === movie.genre_ids[0]).name}
+                                    </span>
+                                    :
+                                    null
+                                }
+                                {movie.genre_ids.length > 1 ?
+                                    <span>
+                                        {genres.find(genre => genre.id === movie.genre_ids[1]).name}
+                                    </span>
+                                    :
+                                    null
+                                }
+                            </div>
+                            :
+                            null
+                        }
                         <div className='vote'>
                             ★ {movie.vote_average % 1 === 1 ? movie.vote_average : movie.vote_average.toFixed(1)}
                         </div>

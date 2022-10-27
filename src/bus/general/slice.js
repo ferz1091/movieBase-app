@@ -1,6 +1,7 @@
 // Core
 import { createSlice } from '@reduxjs/toolkit';
 import * as reducers from './reducers';
+import * as extraReducers from './extraReducers';
 
 const generalSlice = createSlice({
     name: 'general',
@@ -14,6 +15,15 @@ const generalSlice = createSlice({
         currentTVShow: null,
         currentPerson: null,
         currentCollection: null
+    },
+    extraReducers: {
+        ...extraReducers.getCurrentCollectionReducer, 
+        ...extraReducers.getCurrentMovieReducer, 
+        ...extraReducers.getCurrentPersonReducer,
+        ...extraReducers.getCurrentMovieReviewsByPageReducer,
+        ...extraReducers.getCurrentTVShowReducer,
+        ...extraReducers.getCurrentTVShowSeasonReducer,
+        ...extraReducers.getCurrentTVShowReviewsByPageReducer
     }
 });
 

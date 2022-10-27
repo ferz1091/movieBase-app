@@ -75,11 +75,6 @@ export const Seasons = () => {
                                     SPINNEr
                                 </div>
                                 :
-                                (season.error ?
-                                <div className='error'>
-                                    {season.error}
-                                </div>
-                                :
                                 <>
                                     <section className='season-header'>
                                         <div>
@@ -212,7 +207,6 @@ export const Seasons = () => {
                                         null
                                     }
                                 </>
-                                )
                             :
                             null
                         }

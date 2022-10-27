@@ -90,7 +90,8 @@ export const MovieInfoHeader = (props) => {
                         </span>
                     )}
                 />
-                <InfoProperty
+                {!props.currentMovie.crew.error ?
+                    <InfoProperty
                     class='director'
                     name='Director: '
                     value={
@@ -102,7 +103,10 @@ export const MovieInfoHeader = (props) => {
                             </Link>
                             }
                     isVisible={props.currentMovie.crew.find(member => member.job === 'Director')}
-                />
+                    />
+                    :
+                    null
+                }
                 <InfoProperty
                     class='prod_companies'
                     name='Companies: '

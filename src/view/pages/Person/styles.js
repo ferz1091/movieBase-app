@@ -37,9 +37,10 @@ h2 {
 }
 .biography-text {
     background: rgba(50, 50, 50, 0.5);
-    padding: 20px 5px 20px 20px;
+    padding: 20px 30px 20px 30px;
     text-shadow: 1px 1px 2px black;
     font-style: italic;
+    text-align: justify;
 }
 .movie-list, .tv-list {
     padding-top: 15px;
@@ -64,6 +65,7 @@ h2 {
     display: flex;
     justify-content: center;
     padding: 5px 0;
+    /* min-height: 19px; */
     span {
         padding: 0 5px;
         color: black;

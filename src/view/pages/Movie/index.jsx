@@ -40,24 +40,40 @@ export const MoviePage = () => {
         return (
             <MoviePageWrapper
                 videoPlayerIsOn={videoPlayerMode.isOn}
-                videosAmount={!currentMovie.error && currentMovie.videos ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
+                videosAmount={currentMovie.videos && !currentMovie.videos.error ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
             >
                 <MovieInfoHeader currentMovie={currentMovie} />
-                <Clips
+                {!currentMovie.videos.error ?
+                    <Clips
                     currentMovie={currentMovie}
                     setVideoPlayerMode={setVideoPlayerMode}
                     clipsRef={clipsRef}
-                />
-                <Cast cast={currentMovie.cast} />
-                <Reviews
+                    />
+                    :
+                    null
+                }
+                {!currentMovie.cast.error ? 
+                    <Cast cast={currentMovie.cast} /> 
+                    : 
+                    null
+                }
+                {!currentMovie.reviews.error ?
+                    <Reviews
                     currentMovie={currentMovie}
                     getCurrentMovieReviewsByPage={getCurrentMovieReviewsByPage}
                     reviewPage={reviewPage}
                     setReviewPage={setReviewPage}
                     id={id}
                     lang={lang}
-                />
-                <Similar currentMovie={currentMovie} />
+                    />
+                    :
+                    null
+                }
+                {!currentMovie.similar.error ?
+                    <Similar currentMovie={currentMovie} />
+                    :
+                    null
+                }
                 {videoPlayerMode.isOn ?
                     <VideoPlayer
                         src_key={videoPlayerMode.key}

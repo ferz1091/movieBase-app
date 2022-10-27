@@ -39,7 +39,14 @@ export const Reviews = (props) => {
                             {props.currentMovie.reviews.totalPages !== props.reviewPage ?
                                 <span
                                     className='next-reviewPage'
-                                    onClick={() => props.getCurrentMovieReviewsByPage(props.id, props.lang, props.reviewPage + 1, (arg) => props.setReviewPage(arg), props.reviewPage + 1)}
+                                    onClick={() => {
+                                        if (props.currentMovie.reviews.data.find(review => review.page === props.reviewPage)) {
+                                            props.setReviewPage(props.reviewPage + 1);
+                                        } else {
+                                            props.getCurrentMovieReviewsByPage(props.id, props.lang, props.reviewPage + 1, (arg) => props.setReviewPage(arg), props.reviewPage + 1)
+                                        }
+                                        }
+                                    }
                                 >
                                     {`Next >`}
                                 </span>
@@ -50,14 +57,20 @@ export const Reviews = (props) => {
                         :
                         null
                     }
-                    {props.currentMovie.reviews.data[props.reviewPage - 1].reviews.length > 0 ?
-                        <dl className='review-list'>
-                            {props.currentMovie.reviews.data[props.reviewPage - 1].reviews.map(review =>
-                                <Review key={review.id} {...review} />
-                            )}
-                        </dl>
+                    {props.currentMovie.reviews.data.error ?
+                        <div className='error'>
+                            {props.currentMovie.reviews.data.error}
+                        </div>
                         :
-                        null
+                        (props.currentMovie.reviews.data[props.reviewPage - 1].reviews.length > 0 ?
+                            <dl className='review-list'>
+                                {props.currentMovie.reviews.data[props.reviewPage - 1].reviews.map(review =>
+                                    <Review key={review.id} {...review} />
+                                )}
+                            </dl>
+                            :
+                            null
+                        )
                     }
                 </>
                 :

@@ -9,22 +9,20 @@ import { useGeneral } from '../../../bus/general';
 // Components
 import { Movies } from '../../components';
 
-// Tools
-import { useMovie } from '../../../tools';
-
 // Styles
 import { CollectionPageWrapper } from './styles';
 
 export const CollectionPage = () => {
-    const { getCurrentCollection } = useGeneral();
     const { currentCollection, lang, isFetching, genres } = useSelector(state => state.general);
     const { id } = useParams();
+    const { getCurrentCollection } = useGeneral();
+
     useEffect(() => {
         if (!currentCollection || currentCollection.id !== id) {
             getCurrentCollection(id, lang, !genres.length);
         }
     }, [id, lang])
-
+    
     if (isFetching.main) {
         return (
             <div>

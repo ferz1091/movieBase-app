@@ -1,16 +1,16 @@
-export const getMovies = (state, action) => {
-}
-
 export const setMovies = (state, action) => {
     return [
         ...state.filter(item => item.name !== action.payload.category),
         {...state.find(item => item.name === action.payload.category),
-            data: [...(state.find(item => item.name === action.payload.category).data),
-                {
-                    page: action.payload.page,
-                    data: action.payload.data,
-                    error: action.payload.error
-                }
+            data: [...(state.find(item => item.name === action.payload.category).data)].some(item => item.page === action.payload.page) ?
+                [...(state.find(item => item.name === action.payload.category).data)]
+                :
+                [...(state.find(item => item.name === action.payload.category).data),
+                    {
+                        page: action.payload.page,
+                        data: action.payload.data,
+                        error: action.payload.error
+                    }
             ]
         }
     ]

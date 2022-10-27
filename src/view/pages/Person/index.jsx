@@ -29,6 +29,7 @@ export const PersonPage = () => {
             getCurrentPerson(id, lang, !genres.length);
         }
     }, [id, lang])
+
     if (isFetching.main) {
         return (
             <div>
@@ -90,91 +91,111 @@ export const PersonPage = () => {
                     :
                     null
                 }
-                <section className='person-movies'>
-                    <h2>
-                        <img
-                            src={clips}
-                            alt=''
-                        />
-                        {mode ? `Movies with ${currentPerson.name}` : `TV series with ${currentPerson.name}`}
-                    </h2>
-                    <div className='mode-changer'>
-                        {currentPerson.credits.tv.length ? 
-                            <>
-                                <span
-                                    className={mode ? 'mode-active' : 'mode'}
-                                    onClick={() => {
-                                        if (!mode) {
-                                            setMoviePage(1);
-                                            toggleMode(1);
-                                        }
-                                    }}
-                                >
-                                    Movies
-                                </span>
-                                <span
-                                    className={!mode ? 'mode-active' : 'mode'}
-                                    onClick={() => {
-                                        if (mode) {
-                                            setMoviePage(1);
-                                            toggleMode(0);
-                                        }
-                                    }}
-                                >
-                                    TV shows
-                                </span>
-                            </>
+                {currentPerson.credits.movie.error && currentPerson.credits.tv.error ?
+                    null
+                    :
+                    <section className='person-movies'>
+                        <h2>
+                            <img
+                                src={clips}
+                                alt=''
+                            />
+                            {mode ? `Movies with ${currentPerson.name}` : `TV series with ${currentPerson.name}`}
+                        </h2>
+                        <div className='mode-changer'>
+                            {currentPerson.credits.tv.length && currentPerson.credits.movie.length ? 
+                                <>
+                                    <span
+                                        className={mode ? 'mode-active' : 'mode'}
+                                        onClick={() => {
+                                            if (!mode) {
+                                                setMoviePage(1);
+                                                toggleMode(1);
+                                            }
+                                        }}
+                                    >
+                                        Movies
+                                    </span>
+                                    <span
+                                        className={!mode ? 'mode-active' : 'mode'}
+                                        onClick={() => {
+                                            if (mode) {
+                                                setMoviePage(1);
+                                                toggleMode(0);
+                                            }
+                                        }}
+                                    >
+                                        TV shows
+                                    </span>
+                                </>
+                                :
+                                null
+                            }
+                            {mode && currentPerson.credits.movie.length > 20 || !mode && currentPerson.credits.tv.length > 20 ?
+                                <>
+                                    {moviePage > 1 ?
+                                        <span 
+                                            className='prev-page'
+                                            onClick={() => setMoviePage(moviePage - 1)}
+                                        >
+                                            Previous
+                                        </span>
+                                        :
+                                        null
+                                    }
+                                    {mode && currentPerson.credits.movie.length > moviePage * 20 || !mode && currentPerson.credits.tv.length > moviePage * 20 ?
+                                        <span 
+                                            className='next-page'
+                                            onClick={() => setMoviePage(moviePage + 1)}
+                                        >
+                                            Next
+                                        </span>
+                                        :
+                                        null
+                                    }
+                                </>
+                                :
+                                null
+                            }            
+                        </div>
+                        {mode ?
+                            (!currentPerson.credits.movie.error ?
+                                <div className='movie-list'>
+                                    {currentPerson.credits.movie.slice((moviePage - 1) * 20, moviePage * 20).map(movie =>
+                                        <Movies
+                                            key={movie.id}
+                                            {...movie}
+                                        />
+                                    )}
+                                </div>
+                                :
+                                (!currentPerson.credits.tv.error ?
+                                    <div className='tv-list'>
+                                        {currentPerson.credits.tv.slice((moviePage - 1) * 20, moviePage * 20).map(movie =>
+                                            <Movies
+                                                key={movie.id}
+                                                tv={true}
+                                                {...movie}
+                                            />
+                                        )}
+                                    </div>
+                                    :
+                                    null
+                                )
+                            )
                             :
-                            null
+                            <div className='tv-list'>
+                                {currentPerson.credits.tv.slice((moviePage - 1) * 20, moviePage * 20).map(movie =>
+                                    <Movies
+                                        key={movie.id}
+                                        tv={true}
+                                        {...movie}
+                                    />
+                                )}
+                            </div>
                         }
-                        {mode && currentPerson.credits.movie.length > 20 || !mode && currentPerson.credits.tv.length > 20 ?
-                            <>
-                                {moviePage > 1 ?
-                                    <span 
-                                        className='prev-page'
-                                        onClick={() => setMoviePage(moviePage - 1)}
-                                    >
-                                        Previous
-                                    </span>
-                                    :
-                                    null
-                                }
-                                {mode && currentPerson.credits.movie.length > moviePage * 20 || !mode && currentPerson.credits.tv.length > moviePage * 20 ?
-                                    <span 
-                                        className='next-page'
-                                        onClick={() => setMoviePage(moviePage + 1)}
-                                    >
-                                        Next
-                                    </span>
-                                    :
-                                    null
-                                }
-                            </>
-                            :
-                            null
-                        }            
-                    </div>
-                    {mode ?
-                        <div className='movie-list'>
-                            {currentPerson.credits.movie.slice((moviePage - 1) * 20, moviePage * 20).map(movie =>
-                                <Movies
-                                    key={movie.id}
-                                    {...movie}
-                                />
-                            )}
-                        </div>
-                        :
-                        <div className='tv-list'>
-                            {currentPerson.credits.tv.slice((moviePage - 1) * 20, moviePage * 20).map(movie =>
-                                <Movies
-                                    key={movie.id}
-                                    tv={true}
-                                    {...movie}
-                                />
-                            )}
-                        </div>
-                    }
-                </section>
+                    </section>
+                }
             </PersonWrapper>
         )
     } else if (currentPerson && currentPerson.error) {

@@ -22,18 +22,13 @@ export const Main = () => {
     const tv_shows = useSelector(state => state.tv);
     const { getMovies } = useMovies();
     const { getTVShows } = useTVShows();
-    const { getGenres } = useGeneral();
     useEffect(() => {
-        if (!genres.length) {
-            getGenres();
-        }
         if (mode && !tv_shows.find(item => item.name === category).data.some(item => item.page === page && item.data.length > 0)) {
-            getTVShows(category, page, lang, tv_shows.find(movie => movie.name === category).totalPages, mode);
+            getTVShows(category, page, lang, tv_shows.find(movie => movie.name === category).totalPages);
         } else if (!mode && !movies.find(item => item.name === category).data.some(item => item.page === page && item.data.length > 0)) {
-            getMovies(category, page, lang, movies.find(movie => movie.name === category).totalPages, mode);
+            getMovies(category, page, lang, movies.find(movie => movie.name === category).totalPages, !genres.length);
         }
     }, [mode, category, page])
-    
     if (isFetching.main) {
         return (
             <div>

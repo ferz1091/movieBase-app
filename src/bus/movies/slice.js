@@ -1,5 +1,7 @@
 // Core
 import { createSlice } from '@reduxjs/toolkit';
+
+// Reducers
 import * as reducers from './reducers';
 
 const moviesSlice = createSlice({

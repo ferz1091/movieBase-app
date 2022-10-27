@@ -31,20 +31,39 @@ export const TVShowPage = () => {
                 SPINNER
             </div>
         )
-    } else if (currentTVShow) {
+    } else if (currentTVShow && !currentTVShow.error) {
         return (
             <TVShowWrapper>
                 <TVShowInfoHeader currentTVShow={currentTVShow} />
-                <Reviews
+                {!currentTVShow.reviews.error ?
+                    <Reviews
                     currentMovie={currentTVShow}
                     getCurrentMovieReviewsByPage={getCurrentTVShowReviewsByPage}
                     reviewPage={reviewPage}
                     setReviewPage={setReviewPage}
                     id={id}
                     lang={lang}
-                />
+                    />
+                    :
+                    null
+                }
                 <Seasons />
-                <Similar currentMovie={currentTVShow} tv={true} />
+                {!currentTVShow.similar.error ?
+                    <Similar 
+                        currentMovie={currentTVShow} 
+                        tv={true} 
+                    />
+                    :
+                    null
+                }
+            </TVShowWrapper>
+        )
+    } else if (currentTVShow && currentTVShow.error) {
+        return (
+            <TVShowWrapper>
+                <div className='error'>
+                    {currentTVShow.error}
+                </div>
             </TVShowWrapper>
         )
     }
