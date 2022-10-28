@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import { Review } from '../../common';
+import { Review, SectionHeader } from '../../common';
 
 // Assets
 import reviews from '../../../../assets/icons/reviews.png';
@@ -13,13 +13,11 @@ import { ReviewsWrapper } from './styles';
 export const Reviews = (props) => {
     return (
         <ReviewsWrapper className='reviews'>
-            <h2>
-                <img
-                    src={reviews}
-                    alt=''
-                />
-                Reviews
-            </h2>
+            <SectionHeader 
+                img={reviews}
+                value='Reviews'
+                alt='Reviews'
+            />
             {props.currentMovie.reviews.data.length > 0 ?
                 <>
                     {props.currentMovie.reviews.totalPages > 1 ?

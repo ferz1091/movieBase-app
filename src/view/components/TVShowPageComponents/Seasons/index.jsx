@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 // Components
-import { InfoProperty, Cast, GuestCast, Clips, VideoPlayer } from '../../';
+import { InfoProperty, Cast, GuestCast, Clips, VideoPlayer, SectionHeader } from '../../';
 
 // Tools
 import { useMovie, deleteDuplicates } from '../../../../tools';
@@ -27,13 +27,10 @@ export const Seasons = () => {
     }, [activeSeason])
     return (
         <SeasonsWrapper>
-            <h2>
-                <img
-                    src={seasons}
-                    alt=''
-                />
-                Seasons
-            </h2>
+            <SectionHeader 
+                img={seasons}
+                value='Seasons'
+            />
             <div className='seasons-list'>
                 {currentTVShow.seasons.map((season, index) =>
                     <div

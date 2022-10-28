@@ -1,6 +1,9 @@
 // Core
 import React from 'react';
 
+// Components
+import { SectionHeader } from '../../';
+
 // Assets
 import clips from '../../../../assets/icons/clips.png';
 
@@ -14,13 +17,11 @@ export const Clips = (props) => {
             videosAmount={props.currentMovie.videos.filter(video => video.site === 'YouTube').length}
             isArrowsVisible={props.currentMovie.videos.filter(video => video.site === 'YouTube').length * 300 > window.innerWidth}
         >
-            <h2>
-                <img
-                    src={clips}
-                    alt=''
-                />
-                Clips
-            </h2>
+            <SectionHeader 
+                img={clips}
+                value='Clips'
+                alt='Clips'
+            />
             <div
                 className='clips-container'
                 ref={props.clipsRef}

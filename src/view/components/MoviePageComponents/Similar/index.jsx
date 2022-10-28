@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import { Movies } from '../../common';
+import { Movies, SectionHeader } from '../../common';
 
 // Assets
 import similar from '../../../../assets/icons/similar.png';
@@ -13,13 +13,11 @@ import { SimilarWrapper } from './styles';
 export const Similar = (props) => {
     return (
         <SimilarWrapper className='similar'>
-            <h2>
-                <img
-                    src={similar}
-                    alt=''
-                />
-                Similar
-            </h2>
+            <SectionHeader 
+                img={similar}
+                value='Reviews'
+                alt='Similar'
+            />
             <div className='similar-list'>
                 {props.currentMovie.similar.map(movie =>
                     <Movies

@@ -75,8 +75,7 @@ export const TVShowInfoHeader = (props) => {
                     name='Network: '
                     isVisible={props.currentTVShow.networks.length}
                     value={props.currentTVShow.networks.map((network, index, networks) =>
-                        <NavLink
-                            to={`/network/${network.id}`}
+                        <span
                             key={network.id}
                         >
                             {
@@ -89,7 +88,7 @@ export const TVShowInfoHeader = (props) => {
                                         {` ${network.name},`}
                                     </>
                             }
-                        </NavLink>
+                        </span>
                     )}
                 />
                 <InfoProperty
