@@ -169,30 +169,44 @@ export const Seasons = () => {
                                             </h2>
                                             {activeEpisode ?
                                                 <div className='episode-info'>
-                                                    {season.episodes[activeEpisode - 1].name && season.episodes[activeEpisode - 1].vote_average ?
+                                                    {season.episodes[activeEpisode - 1].name ?
                                                         <div className='episode-header'>
                                                             <span className='episode-name'>
                                                                 "{season.episodes[activeEpisode - 1].name}"
                                                             </span>
-                                                            <RatingWrapper 
-                                                                className='episode-rating'
-                                                                vote={season.episodes[activeEpisode - 1].vote_average}
-                                                            >
-                                                                ★{season.episodes[activeEpisode - 1].vote_average.toFixed(1)}
-                                                            </RatingWrapper>
+                                                            {season.episodes[activeEpisode - 1].vote_average ?
+                                                                <RatingWrapper
+                                                                    className='episode-rating'
+                                                                    vote={season.episodes[activeEpisode - 1].vote_average}
+                                                                >
+                                                                    ★{season.episodes[activeEpisode - 1].vote_average.toFixed(1)}
+                                                                </RatingWrapper>
+                                                                :
+                                                                null
+                                                            }
                                                         </div>
                                                         :
                                                         null
                                                     }
+                                                    <InfoProperty 
+                                                        class='air_date'
+                                                        name='Air date: '
+                                                        value={new Date(season.episodes[activeEpisode - 1].air_date).toLocaleDateString()}
+                                                        isVisible={season.episodes[activeEpisode - 1].air_date}
+                                                    />
                                                     <InfoProperty
                                                         class='time'
                                                         name='Time: '
                                                         value={`${season.episodes[activeEpisode - 1].runtime} min.`}
                                                         isVisible={season.episodes[activeEpisode - 1].runtime}
                                                     />
-                                                    <div className='overview'>
-                                                        <u>What is this series about?</u><br />{season.episodes[activeEpisode - 1].overview}
-                                                    </div>
+                                                    {season.episodes[activeEpisode - 1].overview ?
+                                                        <div className='overview'>
+                                                            <u>What is this series about?</u><br />{season.episodes[activeEpisode - 1].overview}
+                                                        </div>
+                                                        :
+                                                        null
+                                                    }
                                                 </div>
                                                 :
                                                 null
