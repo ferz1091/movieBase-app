@@ -1,5 +1,5 @@
 // Core
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -10,9 +10,19 @@ import { useGeneral } from '../../../../bus/general';
 import { HeaderWrapper } from './styles';
 
 export const Header = () => {
-    const { switchMode } = useGeneral();
+    const { switchMode, getCurrentSearchResultByString, resetSearchResults } = useGeneral();
     const navigate = useNavigate();
-    const { mode } = useSelector(state => state.general);
+    const { mode, lang, searchResults } = useSelector(state => state.general);
+    const searchRef = useRef();
+    const [searchString, setSearchString] = useState('');
+    useEffect(() => {
+        if (searchResults.length) {
+            resetSearchResults();
+        }
+        if (searchString.length >= 3) {
+            getCurrentSearchResultByString(searchString, 1, lang);
+        }
+    }, [searchString])
     return (
         <HeaderWrapper>
             <div className='Switch-mode'>
@@ -37,7 +47,6 @@ export const Header = () => {
             </div>
             <div className='Switch-category'>
                 <NavLink
-                    // className={category === 'popular'}
                     to='/popular/1'>
                     Popular
                 </NavLink>
@@ -56,6 +65,14 @@ export const Header = () => {
                         </NavLink>
                     </>
                 }
+            </div>
+            <div className='search'>
+                <input 
+                    ref={searchRef} 
+                    type='text' 
+                    onChange={() => setSearchString(searchRef.current.value)} 
+                    placeholder='Text something'
+                />
             </div>
         </HeaderWrapper>
     )

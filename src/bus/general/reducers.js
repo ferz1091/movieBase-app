@@ -16,3 +16,9 @@ export const switchMode = (state, action) => {
         mode: action.payload
     }
 }
+export const resetSearchResults = (state, action) => {
+    return {
+        ...state,
+        searchResults: []
+    }
+}

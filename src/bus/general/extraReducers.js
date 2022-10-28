@@ -118,3 +118,13 @@ export const getCurrentCollectionReducer = {
         state.currentCollection = {error: action.error.message};
     }
 };
+
+// SEARCH CURRENT STRING
+export const getCurrentSearchResultByStringReducer = {
+    [thunks.getCurrentSearchResultsByStringThunk.pending]: (state, action) => {
+        state.isFetching.search = true;
+    },
+    [thunks.getCurrentSearchResultsByStringThunk.fulfilled]: (state, action) => {
+        state.searchResults = action.payload;
+    }
+}

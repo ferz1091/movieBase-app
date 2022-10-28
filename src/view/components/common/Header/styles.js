@@ -29,7 +29,17 @@ background: rgba(200, 200, 200, 1);
         font-weight: bolder;
     }
 }
+.search {
+    position: absolute;
+    bottom: 5px; right: 5px;
+    input {
+        min-width: 25vw;
+    }
+}
 @media (max-width: 768px) {
     width: 100vw;
+    .search {
+        bottom: 28px;
+    }
 }
 `;

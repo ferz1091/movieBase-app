@@ -119,5 +119,15 @@ export const movieAPI = {
         return (
             instance.get(`/tv/${id}/similar?api_key=${API_KEY}&language=${lang}&page=1`)
         )
+    },
+    getMoviesByString(query, page, lang) {
+        return (
+            instance.get(`/search/movie?api_key=${API_KEY}&language=${lang}&query=${query}&page=${page}&include_adult=false`)
+        )
+    },
+    getTVShowsByString(query, page, lang) {
+        return (
+            instance.get(`/search/tv?api_key=${API_KEY}&language=${lang}&page=${page}&query=${query}&include_adult=false`)
+        )
     }
 }

@@ -182,3 +182,10 @@ export const getCurrentCollectionThunk = createAsyncThunk('general/getCurrentCol
     const response = await movieAPI.getCollection(id, lang);
     return response.data;
 })
+
+// SEARCH CURRENT STRING
+export const getCurrentSearchResultsByStringThunk = createAsyncThunk('general/getCurrentSearchResultByString', async ({query, page, lang}) => {
+    const movies = await movieAPI.getMoviesByString(query, page, lang);
+    const tv_shows = await movieAPI.getTVShowsByString(query, page, lang);
+    return movies.data.results.concat(tv_shows.data.results).sort((a, b) => b.popularity - a.popularity);
+})
