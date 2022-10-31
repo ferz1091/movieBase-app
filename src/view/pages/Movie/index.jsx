@@ -43,7 +43,7 @@ export const MoviePage = () => {
                 videosAmount={currentMovie.videos && !currentMovie.videos.error ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
             >
                 <MovieInfoHeader currentMovie={currentMovie} />
-                {!currentMovie.videos.error ?
+                {!currentMovie.videos.error && currentMovie.videos.length ?
                     <Clips
                     currentMovie={currentMovie}
                     setVideoPlayerMode={setVideoPlayerMode}
@@ -57,14 +57,14 @@ export const MoviePage = () => {
                     : 
                     null
                 }
-                {!currentMovie.reviews.error ?
+                {!currentMovie.reviews.error && currentMovie.reviews.totalPages ?
                     <Reviews
-                    currentMovie={currentMovie}
-                    getCurrentMovieReviewsByPage={getCurrentMovieReviewsByPage}
-                    reviewPage={reviewPage}
-                    setReviewPage={setReviewPage}
-                    id={id}
-                    lang={lang}
+                        currentMovie={currentMovie}
+                        getCurrentMovieReviewsByPage={getCurrentMovieReviewsByPage}
+                        reviewPage={reviewPage}
+                        setReviewPage={setReviewPage}
+                        id={id}
+                        lang={lang}
                     />
                     :
                     null

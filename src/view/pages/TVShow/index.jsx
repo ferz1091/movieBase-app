@@ -35,7 +35,7 @@ export const TVShowPage = () => {
         return (
             <TVShowWrapper>
                 <TVShowInfoHeader currentTVShow={currentTVShow} />
-                {!currentTVShow.reviews.error ?
+                {!currentTVShow.reviews.error && currentTVShow.reviews.totalPages ?
                     <Reviews
                     currentMovie={currentTVShow}
                     getCurrentMovieReviewsByPage={getCurrentTVShowReviewsByPage}
@@ -48,7 +48,7 @@ export const TVShowPage = () => {
                     null
                 }
                 <Seasons />
-                {!currentTVShow.similar.error ?
+                {!currentTVShow.similar.error && currentTVShow.similar.length ?
                     <Similar 
                         currentMovie={currentTVShow} 
                         tv={true} 

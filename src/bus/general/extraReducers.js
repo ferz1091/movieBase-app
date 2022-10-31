@@ -126,5 +126,6 @@ export const getCurrentSearchResultByStringReducer = {
     },
     [thunks.getCurrentSearchResultsByStringThunk.fulfilled]: (state, action) => {
         state.searchResults = action.payload;
+        state.isFetching.search = false;
     }
 }

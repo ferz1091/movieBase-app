@@ -15,7 +15,7 @@ export const Similar = (props) => {
         <SimilarWrapper className='similar'>
             <SectionHeader 
                 img={similar}
-                value='Reviews'
+                value='Similar'
                 alt='Similar'
             />
             <div className='similar-list'>
