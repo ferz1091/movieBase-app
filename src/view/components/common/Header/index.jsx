@@ -17,6 +17,7 @@ export const Header = () => {
     const [searchString, setSearchString] = useState('');
     const [isFocusSearch, toggleIsFocusSearch] = useState(false);
     const location = useLocation();
+    console.log(searchResults.error);
     useEffect(() => {
         if (searchResults.length) {
             resetSearchResults();
@@ -99,9 +100,22 @@ export const Header = () => {
                                 <div 
                                     className='result'
                                     key={result.id}
-                                    onClick={() => navigate(result.title ? `/movie/${result.id}` : `/tv/${result.id}`)}
+                                    onClick={() => {
+                                        toggleIsFocusSearch(false);
+                                        navigate(result.title ? `/movie/${result.id}` : `/tv/${result.id}`);
+                                    }}
                                 >
-                                    {result.title ? result.title : result.name}
+                                    {result.title ? 
+                                        result.title.length > 59 ? 
+                                            `${result.title.slice(0, 59)}...` 
+                                            : 
+                                            result.title 
+                                        : 
+                                        result.name.length > 59 ? 
+                                            `${result.name.slice(0, 59)}...` 
+                                            : 
+                                            result.name
+                                    }
                                     <RatingWrapper
                                         vote={result.vote_average}
                                         className='rating'
@@ -111,12 +125,18 @@ export const Header = () => {
                                 </div>
                             ))
                             :
-                            (searchString.length > 2 && !searchResults.length ?
+                            (searchString.length > 2 && !searchResults.length && !searchResults.error ?
                                 <div className='result-no-matches'>
                                     No matches found
                                 </div>
                                 :
-                                null    
+                                (searchResults.error ?
+                                    <div className='result-error'>
+                                        Something goes wrong
+                                    </div>
+                                    :
+                                    null    
+                                )
                             )
                         )
                         :

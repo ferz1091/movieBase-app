@@ -63,14 +63,16 @@ background: rgba(200, 200, 200, 1);
     .result {
         cursor: pointer;
         min-width: 600px;
-        font-size: 14px;
-        padding: 10px 5px 2px 5px;
+        font-size: calc(10px + 5 * (100vw / 1400));
+        padding: 10px 5px 10px 5px;
         padding-right: 40px;
+        color: rgb(90, 90, 90);
         border-bottom: 1px solid rgb(200, 200, 200);
         box-sizing: border-box;
     }
     .result:hover {
-        background-color: rgb(200, 200, 200);
+        color: black;
+        background-color: rgb(220, 220, 220);
     }
 }
 .search-button {
@@ -85,10 +87,10 @@ background: rgba(200, 200, 200, 1);
 .search-button:active {
     transform: translateY(5%);
 }
-.result:first-child, .result-no-matches:first-child {
+.result:first-child, .result-no-matches:first-child, .result-error {
     border-top: 1px solid rgb(200, 200, 200);
 }
-.result-no-matches {
+.result-no-matches, .result-error {
     min-width: 600px;
     font-size: 14px;
     padding: 10px 5px 2px 5px;
