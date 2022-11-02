@@ -29,7 +29,8 @@ background: rgba(200, 200, 200, 1);
     .mode {
         position: relative;
         cursor: pointer;
-        padding: 0 5px;
+        padding-left: 5px;
+        padding-right: 15px;
     }
     .active {
         font-weight: bolder;

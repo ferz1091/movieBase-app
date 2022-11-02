@@ -129,5 +129,10 @@ export const movieAPI = {
         return (
             instance.get(`/search/tv?api_key=${API_KEY}&language=${lang}&page=${page}&query=${query}&include_adult=false`)
         )
+    },
+    getMoviesByParams(genre, year, page, lang) {
+        return (
+            instance.get(`/discover/movie?api_key=${API_KEY}&language=${lang}&page=${page}${genre ? `&with_genres${genre}` : ''}${year ? `&primary_release_year=${year}` : ''}&sort_by=vote_count.desc`)
+        )
     }
 }

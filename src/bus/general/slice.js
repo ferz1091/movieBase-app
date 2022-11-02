@@ -8,14 +8,15 @@ const generalSlice = createSlice({
     reducers,
     initialState: {
         lang: 'en',
-        isFetching: {main: false, reviews: false, seasons: false, search: false},
+        isFetching: {main: false, reviews: false, seasons: false, search: false, searchByParams: false},
         mode: false,
         genres: [],
         currentMovie: null,
         currentTVShow: null,
         currentPerson: null,
         currentCollection: null,
-        searchResults: []
+        searchResults: [],
+        compositionsByParams: {data: [], totalPages: null}
     },
     extraReducers: {
         ...extraReducers.getCurrentCollectionReducer, 
@@ -25,7 +26,8 @@ const generalSlice = createSlice({
         ...extraReducers.getCurrentTVShowReducer,
         ...extraReducers.getCurrentTVShowSeasonReducer,
         ...extraReducers.getCurrentTVShowReviewsByPageReducer,
-        ...extraReducers.getCurrentSearchResultByStringReducer
+        ...extraReducers.getCurrentSearchResultByStringReducer,
+        ...extraReducers.getMoviesByParamsReducer
     }
 });
 

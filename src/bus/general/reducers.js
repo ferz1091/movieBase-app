@@ -22,3 +22,9 @@ export const resetSearchResults = (state, action) => {
         searchResults: []
     }
 }
+export const resetCompositionsByParams = (state, action) => {
+    return {
+        ...state,
+        compositionsByParams: {data: [], totalPages: null}
+    }
+}

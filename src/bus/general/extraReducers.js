@@ -133,3 +133,31 @@ export const getCurrentSearchResultByStringReducer = {
         state.isFetching.search = false;
     }
 }
+
+// MOVIES BY PARAMS 
+export const getMoviesByParamsReducer = {
+    [thunks.getMoviesByParamsThunk.pending]: (state, action) => {
+        state.isFetching.searchByParams = true;
+    },
+    [thunks.getMoviesByParamsThunk.fulfilled]: (state, action) => {
+        if (!state.compositionsByParams.totalPages) {
+            state.compositionsByParams.totalPages = action.payload.total_pages > 500 ? 500 : action.payload.total_pages
+        }
+        if (!state.compositionsByParams.data.some(movies => movies.page === action.payload.page)) {
+            state.compositionsByParams.data = [
+                                                ...state.compositionsByParams.data, 
+                                                {page: action.payload.page, data: action.payload.results, error: null}
+                                            ]
+        }
+        state.isFetching.searchByParams = false;
+    },
+    [thunks.getMoviesByParamsThunk.rejected]: (state, action) => {
+        if (!state.compositionsByParams.data.some(movies => movies.page === action.payload.page)) {
+            state.compositionsByParams.data = [
+                ...state.compositionsByParams.data,
+                { page: action.meta.arg.page, data: null, error: action.error.message }
+            ]
+        }
+        state.isFetching.searchByParams = false;
+    }
+}

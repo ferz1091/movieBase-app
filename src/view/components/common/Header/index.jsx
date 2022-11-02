@@ -13,7 +13,7 @@ import { CustomSearch } from '../CustomSearch';
 import { HeaderWrapper, RatingWrapper } from './styles';
 
 export const Header = () => {
-    const { switchMode, getCurrentSearchResultByString, resetSearchResults } = useGeneral();
+    const { switchMode, getCurrentSearchResultByString, resetSearchResults, getMoviesByParams, resetCompositionsByParams } = useGeneral();
     const navigate = useNavigate();
     const { mode, lang, searchResults, isFetching, genres } = useSelector(state => state.general);
     const searchRef = useRef();
@@ -68,7 +68,12 @@ export const Header = () => {
                                     }
                                 </div>
                                 {genres.length ?
-                                    <CustomSearch genres={genres.filter(genre => !genre.mode)} /> 
+                                    <CustomSearch 
+                                        genres={genres.filter(genre => !genre.mode)} 
+                                        getMoviesByParams={getMoviesByParams}
+                                        lang={lang}
+                                        resetCompositionsByParams={resetCompositionsByParams}
+                                    /> 
                                     : 
                                     null
                                 }
@@ -110,7 +115,12 @@ export const Header = () => {
                                         null
                                     }
                                 </div>
-                                <CustomSearch genres={genres.filter(genre => genre.mode)} />
+                                <CustomSearch 
+                                    genres={genres.filter(genre => genre.mode)} 
+                                    getMoviesByParams={getMoviesByParams}
+                                    lang={lang}
+                                    resetCompositionsByParams={resetCompositionsByParams}
+                                />
                             </div>
                         </>
                         :

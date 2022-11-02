@@ -12,7 +12,8 @@ import { getCurrentCollectionThunk,
         getCurrentTVShowThunk,
         getCurrentTVShowSeasonThunk,
         getCurrentTVShowReviewsByPageThunk,
-        getCurrentSearchResultsByStringThunk } from './thunks';
+        getCurrentSearchResultsByStringThunk,
+        getMoviesByParamsThunk } from './thunks';
 
 export const useGeneral = () => {
     const dispatch = useDispatch();
@@ -40,6 +41,9 @@ export const useGeneral = () => {
     function getCurrentSearchResultByString(query, page, lang) {
         dispatch(getCurrentSearchResultsByStringThunk({query, page, lang}))
     }
+    function getMoviesByParams(genre, year, page, lang) {
+        dispatch(getMoviesByParamsThunk({genre, year, page, lang}))
+    }
     function createSeasonsInfo(length) {
         dispatch(generalActions.createSeasonsInfo(length))
     }
@@ -48,6 +52,9 @@ export const useGeneral = () => {
     }
     function resetSearchResults() {
         dispatch(generalActions.resetSearchResults())
+    }
+    function resetCompositionsByParams() {
+        dispatch(generalActions.resetCompositionsByParams())
     }
     return {
         switchMode,
@@ -60,6 +67,8 @@ export const useGeneral = () => {
         getCurrentTVShowReviewsByPage,
         getCurrentCollection,
         getCurrentSearchResultByString,
-        resetSearchResults
+        resetSearchResults,
+        getMoviesByParams,
+        resetCompositionsByParams
     }
 }

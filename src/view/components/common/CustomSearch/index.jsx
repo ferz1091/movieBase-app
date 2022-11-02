@@ -98,7 +98,13 @@ export const CustomSearch = (props) => {
                         </span>
                     </span>
                 </div>
-                <span className='search-submit'>
+                <span 
+                    className='search-submit'
+                    onClick={() => {
+                        props.resetCompositionsByParams();
+                        props.getMoviesByParams(genreInput === 'All genres' ? null : props.genres.find(genre => genre.name === genreInput).id, yearInput === 'During all time' ? null : yearInput, 1, props.lang);
+                    }}
+                >
                     SEARCH
                 </span>
             </div>

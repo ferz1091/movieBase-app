@@ -189,3 +189,9 @@ export const getCurrentSearchResultsByStringThunk = createAsyncThunk('general/ge
     const tv_shows = await movieAPI.getTVShowsByString(query, page, lang);
     return movies.data.results.concat(tv_shows.data.results).sort((a, b) => b.popularity - a.popularity);
 })
+
+// MOVIES BY PARAMS 
+export const getMoviesByParamsThunk = createAsyncThunk('general/getMoviesByParams', async ({genre, year, page, lang}) => {
+    const response = await movieAPI.getMoviesByParams(genre, year, page, lang);
+    return response.data;
+})
