@@ -3,16 +3,19 @@ import styled from 'styled-components';
 
 // Assets
 import search from '../../../../assets/icons/search.png';
+import arrow_down from '../../../../assets/icons/arrow-down.png';
 
 export const HeaderWrapper = styled.header`
 position: fixed;
 z-index: 2;
 width: 90vw;
 height: 15vh;
+display: flex;
+flex-direction: column;
+justify-content: end;
 background: rgba(200, 200, 200, 1);
 .Switch-category {
-    position: absolute;
-    bottom: 5px; left:0;
+    margin-bottom: 5px;
     a {
         text-decoration: none;
         padding: 0 5px;
@@ -22,9 +25,9 @@ background: rgba(200, 200, 200, 1);
     }
 }
 .Switch-mode {
-    position: absolute;
-    bottom: 30px; left: 0;
-    span {
+    margin-bottom: 5px;
+    .mode {
+        position: relative;
         cursor: pointer;
         padding: 0 5px;
     }
@@ -98,6 +101,46 @@ background: rgba(200, 200, 200, 1);
     border-bottom: 1px solid rgb(200, 200, 200);
     box-sizing: border-box;
 }
+.arrow-down, .arrow-up {
+    margin-left: 5px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+    background: url(${arrow_down});
+    background-size: cover;
+    transition: all linear 0.1s;
+}
+.arrow-up {
+    transform: rotate(180deg);
+}
+.panel {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    width: 90vw;
+    font-weight: 400;
+    box-sizing: border-box;
+}
+.genres {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: rgb(90, 90, 90);
+    color: white;
+    padding: 15px calc(5px + 30 * (100vw / 1400));
+    .genre {
+        padding: 5px 0 5px 10px;
+        font-size: calc(12px + 4 * (100vw / 1400));
+        transition: all linear 0.1s;
+    }
+    .genre:hover {
+        background-color: rgb(120, 120, 120);
+    }
+    .genre:active {
+        transform: translateY(5%);
+        box-shadow: 1px 1px 2px black;
+    }
+}
 @media (max-width: 768px) {
     width: 100vw;
     .search {
@@ -117,6 +160,10 @@ background: rgba(200, 200, 200, 1);
         .result {
             min-width: 100px;
         }
+    }
+    .genres {
+        width: 100vw;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 `;

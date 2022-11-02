@@ -6,18 +6,21 @@ import { useSelector } from 'react-redux';
 // Bus
 import { useGeneral } from '../../../../bus/general';
 
+// Components
+import { CustomSearch } from '../CustomSearch';
+
 // Styles
 import { HeaderWrapper, RatingWrapper } from './styles';
 
 export const Header = () => {
     const { switchMode, getCurrentSearchResultByString, resetSearchResults } = useGeneral();
     const navigate = useNavigate();
-    const { mode, lang, searchResults, isFetching } = useSelector(state => state.general);
+    const { mode, lang, searchResults, isFetching, genres } = useSelector(state => state.general);
     const searchRef = useRef();
     const [searchString, setSearchString] = useState('');
     const [isFocusSearch, toggleIsFocusSearch] = useState(false);
+    const [genresMode, setGenresMode] = useState(null);
     const location = useLocation();
-    console.log(searchResults.error);
     useEffect(() => {
         if (searchResults.length) {
             resetSearchResults();
@@ -36,20 +39,84 @@ export const Header = () => {
                 <span 
                     className={!mode ? 'mode active' : 'mode'}
                     onClick={() => {
-                        switchMode(false)
-                        navigate('/popular/1');
+                        if (genresMode !== 'movies') {
+                            switchMode(false)
+                            navigate('/popular/1');
+                        }
                     }}
+                    onMouseOver={() => setGenresMode('movies')}
+                    onMouseOut={() => setGenresMode(null)}
                 >
                     Movies
+                    {genresMode === 'movies' ?
+                        <>
+                            <span className='arrow-up'>
+                            </span>
+                            <div className='panel'>
+                                <div className='genres'>
+                                    {genres.length ? 
+                                        (genres.filter(genre => !genre.mode).map(genre =>
+                                            <span 
+                                                className='genre'
+                                                key={genre.id}
+                                            >
+                                                {genre.name}
+                                            </span>
+                                        ))
+                                        :
+                                        null
+                                    }
+                                </div>
+                                {genres.length ?
+                                    <CustomSearch genres={genres.filter(genre => !genre.mode)} /> 
+                                    : 
+                                    null
+                                }
+                            </div>
+                        </>
+                        :
+                        <span className='arrow-down'>
+                        </span>
+                    }
                 </span>
                 <span 
                     className={mode ? 'mode active' : 'mode'}
                     onClick={() => {
-                        switchMode(true);
-                        navigate('/popular/1');
+                        if (genresMode !== 'tv') {
+                            switchMode(true);
+                            navigate('/popular/1');
+                        }
                     }}
+                    onMouseOver={() => setGenresMode('tv')}
+                    onMouseOut={() => setGenresMode(null)}
                 >
                     TV Shows
+                    {genresMode === 'tv' ?
+                        <>
+                            <span className='arrow-up'>
+                            </span>
+                            <div className='panel'>
+                                <div className='genres'>
+                                    {genres.length ?
+                                        (genres.filter(genre => genre.mode).map(genre =>
+                                            <span 
+                                                className='genre'
+                                                key={genre.id}
+                                            >
+                                                {genre.name}
+                                            </span>
+                                        ))
+                                        :
+                                        null
+                                    }
+                                </div>
+                                <CustomSearch genres={genres.filter(genre => genre.mode)} />
+                            </div>
+                        </>
+                        :
+                        <span className='arrow-down'>
+                        </span>
+                    }
                 </span>
             </div>
             <div className='Switch-category'>

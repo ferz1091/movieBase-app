@@ -8,17 +8,16 @@ import { moviesActions } from './slice';
 // Api
 import { movieAPI } from '../../api';
 
+// Tools
+import { getGenres } from '../../tools';
+
 // MOVIES
 export const getMoviesThunk = createAsyncThunk('general/getMovies', async ({ category, page, lang, totalPages, isGenresLoaded }, { dispatch }) => {
     dispatch(generalActions.toggleIsFetchingMain(true));
     if (isGenresLoaded) {
-        try {
-            const movieGenres = await movieAPI.getMovieGenres(lang);
-            const tvGenres = await movieAPI.getTVGenres(lang);
-            dispatch(generalActions.setGenres(movieGenres.data.genres.concat(tvGenres.data.genres)));
-        } catch (error) {
-            dispatch(generalActions.setGenres({ error: error.message }))
-        }
+        getGenres(lang)
+            .then(genres => dispatch(generalActions.setGenres(genres)))
+            .catch(error => dispatch(generalActions.setGenres({ error: error.message })))
     }
     try {
         const response = await movieAPI.getMovies(category, page, lang);
