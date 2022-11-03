@@ -137,7 +137,7 @@ export const movieAPI = {
     },
     getTVShowsByParams(genre, year, page, lang) {
         return (
-            instance.get(`/discover/tv?api_key=${API_KEY}&language=${lang}&page=${page}${genre ? `&with_genres=${genre}` : ''}${year ? `&first_air_date_year=${year}` : ''}`)
+            instance.get(`/discover/tv?api_key=${API_KEY}&language=${lang}&page=${page}${genre ? `&with_genres=${genre}` : ''}${year ? `&first_air_date_year=${year}` : ''}&sort_by=vote_count.desc`)
         )
     }
 }

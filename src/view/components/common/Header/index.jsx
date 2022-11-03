@@ -63,6 +63,10 @@ export const Header = () => {
                                             <span 
                                                 className='genre'
                                                 key={genre.id}
+                                                onClick={() => {
+                                                    resetCompositionsByParams();
+                                                    getMoviesByParams(genre.id, null, 1, lang);
+                                                }}
                                             >
                                                 {genre.name}
                                             </span>
@@ -115,6 +119,10 @@ export const Header = () => {
                                             <span 
                                                 className='genre'
                                                 key={genre.id}
+                                                onClick={() => {
+                                                    resetCompositionsByParams();
+                                                    getTVShowsByParams(genre.id, null, 1, lang);
+                                                }}
                                             >
                                                 {genre.name}
                                             </span>
