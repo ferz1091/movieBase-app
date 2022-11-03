@@ -195,3 +195,9 @@ export const getMoviesByParamsThunk = createAsyncThunk('general/getMoviesByParam
     const response = await movieAPI.getMoviesByParams(genre, year, page, lang);
     return response.data;
 })
+
+// TV SHOWS BY PARAMS
+export const getTVShowsByParamsThunk = createAsyncThunk('general/getTVShowsByParams', async ({genre, year, page, lang}) => {
+    const response = await movieAPI.getTVShowsByParams(genre, year, page, lang);
+    return response.data;
+})

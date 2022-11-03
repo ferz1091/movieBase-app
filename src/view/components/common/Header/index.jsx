@@ -13,7 +13,7 @@ import { CustomSearch } from '../CustomSearch';
 import { HeaderWrapper, RatingWrapper } from './styles';
 
 export const Header = () => {
-    const { switchMode, getCurrentSearchResultByString, resetSearchResults, getMoviesByParams, resetCompositionsByParams } = useGeneral();
+    const { switchMode, getCurrentSearchResultByString, resetSearchResults, getMoviesByParams, getTVShowsByParams, resetCompositionsByParams } = useGeneral();
     const navigate = useNavigate();
     const { mode, lang, searchResults, isFetching, genres } = useSelector(state => state.general);
     const searchRef = useRef();
@@ -70,7 +70,7 @@ export const Header = () => {
                                 {genres.length ?
                                     <CustomSearch 
                                         genres={genres.filter(genre => !genre.mode)} 
-                                        getMoviesByParams={getMoviesByParams}
+                                        getCompositionsByParams={getMoviesByParams}
                                         lang={lang}
                                         resetCompositionsByParams={resetCompositionsByParams}
                                     /> 
@@ -117,7 +117,7 @@ export const Header = () => {
                                 </div>
                                 <CustomSearch 
                                     genres={genres.filter(genre => genre.mode)} 
-                                    getMoviesByParams={getMoviesByParams}
+                                    getCompositionsByParams={getTVShowsByParams}
                                     lang={lang}
                                     resetCompositionsByParams={resetCompositionsByParams}
                                 />

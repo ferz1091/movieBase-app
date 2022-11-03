@@ -132,7 +132,12 @@ export const movieAPI = {
     },
     getMoviesByParams(genre, year, page, lang) {
         return (
-            instance.get(`/discover/movie?api_key=${API_KEY}&language=${lang}&page=${page}${genre ? `&with_genres${genre}` : ''}${year ? `&primary_release_year=${year}` : ''}&sort_by=vote_count.desc`)
+            instance.get(`/discover/movie?api_key=${API_KEY}&language=${lang}&page=${page}${genre ? `&with_genres=${genre}` : ''}${year ? `&primary_release_year=${year}` : ''}&sort_by=vote_count.desc`)
+        )
+    },
+    getTVShowsByParams(genre, year, page, lang) {
+        return (
+            instance.get(`/discover/tv?api_key=${API_KEY}&language=${lang}&page=${page}${genre ? `&with_genres=${genre}` : ''}${year ? `&first_air_date_year=${year}` : ''}`)
         )
     }
 }

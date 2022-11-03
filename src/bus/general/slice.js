@@ -16,7 +16,7 @@ const generalSlice = createSlice({
         currentPerson: null,
         currentCollection: null,
         searchResults: [],
-        compositionsByParams: {data: [], totalPages: null}
+        compositionsByParams: {data: [], totalPages: null, params: {year: null, genre: null, mode: null}}
     },
     extraReducers: {
         ...extraReducers.getCurrentCollectionReducer, 
@@ -27,7 +27,8 @@ const generalSlice = createSlice({
         ...extraReducers.getCurrentTVShowSeasonReducer,
         ...extraReducers.getCurrentTVShowReviewsByPageReducer,
         ...extraReducers.getCurrentSearchResultByStringReducer,
-        ...extraReducers.getMoviesByParamsReducer
+        ...extraReducers.getMoviesByParamsReducer,
+        ...extraReducers.getTVShowsByParamsReducer
     }
 });
 
