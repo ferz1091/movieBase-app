@@ -36,14 +36,18 @@ export const Header = () => {
     return (
         <HeaderWrapper>
             <div className='Switch-mode'>
-                <span 
-                    className={!mode ? 'mode active' : 'mode'}
+                <input 
+                    type='checkbox' 
+                    checked={!mode ? true : false}
                     onClick={() => {
-                        if (genresMode !== 'movies') {
-                            switchMode(false)
-                            navigate('/popular/1');
+                        if (mode) {
+                            switchMode(false);
                         }
                     }}
+                    readOnly={true}
+                />
+                <span 
+                    className={!mode ? 'mode active' : 'mode'}
                     onMouseOver={() => setGenresMode('movies')}
                     onMouseOut={() => setGenresMode(null)}
                 >
@@ -84,14 +88,18 @@ export const Header = () => {
                         </span>
                     }
                 </span>
-                <span 
-                    className={mode ? 'mode active' : 'mode'}
+                <input 
+                    type='checkbox'
+                    checked={mode ? true : false}
                     onClick={() => {
-                        if (genresMode !== 'tv') {
+                        if (!mode) {
                             switchMode(true);
-                            navigate('/popular/1');
                         }
                     }}
+                    readOnly={true}
+                />
+                <span
+                    className={mode ? 'mode active' : 'mode'}
                     onMouseOver={() => setGenresMode('tv')}
                     onMouseOut={() => setGenresMode(null)}
                 >

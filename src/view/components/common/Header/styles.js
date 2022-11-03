@@ -35,6 +35,12 @@ background: rgba(200, 200, 200, 1);
     .active {
         font-weight: bolder;
     }
+    input {
+        cursor: pointer;
+        margin-left: 5px;
+        height: 12px;
+        accent-color: black;
+    }
 }
 .search {
     position: absolute;
