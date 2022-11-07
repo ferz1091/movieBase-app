@@ -9,6 +9,8 @@ width: 90vw;
 bottom: 0;
 background-color: gray;
 padding: 5px 0;
+min-height: 20px;
+font-size: calc(12px + 4 * (100vw / 1400));
 a {
     text-decoration: none;
     padding: 0 5px;

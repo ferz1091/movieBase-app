@@ -33,7 +33,7 @@ export const Movies = (movie) => {
                     <div className='movie-info-header'>
                         {!genres.error ?
                             <div className='genre'>
-                                {movie.genre_ids.length > 0 ?
+                                {movie.genre_ids.length && genres.length ?
                                     <span>
                                         {genres.find(genre => genre.id === movie.genre_ids[0]).name}
                                     </span>

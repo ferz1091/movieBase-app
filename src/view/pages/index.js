@@ -3,3 +3,4 @@ export * from './Movie';
 export * from './Person';
 export * from './TVShow';
 export * from './Collection';
+export * from './CompositionsByParams';

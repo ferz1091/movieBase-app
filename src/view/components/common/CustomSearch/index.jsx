@@ -103,6 +103,7 @@ export const CustomSearch = (props) => {
                     onClick={() => {
                         props.resetCompositionsByParams();
                         props.getCompositionsByParams(genreInput === 'All genres' ? null : props.genres.find(genre => genre.name === genreInput).id, yearInput === 'During all time' ? null : yearInput, 1, props.lang);
+                        props.navigate('/compositions/1');
                     }}
                 >
                     SEARCH

@@ -48,7 +48,11 @@ export const Header = () => {
                 />
                 <span 
                     className={!mode ? 'mode active' : 'mode'}
-                    onMouseOver={() => setGenresMode('movies')}
+                    onMouseOver={() => {
+                        if (genres.length) {
+                            setGenresMode('movies')
+                        }
+                    }}
                     onMouseOut={() => setGenresMode(null)}
                 >
                     Movies
@@ -64,8 +68,10 @@ export const Header = () => {
                                                 className='genre'
                                                 key={genre.id}
                                                 onClick={() => {
+                                                    setGenresMode(null);
                                                     resetCompositionsByParams();
                                                     getMoviesByParams(genre.id, null, 1, lang);
+                                                    navigate('/compositions/1');
                                                 }}
                                             >
                                                 {genre.name}
@@ -81,6 +87,7 @@ export const Header = () => {
                                         getCompositionsByParams={getMoviesByParams}
                                         lang={lang}
                                         resetCompositionsByParams={resetCompositionsByParams}
+                                        navigate={navigate}
                                     /> 
                                     : 
                                     null
@@ -104,7 +111,12 @@ export const Header = () => {
                 />
                 <span
                     className={mode ? 'mode active' : 'mode'}
-                    onMouseOver={() => setGenresMode('tv')}
+                    onMouseOver={() => {
+                        if (genres.length) {
+                            setGenresMode('tv')
+                        }
+                    }
+                    }
                     onMouseOut={() => setGenresMode(null)}
                 >
                     TV Shows
@@ -120,8 +132,10 @@ export const Header = () => {
                                                 className='genre'
                                                 key={genre.id}
                                                 onClick={() => {
+                                                    setGenresMode(null);
                                                     resetCompositionsByParams();
                                                     getTVShowsByParams(genre.id, null, 1, lang);
+                                                    navigate('/compositions/1');
                                                 }}
                                             >
                                                 {genre.name}
@@ -136,6 +150,7 @@ export const Header = () => {
                                     getCompositionsByParams={getTVShowsByParams}
                                     lang={lang}
                                     resetCompositionsByParams={resetCompositionsByParams}
+                                    navigate={navigate}
                                 />
                             </div>
                         </>
