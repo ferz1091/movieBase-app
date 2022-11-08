@@ -12,6 +12,7 @@ figcaption {
 }
 img {
     width: calc(18vw - 16px);
+    height: calc(18vw - 16px + ((18vw - 16px) / 2));
 }
 a {
     text-decoration: none;
@@ -73,6 +74,7 @@ a:visited, a:link {
     }
     img {
         width: calc(45vw - 16px);
+        height: calc(45vw - 16px + ((45vw - 16px) / 2));
     }
     .overview-text {
         min-width: calc(45vw - 16px);

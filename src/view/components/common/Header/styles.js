@@ -172,6 +172,17 @@ background: rgba(200, 200, 200, 1);
         width: 100vw;
         grid-template-columns: repeat(3, 1fr);
     }
+    .Switch-mode {
+        margin-bottom: 15px;
+    }
+}
+@media (max-width: 300px) {
+    .Switch-category {
+        font-size: 12px;
+        a {
+            padding: 0 3px;
+        }
+    }
 }
 `;
 export const RatingWrapper = styled.span`

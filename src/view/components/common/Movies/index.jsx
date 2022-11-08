@@ -31,9 +31,9 @@ export const Movies = (movie) => {
                 </figcaption>
                 {isHover ?
                     <div className='movie-info-header'>
-                        {!genres.error ?
+                        {!genres.error && genres.length ?
                             <div className='genre'>
-                                {movie.genre_ids.length && genres.length ?
+                                {movie.genre_ids.length ?
                                     <span>
                                         {genres.find(genre => genre.id === movie.genre_ids[0]).name}
                                     </span>
