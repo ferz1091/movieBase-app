@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Components
-import { PersonInfoHeader, Biography, PersonMovies } from '../../components/';
+import { PersonInfoHeader, Biography, PersonMovies, Error } from '../../components/';
 
 // Tools
 import { usePerson } from '../../../tools';
@@ -57,10 +57,8 @@ export const PersonPage = () => {
         )
     } else if (currentPerson && currentPerson.error) {
         return (
-            <PersonWrapper>
-                <div className='error'>
-                    {currentPerson.error}
-                </div>
+            <PersonWrapper error={currentPerson.error}>
+                <Error error={currentPerson.error} />
             </PersonWrapper>
         )
     }

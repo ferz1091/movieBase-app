@@ -2,12 +2,9 @@
 import styled from 'styled-components';
 
 export const PersonWrapper = styled.main`
-position: relative;
-margin-top: 15vh;
-box-sizing: border-box;
-min-height: 84vh;
 display: flex;
 flex-direction: column;
+justify-content: ${props => props.error ? 'center' : 'flex-start'};
 color: white;
 background-color: rgba(50,50,50,0.2);
 overflow: hidden;
@@ -65,10 +62,10 @@ h2 {
     display: flex;
     justify-content: center;
     padding: 5px 0;
-    /* min-height: 19px; */
     span {
         padding: 0 5px;
         color: black;
+        font-size: calc(12px + 4 * (100vw / 1400));
     }
     .mode {
         cursor: pointer;
@@ -108,6 +105,15 @@ h2 {
     .social {
         span {
             padding-right: 0px;
+        }
+    }
+}
+@media (max-width: 300px) {
+    .person-header {
+        grid-template-columns: 106px 1fr;
+        img {
+            padding: 5px 3px;
+            max-width: 100px;
         }
     }
 }

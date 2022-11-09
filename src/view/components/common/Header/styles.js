@@ -103,7 +103,7 @@ background: rgba(200, 200, 200, 1);
 .result-no-matches, .result-error {
     min-width: 600px;
     font-size: 14px;
-    padding: 10px 5px 2px 5px;
+    padding: 10px 5px 10px 5px;
     padding-right: 40px;
     border-bottom: 1px solid rgb(200, 200, 200);
     box-sizing: border-box;

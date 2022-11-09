@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Components
-import { Movies } from '../../components';
+import { Movies, Error } from '../../components';
 
 // Tools
 import { useCollection } from '../../../tools';
@@ -42,6 +42,12 @@ export const CollectionPage = () => {
                     />    
                 )}
             </div>
+            </CollectionPageWrapper>
+        )
+    } else if (currentCollection && currentCollection.error) {
+        return (
+            <CollectionPageWrapper error={currentCollection.error}>
+                <Error error={currentCollection.error} />
             </CollectionPageWrapper>
         )
     }

@@ -7,7 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useGeneral } from '../../../bus/general';
 
 // Components
-import { Movies, PageSwitcher } from '../../components';
+import { Movies, PageSwitcher, Error } from '../../components';
 
 // Styles
 import { CompositionsByParamsWrapper } from './styles';
@@ -37,8 +37,8 @@ export const CompositionsByParamsPage = () => {
         )
     } else {
         return (
-            <CompositionsByParamsWrapper>
-                {compositionsByParams.params.mode ?
+            <CompositionsByParamsWrapper error={compositionsByParams.data.length ? compositionsByParams.data.find(composition => composition.page === Number(page)).error : null}>
+                {compositionsByParams.params.mode && !compositionsByParams.data.find(composition => composition.page === Number(page)).error ?
                     <>
                         <h2>
                             {`Best ${compositionsByParams.params.genre ? genres.find(genre => genre.id === compositionsByParams.params.genre).name : ''} ${compositionsByParams.params.mode === 'tv' ? 'TV Shows' : 'movies'} of ${compositionsByParams.params.year ? compositionsByParams.params.year : 'all time'}`}
@@ -58,7 +58,11 @@ export const CompositionsByParamsPage = () => {
                         </div>
                     </>
                     :
-                    null
+                    (compositionsByParams.data.length && compositionsByParams.data.find(composition => composition.page === Number(page)).error ?
+                        <Error error={compositionsByParams.data.find(composition => composition.page === Number(page)).error} />
+                        :
+                        null
+                    )
                 }
                 {compositionsByParams.totalPages ? 
                     <PageSwitcher 

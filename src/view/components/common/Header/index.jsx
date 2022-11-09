@@ -42,6 +42,7 @@ export const Header = () => {
                     onClick={() => {
                         if (mode) {
                             switchMode(false);
+                            navigate('popular/1');
                         }
                     }}
                     readOnly={true}
@@ -105,6 +106,7 @@ export const Header = () => {
                     onClick={() => {
                         if (!mode) {
                             switchMode(true);
+                            navigate('popular/1');
                         }
                     }}
                     readOnly={true}

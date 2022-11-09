@@ -2,12 +2,9 @@
 import styled from 'styled-components';
 
 export const MoviePageWrapper = styled.main`
-position: relative;
-margin-top: 15vh;
-box-sizing: border-box;
-min-height: 84vh;
 display: flex;
 flex-direction: column;
+justify-content: ${props => props.error ? 'center' : 'flex-start'};
 color: white;
 background-color: rgba(50,50,50,0.2);
 .movie-info {
@@ -24,8 +21,5 @@ background-color: rgba(50,50,50,0.2);
             padding-right: 10px;
         }
     }
-}
-.error {
-    color: black;
 }
 `;

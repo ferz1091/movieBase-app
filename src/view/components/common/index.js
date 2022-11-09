@@ -9,3 +9,4 @@ export * from './Social';
 export * from './CompositionsList';
 export * from './SectionHeader';
 export * from './CustomSearch';
+export * from './Error';

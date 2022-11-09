@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { useMovie } from '../../../tools';
 
 // Components
-import { TVShowInfoHeader, Seasons, Reviews, Similar } from '../../components';
+import { TVShowInfoHeader, Seasons, Reviews, Similar, Error } from '../../components';
 
 // Styles
 import { TVShowWrapper } from './styles';
@@ -60,10 +60,8 @@ export const TVShowPage = () => {
         )
     } else if (currentTVShow && currentTVShow.error) {
         return (
-            <TVShowWrapper>
-                <div className='error'>
-                    {currentTVShow.error}
-                </div>
+            <TVShowWrapper error={currentTVShow.error}>
+                <Error error={currentTVShow.error} />
             </TVShowWrapper>
         )
     }

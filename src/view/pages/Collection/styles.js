@@ -2,13 +2,12 @@
 import styled from 'styled-components';
 
 export const CollectionPageWrapper = styled.main`
-position: relative;
-padding-top: 15vh;
-box-sizing: border-box;
-min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: ${props => props.error ? 'center' : 'flex-start'};
 h2 {
     margin: 5px 0 0 0;
-    padding: 20px 0 20px 10px;
+    padding: 20px 5px 20px 10px;
     background: rgba(50,50,50,0.2);
 }
 .parts {

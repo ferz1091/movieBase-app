@@ -116,6 +116,7 @@ export const getCurrentCollectionReducer = {
     },
     [thunks.getCurrentCollectionThunk.rejected]: (state, action) => {
         state.currentCollection = {error: action.error.message};
+        state.isFetching.main = false;
     }
 };
 
@@ -145,9 +146,9 @@ export const getMoviesByParamsReducer = {
         }
         if (!state.compositionsByParams.data.some(movies => movies.page === action.payload.page)) {
             state.compositionsByParams.data = [
-                                                ...state.compositionsByParams.data, 
-                                                {page: action.payload.page, data: action.payload.results, error: null}
-                                            ]
+                ...state.compositionsByParams.data, 
+                {page: action.payload.page, data: action.payload.results, error: null}
+            ]
             state.compositionsByParams.params = {year: action.meta.arg.year, genre: action.meta.arg.genre, mode: 'movies'}
         }
         state.isFetching.searchByParams = false;
@@ -158,6 +159,7 @@ export const getMoviesByParamsReducer = {
                 ...state.compositionsByParams.data,
                 { page: action.meta.arg.page, data: null, error: action.error.message }
             ]
+            state.compositionsByParams.params = { year: action.meta.arg.year, genre: action.meta.arg.genre, mode: 'movies' }
         }
         state.isFetching.searchByParams = false;
     }
@@ -187,6 +189,7 @@ export const getTVShowsByParamsReducer = {
                 ...state.compositionsByParams.data,
                 { page: action.meta.arg.page, data: null, error: action.error.message }
             ]
+        state.compositionsByParams.params = { year: action.meta.arg.year, genre: action.meta.arg.genre, mode: 'tv' }
         }
         state.isFetching.searchByParams = false;
     }

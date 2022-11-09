@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import { PageSwitcher, Movies } from '../';
+import { PageSwitcher, Movies, Error } from '../';
 
 export const CompositionsList = (props) => {
     return (
@@ -17,9 +17,7 @@ export const CompositionsList = (props) => {
                         />
                     )
                     :
-                    <div>
-                        {props.modeData.error}
-                    </div>
+                    <Error error={props.modeData.error} />
                 )
                 :
                 null

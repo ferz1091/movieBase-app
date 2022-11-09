@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Component
-import { VideoPlayer, MovieInfoHeader, Cast, Clips, Reviews, Similar } from '../../components';
+import { VideoPlayer, MovieInfoHeader, Cast, Clips, Reviews, Similar, Error } from '../../components';
 
 // Tools
 import { useMovie } from '../../../tools';
@@ -86,10 +86,8 @@ export const MoviePage = () => {
         )
     } else if (currentMovie && currentMovie.error) {
         return (
-            <MoviePageWrapper>
-                <div className='error'>
-                    {currentMovie.error}
-                </div>
+            <MoviePageWrapper error={currentMovie.error}>
+                <Error error={currentMovie.error} />
             </MoviePageWrapper>
         )
     }

@@ -38,6 +38,12 @@ const ContentWrapper = styled.section`
 position: relative;
 z-index: 1;
 width: 90vw;
+main {
+    position: relative;
+    margin-top: 15vh;
+    min-height: 85vh;
+    box-sizing: border-box;
+}
 @media (max-width: 768px) {
     width: 100vw;
 }

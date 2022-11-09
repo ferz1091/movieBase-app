@@ -1,13 +1,10 @@
 // Core
 import styled from 'styled-components';
 
-export const CompositionsByParamsWrapper = styled.section`
-position: relative;
-margin-top: 15vh;
-box-sizing: border-box;
+export const CompositionsByParamsWrapper = styled.main`
 display: flex;
 flex-direction: column;
-min-height: 85vh;
+justify-content: ${props => props.error ? 'center' : 'flex-start'};
 h2 {
     margin: 5px 0 0 0;
     padding: 20px 5px 20px 10px;
