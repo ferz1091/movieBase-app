@@ -60,6 +60,12 @@ export const useGeneral = () => {
     function resetCompositionsByParams() {
         dispatch(generalActions.resetCompositionsByParams())
     }
+    function setCategory(category) {
+        dispatch(generalActions.setCategory(category))
+    }
+    function toggleStyle(styleMode) {
+        dispatch(generalActions.toggleStyle(styleMode))
+    }
     return {
         switchMode,
         getCurrentMovie,
@@ -74,6 +80,8 @@ export const useGeneral = () => {
         resetSearchResults,
         getMoviesByParams,
         resetCompositionsByParams,
-        getTVShowsByParams
+        getTVShowsByParams,
+        setCategory,
+        toggleStyle
     }
 }

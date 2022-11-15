@@ -11,13 +11,16 @@ import poster_null from '../../../../assets/poster_null.jpg';
 import { MovieWrapper } from './styles';
 
 export const Movies = (movie) => {
-    const genres = useSelector(state => state.general.genres);
+    const {genres, styleMode} = useSelector(state => state.general);
     const [isHover, toggleIsHover] = useState(false);
     const [isMovieOverviewOpen, toggleIsMovieOverviewOpen] = useState(false);
     return (
-        <NavLink to={movie.tv ? `/tv/${movie.id}` : `/movie/${movie.id}`}>
+        <NavLink 
+            to={movie.tv ? `/tv/${movie.id}` : `/movie/${movie.id}`}
+            className='movie'
+        >
             <MovieWrapper
-                className='movie'
+                styleMode={styleMode ? 1 : 0}
                 vote={movie.vote_average}
                 onMouseOver={() => toggleIsHover(true)}
                 onMouseOut={() => toggleIsHover(false)}

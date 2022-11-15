@@ -5,7 +5,6 @@ export const ActorCardWrapper = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-color: black;
 padding: calc(1px + 19 * (100vw / 1400));
 .actor-photo {
     cursor: pointer;

@@ -28,3 +28,15 @@ export const resetCompositionsByParams = (state, action) => {
         compositionsByParams: {data: [], totalPages: null}
     }
 }
+export const setCategory = (state, action) => {
+    return {
+        ...state,
+        categoryValue: action.payload
+    }
+}
+export const toggleStyle = (state, action) => {
+    return {
+        ...state,
+        styleMode: action.payload
+    }
+}

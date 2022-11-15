@@ -9,13 +9,7 @@ import { useGeneral } from '../bus/general';
 export const useMovie = () => {
     const [reviewPage, setReviewPage] = useState(1);
     const [videoPlayerMode, setVideoPlayerMode] = useState({ isOn: false, key: null });
-    const { lang, currentMovie, isFetching, currentTVShow, genres } = useSelector(state => state.general);
-    const { getCurrentMovie, 
-            getCurrentMovieReviewsByPage, 
-            getCurrentTVShow, 
-            createSeasonsInfo, 
-            getSeason,
-            getCurrentTVShowReviewsByPage } = useGeneral();
+    const { lang, currentMovie, isFetching, currentTVShow, genres, styleMode } = useSelector(state => state.general);
     const clipsRef = useRef();
     const { id } = useParams();
     return {
@@ -29,12 +23,7 @@ export const useMovie = () => {
         isFetching,
         id,
         clipsRef,
-        getCurrentMovie,
-        getCurrentMovieReviewsByPage,
-        getCurrentTVShow,
-        createSeasonsInfo,
-        getSeason,
-        getCurrentTVShowReviewsByPage,
-        genres
+        genres,
+        styleMode
     }
 }

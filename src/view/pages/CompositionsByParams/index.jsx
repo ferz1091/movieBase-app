@@ -35,9 +35,13 @@ export const CompositionsByParamsPage = () => {
                 SPINNER
             </div>
         )
-    } else {
+    } else if (compositionsByParams.data.length && compositionsByParams.data.some(pageData => pageData.page === Number(page))) {
         return (
-            <CompositionsByParamsWrapper error={compositionsByParams.data.length ? compositionsByParams.data.find(composition => composition.page === Number(page)).error : null}>
+            <CompositionsByParamsWrapper
+                className='compositions-by-params'
+                length={compositionsByParams.totalPages > 1}
+                error={compositionsByParams.data.length && compositionsByParams.data.find(composition => composition.page === Number(page)).error ? true : null}
+            >
                 {compositionsByParams.params.mode && !compositionsByParams.data.find(composition => composition.page === Number(page)).error ?
                     <>
                         <h2>

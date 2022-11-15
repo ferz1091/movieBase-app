@@ -9,7 +9,9 @@ const generalSlice = createSlice({
     initialState: {
         lang: 'en',
         isFetching: {main: false, reviews: false, seasons: false, search: false, searchByParams: false},
-        mode: false,
+        mode: false, // false - movies / true - tv shows on Main page
+        styleMode: localStorage.getItem('styleMode') ? localStorage.getItem('styleMode') : '', // '' - light / '1' - dark Background style
+        categoryValue: 'popular',
         genres: [],
         currentMovie: null,
         currentTVShow: null,

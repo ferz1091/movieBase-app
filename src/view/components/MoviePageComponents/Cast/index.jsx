@@ -12,7 +12,10 @@ import { CastWrapper } from './styles';
 
 export const Cast = (props) => {
     return (
-        <CastWrapper className='cast'>
+        <CastWrapper 
+            className='cast' 
+            styleMode={props.styleMode}
+        >
             <SectionHeader 
                 img={actors}
                 value='Starring'
@@ -20,7 +23,10 @@ export const Cast = (props) => {
             />
             <div className='cast-list'>
                 {props.cast.slice(0, 12).map(actor =>
-                    <ActorCard key={actor.id} {...actor} />
+                    <ActorCard 
+                        key={actor.id} 
+                        {...actor}
+                    />
                 )}
             </div>
         </CastWrapper>

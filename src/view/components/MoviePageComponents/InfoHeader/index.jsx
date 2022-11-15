@@ -1,6 +1,6 @@
 // Core
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Components
 import { InfoProperty, Social } from '../../common';
@@ -9,6 +9,7 @@ import { InfoProperty, Social } from '../../common';
 import { InfoHeaderWrapper } from './styles';
 
 export const MovieInfoHeader = (props) => {
+    const navigate = useNavigate();
     return (
         <InfoHeaderWrapper 
             className='info-header'
@@ -26,7 +27,14 @@ export const MovieInfoHeader = (props) => {
             </h1>
             <div className='genres'>
                 {props.currentMovie.genres.map(genre =>
-                    <span key={genre.id}>
+                    <span 
+                        key={genre.id}
+                        onClick={() => {
+                            props.resetCompositionsByParams();
+                            props.getMoviesByParams(genre.id, null, 1, props.lang);
+                            navigate('/compositions/1');
+                        }}
+                    >
                         {genre.name}
                     </span>
                 )}

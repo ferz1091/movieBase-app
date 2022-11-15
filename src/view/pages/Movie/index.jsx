@@ -4,6 +4,9 @@ import React, { useEffect } from 'react';
 // Component
 import { VideoPlayer, MovieInfoHeader, Cast, Clips, Reviews, Similar, Error } from '../../components';
 
+// Bus
+import { useGeneral } from '../../../bus/general';
+
 // Tools
 import { useMovie } from '../../../tools';
 
@@ -11,6 +14,10 @@ import { useMovie } from '../../../tools';
 import { MoviePageWrapper } from './styles';
 
 export const MoviePage = () => {
+    const { getCurrentMovie, 
+            getCurrentMovieReviewsByPage, 
+            resetCompositionsByParams, 
+            getMoviesByParams } = useGeneral();
     const { reviewPage,
         setReviewPage,
         videoPlayerMode,
@@ -21,8 +28,7 @@ export const MoviePage = () => {
         id,
         clipsRef,
         genres,
-        getCurrentMovie,
-        getCurrentMovieReviewsByPage } = useMovie();
+        styleMode } = useMovie();
     useEffect(() => {
         if (!currentMovie || currentMovie.id !== id) {
             getCurrentMovie(id, lang, !genres.length);
@@ -41,19 +47,28 @@ export const MoviePage = () => {
             <MoviePageWrapper
                 videoPlayerIsOn={videoPlayerMode.isOn}
                 videosAmount={currentMovie.videos && !currentMovie.videos.error ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
+                styleMode={styleMode ? 1 : 0}
             >
-                <MovieInfoHeader currentMovie={currentMovie} />
+                <MovieInfoHeader 
+                    currentMovie={currentMovie}
+                    lang={lang}
+                    resetCompositionsByParams={resetCompositionsByParams}
+                    getMoviesByParams={getMoviesByParams}
+                />
                 {!currentMovie.videos.error && currentMovie.videos.length ?
                     <Clips
-                    currentMovie={currentMovie}
-                    setVideoPlayerMode={setVideoPlayerMode}
-                    clipsRef={clipsRef}
+                        currentMovie={currentMovie}
+                        setVideoPlayerMode={setVideoPlayerMode}
+                        clipsRef={clipsRef}
                     />
                     :
                     null
                 }
                 {!currentMovie.cast.error ? 
-                    <Cast cast={currentMovie.cast} /> 
+                    <Cast 
+                        cast={currentMovie.cast} 
+                        styleMode={styleMode ? 1 : 0}
+                    /> 
                     : 
                     null
                 }
@@ -65,6 +80,7 @@ export const MoviePage = () => {
                         setReviewPage={setReviewPage}
                         id={id}
                         lang={lang}
+                        styleMode={styleMode ? 1 : 0}
                     />
                     :
                     null

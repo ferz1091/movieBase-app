@@ -11,7 +11,6 @@ import hide_hover from '../../../../assets/icons/hide_hover.png';
 export const ReviewAuthor = styled.dt`
 display: flex;
 margin-bottom: 10px;
-color: black;
 .avatar {
     display: inline-block;
     min-width: 50px;
@@ -31,11 +30,9 @@ color: black;
     .username, .create-date {
         font-size: 12px;
         font-weight: normal;
-        color: rgb(80, 80, 80);
         font-style: oblique;
     }
     .create-date {
-        color: rgb(20, 20, 20);
         font-style: normal;
     }
 }
@@ -54,7 +51,7 @@ margin-bottom: 10px;
 color: black;
 font-style: italic;
 vertical-align: middle;
-background-color: rgb(200,200,200);
+border-radius: 15px;
 padding: 5px;
 display: flex;
 align-items: center;

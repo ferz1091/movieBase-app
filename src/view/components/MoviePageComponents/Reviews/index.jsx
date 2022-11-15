@@ -12,7 +12,10 @@ import { ReviewsWrapper } from './styles';
 
 export const Reviews = (props) => {
     return (
-        <ReviewsWrapper className='reviews'>
+        <ReviewsWrapper 
+            className='reviews'
+            styleMode={props.styleMode}
+        >
             <SectionHeader 
                 img={reviews}
                 value='Reviews'

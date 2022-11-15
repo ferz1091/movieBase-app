@@ -13,15 +13,15 @@ import { InfoHeaderWrapper } from './styles';
 
 export const PersonInfoHeader = (props) => {
     return (
-        <>
-            <h2>
-                <img
-                    src={person}
-                    alt=''
-                />
-                {props.currentPerson.name}
-            </h2>
             <InfoHeaderWrapper className='person-header'>
+                <h2>
+                    <img
+                        src={person}
+                        alt=''
+                    />
+                    {props.currentPerson.name}
+                </h2>
+                <div className='person-info'>
                     <div className='person-avatar'>
                         <img
                             src={props.currentPerson.profile_path ? `https://image.tmdb.org/t/p/w200${props.currentPerson.profile_path}` : person_null}
@@ -49,7 +49,7 @@ export const PersonInfoHeader = (props) => {
                         />
                         <Social {...props.currentPerson.social} />
                     </div>
+                </div>
             </InfoHeaderWrapper>
-        </>
     )
 }

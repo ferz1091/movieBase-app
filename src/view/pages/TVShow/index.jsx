@@ -1,25 +1,31 @@
 // Core
 import React, { useEffect } from 'react';
 
-// Tools
-import { useMovie } from '../../../tools';
+// Bus
+import { useGeneral } from '../../../bus/general';
 
 // Components
 import { TVShowInfoHeader, Seasons, Reviews, Similar, Error } from '../../components';
+
+// Tools
+import { useMovie } from '../../../tools';
 
 // Styles
 import { TVShowWrapper } from './styles';
 
 export const TVShowPage = () => {
+    const { getCurrentTVShow, 
+            getCurrentTVShowReviewsByPage, 
+            resetCompositionsByParams, 
+            getTVShowsByParams } = useGeneral();
     const { currentTVShow, 
             id, 
             lang,
-            getCurrentTVShow, 
             isFetching, 
             reviewPage,
             genres,
-            setReviewPage, 
-            getCurrentTVShowReviewsByPage} = useMovie();
+            setReviewPage,
+            styleMode } = useMovie();
     useEffect(() => {
         if (!currentTVShow || currentTVShow.id !== id) {
             getCurrentTVShow(id, lang, !genres.length);
@@ -33,16 +39,22 @@ export const TVShowPage = () => {
         )
     } else if (currentTVShow && !currentTVShow.error) {
         return (
-            <TVShowWrapper>
-                <TVShowInfoHeader currentTVShow={currentTVShow} />
+            <TVShowWrapper styleMode={styleMode ? 1 : 0}>
+                <TVShowInfoHeader 
+                    currentTVShow={currentTVShow}
+                    lang={lang}
+                    resetCompositionsByParams={resetCompositionsByParams}
+                    getTVShowsByParams={getTVShowsByParams}
+                />
                 {!currentTVShow.reviews.error && currentTVShow.reviews.totalPages ?
                     <Reviews
-                    currentMovie={currentTVShow}
-                    getCurrentMovieReviewsByPage={getCurrentTVShowReviewsByPage}
-                    reviewPage={reviewPage}
-                    setReviewPage={setReviewPage}
-                    id={id}
-                    lang={lang}
+                        currentMovie={currentTVShow}
+                        getCurrentMovieReviewsByPage={getCurrentTVShowReviewsByPage}
+                        reviewPage={reviewPage}
+                        setReviewPage={setReviewPage}
+                        id={id}
+                        lang={lang}
+                        styleMode={styleMode ? 1 : 0}
                     />
                     :
                     null

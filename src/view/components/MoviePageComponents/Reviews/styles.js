@@ -5,7 +5,6 @@ export const ReviewsWrapper = styled.section`
 .review-list {
     display: grid;
     grid-template-columns: 200px 1fr;
-    background-color: rgba(50,50,50,0.2);
     padding: 10px;
     margin: 0;
 }
@@ -33,6 +32,23 @@ export const ReviewsWrapper = styled.section`
 }
 .author {
     word-wrap: break-word;
+}
+.user {
+    .author {
+        color: ${props => props.styleMode ? 'white' : 'black'};
+    }
+    .username, .create-date {
+        color: ${props => props.styleMode ? 'rgb(180, 180, 180)' : 'rgb(80, 80, 80)'};
+    }
+    .create-date {
+        color: ${props => props.styleMode ? 'rgb(120, 120, 120)' : 'rgb(20, 20, 20)'};
+    }
+}
+dl {
+    dd {
+        background: ${props => props.styleMode ? 'linear-gradient(to bottom, rgba(150, 150, 150, 0.2) 0%, rgba(150, 150, 150, 0.1) 100%)' : 'linear-gradient(to bottom, rgba(50, 50, 50, 0.2) 0%, rgba(50, 50, 50, 0.1) 100%)'};
+        color: ${props => props.styleMode ? 'white' : 'black'};
+    }
 }
 @media (max-width: 768px) {
     .review-list {

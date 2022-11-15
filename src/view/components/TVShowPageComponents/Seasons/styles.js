@@ -3,11 +3,10 @@ import styled from 'styled-components';
 
 // Assets
 import arrow_down from '../../../../assets/icons/arrow-down.png';
+import arrow_down_light from '../../../../assets/icons/arrow-down-light.png';
 
 export const SeasonsWrapper = styled.section`
-background: rgb(200,200,200);
 .seasons-list {
-    background: rgba(50,50,50,0.2);
     padding: 5px 0;
 }
 .season {
@@ -36,6 +35,7 @@ background: rgb(200,200,200);
             }
             option {
                 font-size: 14px;
+                text-align: center;
             }
         }
     }
@@ -44,14 +44,12 @@ background: rgb(200,200,200);
     }
 }
 .active {
-    background: rgb(200,200,200);
+    border: none;
     .season-name {
         font-weight: 600;
     }
 }
 .season-header {
-    display: grid;
-    grid-template-columns: 1fr 220px;
     color: white;
     ul {
         list-style-type: square;
@@ -69,9 +67,13 @@ background: rgb(200,200,200);
         padding: 5px 10px;
     }
 }
+.season-header-top {
+     display: grid;
+    grid-template-columns: 1fr 220px;
+}
 .overview {
     padding: 5px 0 5px 10px;
-    margin: 0 0 5px 5px;
+    margin: 0 5px 5px 5px;
     text-shadow: 1px 1px 2px black;
     font-style: italic;
     background: rgba(50, 50, 50, 0.2);
@@ -112,10 +114,10 @@ background: rgb(200,200,200);
     transition: all 0.1s linear;
 }
 .arrow-down {
-    background-image: url(${arrow_down});
+    background-image: ${props => props.styleMode ? `url(${arrow_down_light})` : `url(${arrow_down})`};
 }
 .arrow-up {
-    background-image: url(${arrow_down});
+    background-image: ${props => props.styleMode ? `url(${arrow_down_light})` : `url(${arrow_down})`};
     transform: rotate(180deg) translate(0, 25%);
 }
 .clips {
@@ -128,16 +130,27 @@ background: rgb(200,200,200);
     .season {
         margin: 0;
     }
-    .season-header {
-    grid-template-columns: 1fr 160px;
-    ul {
-        list-style-position: outside;
-    }
-    .poster {
-        max-width: 150px;
-        padding: 5px;
+    .season-header-top {
+        grid-template-columns: 1fr 160px;
+        ul {
+            list-style-position: outside;
+        }
+        .poster {
+            max-width: 150px;
+            padding: 5px;
+        }
     }
 }
+@media (max-width: 300px) {
+    .producer {
+        grid-template-columns: 90px 1fr;
+    }
+    .season-header-top {
+        grid-template-columns: 1fr 120px;
+        .poster {
+            max-width: 100px;
+        }
+    }
 }
 `;
 
@@ -156,11 +169,12 @@ color: ${props => props.vote < 3 ? '#cc0000' :
 export const SeasonHeadWrapper = styled.div`
 cursor: ${props => props.isHoverActive ? 'pointer;' : 'auto;'};
 padding: 5px 0;
-background: rgba(50,50,50,0.2);
+background: ${props => props.styleMode ? 'rgba(80,80,80,0.3)' : 'rgba(50,50,50,0.2)'};
 margin: 0 5px;
 transition: 0.1s all linear;
+color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
 :hover {
-    background: ${props => props.isHoverActive ? 'rgb(200, 200, 200);' : 'rgba(50,50,50,0.2);'};
+    background: ${props => props.isHoverActive ? 'rgba(50,50,50,0.3);' : 'rgba(50,50,50,0.2);'};
     .season-name {
         font-weight: ${props => props.isHoverActive ? '600;' : 'normal;'};
     }

@@ -20,7 +20,8 @@ export const PersonPage = () => {
             lang,
             genres,
             id,
-            getCurrentPerson } = usePerson();
+            getCurrentPerson,
+            styleMode } = usePerson();
     useEffect(() => {
         if (!currentPerson || currentPerson.id !== id) {
             getCurrentPerson(id, lang, !genres.length);
@@ -35,7 +36,7 @@ export const PersonPage = () => {
         )
     } else if (currentPerson && !currentPerson.error) {
         return (
-            <PersonWrapper>
+            <PersonWrapper styleMode={styleMode ? 1 : 0}>
                 <PersonInfoHeader currentPerson={currentPerson} />
                 {currentPerson.biography ?
                     <Biography biography={currentPerson.biography} />

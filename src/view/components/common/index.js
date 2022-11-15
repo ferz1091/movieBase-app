@@ -10,3 +10,5 @@ export * from './CompositionsList';
 export * from './SectionHeader';
 export * from './CustomSearch';
 export * from './Error';
+export * from './Background';
+export * from './Switch';

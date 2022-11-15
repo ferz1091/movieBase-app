@@ -1,6 +1,6 @@
 // Core
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 // Components
 import { InfoProperty, Social } from '../../common';
@@ -9,6 +9,7 @@ import { InfoProperty, Social } from '../../common';
 import { InfoHeaderWrapper } from './styles';
 
 export const TVShowInfoHeader = (props) => {
+    const navigate = useNavigate();
     return (
         <InfoHeaderWrapper
             className='info-header'
@@ -26,7 +27,14 @@ export const TVShowInfoHeader = (props) => {
             </h1>
             <div className='genres'>
                 {props.currentTVShow.genres.map(genre =>
-                    <span key={genre.id}>
+                    <span 
+                        key={genre.id}
+                        onClick={() => {
+                            props.resetCompositionsByParams();
+                            props.getTVShowsByParams(genre.id, null, 1, props.lang);
+                            navigate('/compositions/1');
+                        }}
+                    >
                         {genre.name}
                     </span>
                 )}

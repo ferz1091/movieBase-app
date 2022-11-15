@@ -1,14 +1,16 @@
 // Core
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 // Styles
 import { PageSwitcherWrapper } from './styles';
 
 export const PageSwitcher = (props) => {
+    const { styleMode } = useSelector(state => state.general);
     if (props.totalPages > 10) {
         return (
-            <PageSwitcherWrapper>
+            <PageSwitcherWrapper styleMode={styleMode ? 1 : 0}>
                 <NavLink 
                     className={props.page === 1 ? 'active link' : null}
                     to={`/${props.category}/1`}

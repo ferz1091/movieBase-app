@@ -32,6 +32,7 @@ export const CustomSearch = (props) => {
         <CustomSearchWrapper 
             genresSelectIsOpen={genresSelectIsOpen}
             yearSelectIsOpen={yearSelectIsOpen}
+            styleMode={props.styleMode}
         >
             <div className='custom-search'>
                 <div
@@ -39,7 +40,7 @@ export const CustomSearch = (props) => {
                     onClick={() => toggleGenresSelect(true)}
                 >
                     {genresSelectIsOpen ? 
-                        <div className='select'>
+                        <div className='select genre-select'>
                             <span 
                                 className='option'
                                 onClick={() => setGenreInput('All genres')}
@@ -72,7 +73,7 @@ export const CustomSearch = (props) => {
                     onClick={() => toggleYearSelect(true)}
                 >
                     {yearSelectIsOpen ?
-                        <div className='select'>
+                        <div className='select year-select'>
                             <span 
                                 className='option'
                                 onClick={() => setYearInput('During all time')}

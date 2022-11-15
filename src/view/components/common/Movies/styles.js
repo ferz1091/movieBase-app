@@ -5,12 +5,22 @@ export const MovieWrapper = styled.figure`
 position: relative;
 height: 100%;
 margin: 5px 8px;
+:hover {
+    figcaption {
+        text-decoration: underline;
+    }
+}
 figcaption {
     text-align: center;
     height: 50px;
     width: calc(18vw - 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
 }
 img {
+    border-radius: 20px;
     width: calc(18vw - 16px);
     height: calc(18vw - 16px + ((18vw - 16px) / 2));
 }
@@ -29,6 +39,7 @@ a:visited, a:link {
     width: 100%;
     padding: 5px 0;
     background-color: rgba(70, 70, 70, 0.7);
+    border-radius: 20px 20px 0 0;
 }
 .genre {
     padding: 0 5px;
@@ -66,6 +77,7 @@ a:visited, a:link {
     background-color: rgba(70, 70, 70, 0.7);
     font-size: 14px;
     text-shadow: none;
+    border-radius: 0 0 20px 20px;
 }
 @media (max-width: 768px) {
     width: calc(45vw - 16px);

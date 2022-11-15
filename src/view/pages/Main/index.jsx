@@ -20,7 +20,15 @@ export const Main = () => {
             movies,
             tv_shows,
             getMovies,
-            getTVShows } = useMain();
+            getTVShows,
+            categoryValue,
+            setCategory,
+            styleMode } = useMain();
+    useEffect(() => {
+        if (category !== categoryValue) {
+            setCategory(category);
+        }
+    }, [category])
     useEffect(() => {
         if (mode && !tv_shows.find(item => item.name === category).data.some(item => item.page === page && item.data.length > 0)) {
             getTVShows(category, page, lang, tv_shows.find(movie => movie.name === category).totalPages);
@@ -36,7 +44,10 @@ export const Main = () => {
         )
     } else {
         return (
-            <MainWrapper className='Main page'>
+            <MainWrapper 
+                className='Main page'
+                styleMode={styleMode ? 1 : 0}
+            >
                 {mode ? 
                     <CompositionsList 
                         modeData={tv_shows.find(item => item.name === category).data.find(item => item.page === page)}

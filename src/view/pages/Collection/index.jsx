@@ -30,7 +30,7 @@ export const CollectionPage = () => {
         )
     } else if (currentCollection && !currentCollection.error) {
         return (
-            <CollectionPageWrapper>
+            <CollectionPageWrapper className='collection-main'>
             <h2>
                 {currentCollection.name}
             </h2>

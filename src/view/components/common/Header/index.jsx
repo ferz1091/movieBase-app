@@ -7,15 +7,26 @@ import { useSelector } from 'react-redux';
 import { useGeneral } from '../../../../bus/general';
 
 // Components
-import { CustomSearch } from '../CustomSearch';
+import { CustomSearch, Switch } from '../';
+
+// Assets
+import logo_light from '../../../../assets/icons/logo-light.png'
+import logo_dark from '../../../../assets/icons/logo-dark.png'
 
 // Styles
 import { HeaderWrapper, RatingWrapper } from './styles';
 
 export const Header = () => {
-    const { switchMode, getCurrentSearchResultByString, resetSearchResults, getMoviesByParams, getTVShowsByParams, resetCompositionsByParams } = useGeneral();
+    const { 
+        switchMode, 
+        getCurrentSearchResultByString, 
+        resetSearchResults, 
+        getMoviesByParams, 
+        getTVShowsByParams, 
+        resetCompositionsByParams,
+        toggleStyle } = useGeneral();
     const navigate = useNavigate();
-    const { mode, lang, searchResults, isFetching, genres } = useSelector(state => state.general);
+    const { mode, lang, searchResults, isFetching, genres, categoryValue, styleMode } = useSelector(state => state.general);
     const searchRef = useRef();
     const [searchString, setSearchString] = useState('');
     const [isFocusSearch, toggleIsFocusSearch] = useState(false);
@@ -34,7 +45,14 @@ export const Header = () => {
         setSearchString('');
     }, [location.pathname])
     return (
-        <HeaderWrapper>
+        <HeaderWrapper styleMode={styleMode} >
+            <div className='logo'>
+                <img 
+                    src={styleMode ? logo_dark : logo_light}
+                    alt=''
+                    onClick={() => navigate('/popular/1')}
+                />
+            </div>
             <div className='Switch-mode'>
                 <input 
                     type='checkbox' 
@@ -89,6 +107,7 @@ export const Header = () => {
                                         lang={lang}
                                         resetCompositionsByParams={resetCompositionsByParams}
                                         navigate={navigate}
+                                        styleMode={styleMode ? 1 : 0}
                                     /> 
                                     : 
                                     null
@@ -153,6 +172,7 @@ export const Header = () => {
                                     lang={lang}
                                     resetCompositionsByParams={resetCompositionsByParams}
                                     navigate={navigate}
+                                    styleMode={styleMode ? 1 : 0}
                                 />
                             </div>
                         </>
@@ -161,23 +181,38 @@ export const Header = () => {
                         </span>
                     }
                 </span>
+                <Switch
+                    toggleStyle={toggleStyle}
+                    styleMode={styleMode} 
+                />
             </div>
             <div className='Switch-category'>
                 <NavLink
-                    to='/popular/1'>
+                    className={categoryValue === 'popular' ? 'active' : null}
+                    to='/popular/1'
+                >
                     Popular
                 </NavLink>
-                <NavLink to='/top_rated/1'>
+                <NavLink 
+                    className={categoryValue === 'top_rated' ? 'active' : null}
+                    to='/top_rated/1'
+                >
                     Top rated
                 </NavLink>
                 {mode ? 
                     null
                     :
                     <>
-                        <NavLink to='/upcoming/1'>
+                        <NavLink 
+                            className={categoryValue === 'upcoming' ? 'active' : null}
+                            to='/upcoming/1'
+                        >
                             Upcoming
                         </NavLink>
-                        <NavLink to='/now_playing/1'>
+                        <NavLink 
+                            className={categoryValue === 'now_playing' ? 'active' : null}
+                            to='/now_playing/1'
+                        >
                             Now playing
                         </NavLink>
                     </>
@@ -191,7 +226,7 @@ export const Header = () => {
                 </span>
                 :
                 null
-            }           
+            }      
             <div className={isFocusSearch ? 'search-focused' : 'search'}>
                 <input
                     onFocus={() => toggleIsFocusSearch(true)}

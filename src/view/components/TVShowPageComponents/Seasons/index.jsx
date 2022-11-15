@@ -2,6 +2,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+// Bus
+import { useGeneral } from '../../../../bus/general';
+
 // Components
 import { InfoProperty, Cast, GuestCast, Clips, VideoPlayer, SectionHeader } from '../../';
 
@@ -16,7 +19,15 @@ import episodes from '../../../../assets/icons/episodes.png';
 import { SeasonsWrapper, RatingWrapper, SeasonHeadWrapper } from './styles';
 
 export const Seasons = () => {
-    const { currentTVShow, lang, getSeason, id, isFetching, videoPlayerMode, setVideoPlayerMode, clipsRef} = useMovie();
+    const { getSeason } = useGeneral();
+    const { currentTVShow, 
+            lang, 
+            id, 
+            isFetching, 
+            videoPlayerMode, 
+            setVideoPlayerMode, 
+            clipsRef, 
+            styleMode } = useMovie();
     const [activeSeason, setActiveSeason] = useState(null);
     const [activeEpisode, setActiveEpisode] = useState(null);
     const ref = useRef();
@@ -26,7 +37,10 @@ export const Seasons = () => {
         }
     }, [activeSeason])
     return (
-        <SeasonsWrapper>
+        <SeasonsWrapper 
+            className='seasons' 
+            styleMode={styleMode ? 1 : 0}
+        >
             <SectionHeader 
                 img={seasons}
                 value='Seasons'
@@ -51,6 +65,7 @@ export const Seasons = () => {
                                     }
                                 }
                             }}
+                            styleMode={styleMode ? 1 : 0}
                         >
                             <span className='season-name'>
                                 {season.name}
@@ -74,6 +89,7 @@ export const Seasons = () => {
                                 :
                                 <>
                                     <section className='season-header'>
+                                        <div className='season-header-top'>
                                         <div>
                                             <InfoProperty
                                                 class='air-date'
@@ -111,31 +127,35 @@ export const Seasons = () => {
                                                 : 
                                                 null 
                                             }
-                                            {season.overview ? 
-                                                <div className='overview'>
-                                                        <u>What is the season about?</u><br/>{season.overview}
-                                                </div>
-                                                :
-                                                null
-                                            }
                                         </div>
                                         <img
                                             className='poster'
                                             src={`https://image.tmdb.org/t/p/w200${season.poster_path}`}
                                             alt=''
                                         />
+                                        </div>
+                                        {season.overview ?
+                                            <div className='overview'>
+                                                <u>What is the season about?</u><br />{season.overview}
+                                            </div>
+                                            :
+                                            null
+                                        }
                                     </section>
                                     {season.videos && season.videos.length ?
                                         <Clips
-                                        currentMovie={season}
-                                        setVideoPlayerMode={setVideoPlayerMode}
-                                        clipsRef={clipsRef}
+                                            currentMovie={season}
+                                            setVideoPlayerMode={setVideoPlayerMode}
+                                            clipsRef={clipsRef}
                                         /> 
                                         : 
                                         null
                                     }
                                     {season.credits && season.credits.cast.length ?
-                                        <Cast cast={season.credits.cast}/>
+                                        <Cast 
+                                            cast={season.credits.cast}
+                                            styleMode={styleMode ? 1 : 0}
+                                        />
                                         :
                                         null
                                     }

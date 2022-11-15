@@ -11,7 +11,7 @@ import { store } from '../init/redux';
 import { Main, MoviePage, PersonPage, TVShowPage, CollectionPage, CompositionsByParamsPage } from './pages';
 
 // Components
-import { Header } from './components';
+import { Header, Background } from './components';
 
 // Assets
 import Spectral from '../assets/fonts/Spectral-Regular.ttf';
@@ -44,12 +44,16 @@ main {
     min-height: 85vh;
     box-sizing: border-box;
 }
+.collection-main, .compositions-by-params {
+    margin-top: calc(15vh + 10px);
+}
 @media (max-width: 768px) {
     width: 100vw;
 }
 `;
 
 export const App = () => {
+    console.log(localStorage);
     return (
         <Provider store={store}>
             <BrowserRouter>
@@ -87,6 +91,7 @@ export const App = () => {
                             />
                         </Routes>
                     </ContentWrapper>
+                    <Background />
                 </AppWrapper>
             </BrowserRouter>
         </Provider>

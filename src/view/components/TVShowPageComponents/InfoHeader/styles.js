@@ -2,6 +2,9 @@
 import styled from 'styled-components';
 
 export const InfoHeaderWrapper = styled.section`
+margin-top: 10px;
+border-radius: 15px 15px 0 0;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 background: ${props => props.background ? `url(${props.backgroundURL});` : `rgba(50, 50, 50, 0.2);`};
 background-position: center;
 background-size: cover;
@@ -11,6 +14,7 @@ h1 {
     margin: 0;
     background: rgba(50, 50, 50, 0.5);
     padding: 20px 0 20px 15px;
+    border-radius: 15px 15px 0 0;
     font-size: 30px;
     .title {
         font-family: Spectral ,Arial, Helvetica, sans-serif;

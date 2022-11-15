@@ -9,7 +9,7 @@ import { useGeneral } from '../bus/general';
 export const usePerson = () => {
     const [moviePage, setMoviePage] = useState(1);
     const [mode, toggleMode] = useState(1);
-    const { currentPerson, isFetching, lang, genres } = useSelector(state => state.general);
+    const { currentPerson, isFetching, lang, genres, styleMode } = useSelector(state => state.general);
     const { id } = useParams();
     const { getCurrentPerson } = useGeneral();
     return {
@@ -22,6 +22,7 @@ export const usePerson = () => {
         lang,
         genres,
         id,
-        getCurrentPerson
+        getCurrentPerson,
+        styleMode
     }
 }
