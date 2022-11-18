@@ -5,9 +5,12 @@ export const MovieWrapper = styled.figure`
 position: relative;
 height: 100%;
 margin: 5px 8px;
+overflow: hidden;
 :hover {
-    figcaption {
-        text-decoration: underline;
+    perspective: 1000;
+    img {
+        border-radius: 20px;
+        transform: translateZ(40px);
     }
 }
 figcaption {
@@ -39,7 +42,6 @@ a:visited, a:link {
     width: 100%;
     padding: 5px 0;
     background-color: rgba(70, 70, 70, 0.7);
-    border-radius: 20px 20px 0 0;
 }
 .genre {
     padding: 0 5px;
@@ -77,7 +79,6 @@ a:visited, a:link {
     background-color: rgba(70, 70, 70, 0.7);
     font-size: 14px;
     text-shadow: none;
-    border-radius: 0 0 20px 20px;
 }
 @media (max-width: 768px) {
     width: calc(45vw - 16px);

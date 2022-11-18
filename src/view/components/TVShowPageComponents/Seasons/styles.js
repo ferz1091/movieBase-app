@@ -8,6 +8,11 @@ import arrow_down_light from '../../../../assets/icons/arrow-down-light.png';
 export const SeasonsWrapper = styled.section`
 .seasons-list {
     padding: 5px 0;
+    .spinner {
+        img {
+            max-width: 38px;
+        }
+    }
 }
 .season {
     position: relative;

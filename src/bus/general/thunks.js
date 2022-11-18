@@ -8,7 +8,7 @@ import { generalActions } from './slice';
 import { movieAPI } from '../../api';
 
 // Tools
-import { getGenres, deleteDuplicates } from '../../tools';
+import { getGenres, deleteDuplicates, getLanguages } from '../../tools';
 
 // CURRENT MOVIE
 export const getCurrentMovieThunk = createAsyncThunk('general/getCurrentMovie', async ({id, lang, isGenresLoaded}, {dispatch}) => {
@@ -58,7 +58,7 @@ export const getCurrentMovieThunk = createAsyncThunk('general/getCurrentMovie', 
 })
 
 // CURRENT TV SHOW
-export const getCurrentTVShowThunk = createAsyncThunk('general/getCurrentTVShow', async ({id, lang, isGenresLoaded}, {dispatch}) => {
+export const getCurrentTVShowThunk = createAsyncThunk('general/getCurrentTVShow', async ({ id, lang, isGenresLoaded }, {dispatch}) => {
     if (isGenresLoaded) {
         getGenres(lang)
             .then(genres => dispatch(generalActions.setGenres(genres)))
@@ -118,7 +118,7 @@ export const getCurrentTVShowSeasonThunk = createAsyncThunk('general/getCurrentT
 })
 
 // CURRENT PERSON
-export const getCurrentPersonThunk = createAsyncThunk('general/getCurrentPerson', async ({id, lang, isGenresLoaded}, {dispatch}) => {
+export const getCurrentPersonThunk = createAsyncThunk('general/getCurrentPerson', async ({ id, lang, isGenresLoaded }, {dispatch}) => {
     if (isGenresLoaded) {
         getGenres(lang)
             .then(genres => dispatch(generalActions.setGenres(genres)))
@@ -173,7 +173,7 @@ export const getCurrentTVShowReviewsByPageThunk = createAsyncThunk('general/getC
 })
 
 // CURRENT COLLECTION
-export const getCurrentCollectionThunk = createAsyncThunk('general/getCurrentCollection', async ({id, lang, isGenresLoaded}, {dispatch}) => {
+export const getCurrentCollectionThunk = createAsyncThunk('general/getCurrentCollection', async ({ id, lang, isGenresLoaded }, {dispatch}) => {
     if (isGenresLoaded) {
         getGenres(lang)
             .then(genres => dispatch(generalActions.setGenres(genres)))

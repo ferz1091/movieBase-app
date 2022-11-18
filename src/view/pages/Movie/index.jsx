@@ -2,7 +2,14 @@
 import React, { useEffect } from 'react';
 
 // Component
-import { VideoPlayer, MovieInfoHeader, Cast, Clips, Reviews, Similar, Error } from '../../components';
+import { VideoPlayer, 
+        MovieInfoHeader, 
+        Cast, 
+        Clips,
+        Reviews, 
+        Similar, 
+        Error, 
+        Spinner } from '../../components';
 
 // Bus
 import { useGeneral } from '../../../bus/general';
@@ -37,9 +44,9 @@ export const MoviePage = () => {
 
     if (isFetching.main) {
         return (
-            <div>
-                SPINNER
-            </div>
+            <MoviePageWrapper>
+                <Spinner />
+            </MoviePageWrapper>
         )
     }
     else if (currentMovie && !currentMovie.error) {

@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { Review, SectionHeader } from '../../common';
@@ -11,6 +12,7 @@ import reviews from '../../../../assets/icons/reviews.png';
 import { ReviewsWrapper } from './styles';
 
 export const Reviews = (props) => {
+    const { t } = useTranslation();
     return (
         <ReviewsWrapper 
             className='reviews'
@@ -18,7 +20,7 @@ export const Reviews = (props) => {
         >
             <SectionHeader 
                 img={reviews}
-                value='Reviews'
+                value={t('h2.reviews')}
                 alt='Reviews'
             />
             {props.currentMovie.reviews.data.length > 0 ?

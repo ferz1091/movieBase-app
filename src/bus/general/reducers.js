@@ -5,6 +5,9 @@ export const toggleIsFetchingMain = (state, action) => {
     }
 }
 export const setGenres = (state, action) => {
+    if (!action.payload.error) {
+        localStorage.setItem('genres', JSON.stringify(action.payload))
+    }
     return {
         ...state,
         genres: action.payload.error ? {error: action.payload.error} : [...action.payload]
@@ -38,5 +41,24 @@ export const toggleStyle = (state, action) => {
     return {
         ...state,
         styleMode: action.payload
+    }
+}
+export const toggleLanguage = (state, action) => {
+    localStorage.setItem('lang', action.payload);
+    return {
+        ...state,
+        lang: action.payload,
+        currentMovie: null,
+        currentTVShow: null,
+        currentPerson: null,
+        currentCollection: null,
+        compositionsByParams: { data: [], totalPages: null },
+        searchResults: []
+    }
+}
+export const resetGenres = (state, action) => {
+    return {
+        ...state,
+        genres: []
     }
 }

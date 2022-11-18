@@ -139,5 +139,10 @@ export const movieAPI = {
         return (
             instance.get(`/discover/tv?api_key=${API_KEY}&language=${lang}&page=${page}${genre ? `&with_genres=${genre}` : ''}${year ? `&first_air_date_year=${year}` : ''}&sort_by=vote_count.desc`)
         )
+    },
+    getLanguages() {
+        return (
+            instance.get(`/configuration/languages?api_key=${API_KEY}`)
+        )
     }
 }

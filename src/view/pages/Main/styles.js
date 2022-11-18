@@ -8,7 +8,7 @@ align-items: center;
 .movie {
     text-decoration: none;
 }
-.movie:visited, a:link {
+.movie:visited, .movie:link {
      color: black;
 }
 .movie:hover {

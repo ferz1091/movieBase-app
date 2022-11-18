@@ -2,12 +2,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 // Bus
 import { useGeneral } from '../../../../bus/general';
+import { useMovies } from '../../../../bus/movies';
 
 // Components
-import { CustomSearch, Switch } from '../';
+import { CustomSearch, Switch, Spinner } from '../';
+
+// Constants
+import { languages } from '../../../../init/constants';
 
 // Assets
 import logo_light from '../../../../assets/icons/logo-light.png'
@@ -24,14 +30,25 @@ export const Header = () => {
         getMoviesByParams, 
         getTVShowsByParams, 
         resetCompositionsByParams,
-        toggleStyle } = useGeneral();
+        toggleStyle,
+        toggleLanguage,
+        resetGenres } = useGeneral();
+    const { resetMovies } = useMovies();
     const navigate = useNavigate();
-    const { mode, lang, searchResults, isFetching, genres, categoryValue, styleMode } = useSelector(state => state.general);
+    const { mode, 
+            lang, 
+            searchResults, 
+            isFetching, 
+            genres, 
+            categoryValue, 
+            styleMode } = useSelector(state => state.general);
     const searchRef = useRef();
     const [searchString, setSearchString] = useState('');
     const [isFocusSearch, toggleIsFocusSearch] = useState(false);
     const [genresMode, setGenresMode] = useState(null);
+    const [langSelectIsOpen, toggleLangSelect] = useState(false);
     const location = useLocation();
+    const { t } = useTranslation();
     useEffect(() => {
         if (searchResults.length) {
             resetSearchResults();
@@ -45,7 +62,10 @@ export const Header = () => {
         setSearchString('');
     }, [location.pathname])
     return (
-        <HeaderWrapper styleMode={styleMode} >
+        <HeaderWrapper 
+            styleMode={styleMode}
+            langSelectIsOpen={langSelectIsOpen}
+        >
             <div className='logo'>
                 <img 
                     src={styleMode ? logo_dark : logo_light}
@@ -74,7 +94,7 @@ export const Header = () => {
                     }}
                     onMouseOut={() => setGenresMode(null)}
                 >
-                    Movies
+                    {t('switch_mode.movies')}
                     {genresMode === 'movies' ?
                         <>
                             <span className='arrow-up'>
@@ -140,7 +160,7 @@ export const Header = () => {
                     }
                     onMouseOut={() => setGenresMode(null)}
                 >
-                    TV Shows
+                    {t('switch_mode.tv_shows')}
                     {genresMode === 'tv' ?
                         <>
                             <span className='arrow-up'>
@@ -181,6 +201,41 @@ export const Header = () => {
                         </span>
                     }
                 </span>
+                <div className='lang-select'>
+                    <span 
+                        className='option current'
+                        onClick={() => {
+                            if (!langSelectIsOpen) {
+                                toggleLangSelect(true);
+                            } else {
+                                toggleLangSelect(false);
+                            }
+                        }}
+                    >
+                        {languages.find(language => language.iso === lang).name}
+                        <span className={langSelectIsOpen ? 'arrow-lang-up' : 'arrow-lang-down'}>
+                        </span>
+                    </span>
+                    {langSelectIsOpen ? 
+                        languages.filter(language => language.iso !== lang).map(language => 
+                            <span 
+                                className='option'
+                                key={language.iso}
+                                onClick={() => {
+                                    i18n.changeLanguage(language.iso)
+                                    toggleLanguage(language.iso);
+                                    resetGenres();
+                                    resetMovies();
+                                    toggleLangSelect(false);
+                                }}
+                            >
+                                {language.name}
+                            </span>
+                        )
+                        :
+                        null
+                    }
+                </div>
                 <Switch
                     toggleStyle={toggleStyle}
                     styleMode={styleMode} 
@@ -191,13 +246,13 @@ export const Header = () => {
                     className={categoryValue === 'popular' ? 'active' : null}
                     to='/popular/1'
                 >
-                    Popular
+                    {t('switch_category.popular')}
                 </NavLink>
                 <NavLink 
                     className={categoryValue === 'top_rated' ? 'active' : null}
                     to='/top_rated/1'
                 >
-                    Top rated
+                    {t('switch_category.top_rated')}
                 </NavLink>
                 {mode ? 
                     null
@@ -207,13 +262,13 @@ export const Header = () => {
                             className={categoryValue === 'upcoming' ? 'active' : null}
                             to='/upcoming/1'
                         >
-                            Upcoming
+                            {t('switch_category.upcoming')}
                         </NavLink>
                         <NavLink 
                             className={categoryValue === 'now_playing' ? 'active' : null}
                             to='/now_playing/1'
                         >
-                            Now playing
+                            {t('switch_category.now_playing')}
                         </NavLink>
                     </>
                 }
@@ -236,8 +291,13 @@ export const Header = () => {
                     ref={searchRef} 
                     type='text' 
                     onChange={() => setSearchString(searchRef.current.value)} 
-                    placeholder='Search movies and series'
+                    placeholder={t('switch_category.search')}
                 />
+                {isFetching.search ?
+                    <Spinner />
+                    :
+                    null
+                }
                 <div className='search-results'>
                     {!isFetching.search ? 
                         (searchResults.length && isFocusSearch ?
@@ -285,7 +345,7 @@ export const Header = () => {
                             )
                         )
                         :
-                        <div>SPINNER</div>
+                        null
                     }
                 </div>
             </div>

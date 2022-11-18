@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { ActorCard, SectionHeader } from '../../';
@@ -11,11 +12,12 @@ import guest_actors from '../../../../assets/icons/guest_actors.png';
 import { GuestCastWrapper } from './styles';
 
 export const GuestCast = (props) => {
+    const { t } = useTranslation();
     return (
         <GuestCastWrapper className='guest-actors'>
             <SectionHeader 
                 img={guest_actors}
-                value='Guest actors'
+                value={t('h2.guests')}
                 alt='Guests'
             />
             <div className='guest-list'>

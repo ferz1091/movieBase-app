@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { InfoProperty, Social } from '../../common';
@@ -12,6 +13,7 @@ import person from '../../../../assets/icons/person.png';
 import { InfoHeaderWrapper } from './styles';
 
 export const PersonInfoHeader = (props) => {
+    const { t } = useTranslation();
     return (
             <InfoHeaderWrapper className='person-header'>
                 <h2>
@@ -31,19 +33,19 @@ export const PersonInfoHeader = (props) => {
                     <div className='person-main-info'>
                         <InfoProperty
                             class='birthday'
-                            name='Birthday: '
+                            name={t('person.birthday')}
                             value={new Date(props.currentPerson.birthday).toLocaleDateString()}
                             isVisible={props.currentPerson.birthday}
                         />
                         <InfoProperty
                             class='deathday'
-                            name='Deathday: '
+                            name={t('person.deathday')}
                             value={new Date(props.currentPerson.deathday).toLocaleDateString()}
                             isVisible={props.currentPerson.deathday}
                         />
                         <InfoProperty
                             class='birth-place'
-                            name='Birth place: '
+                            name={t('person.birth_place')}
                             value={props.currentPerson.place_of_birth}
                             isVisible={props.currentPerson.place_of_birth}
                         />

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Components
-import { CompositionsList } from '../../components';
+import { CompositionsList, Spinner } from '../../components';
 
 // Tools
 import { useMain } from '../../../tools';
@@ -35,12 +35,12 @@ export const Main = () => {
         } else if (!mode && !movies.find(item => item.name === category).data.some(item => item.page === page && item.data.length > 0)) {
             getMovies(category, page, lang, movies.find(movie => movie.name === category).totalPages, !genres.length);
         }
-    }, [mode, category, page])
+    }, [mode, category, page, lang])
     if (isFetching.main) {
         return (
-            <div>
-                SPINNER
-            </div>
+            <MainWrapper className='Main page'>
+                <Spinner />
+            </MainWrapper>
         )
     } else {
         return (

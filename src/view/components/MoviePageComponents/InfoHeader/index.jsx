@@ -1,6 +1,7 @@
 // Core
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { InfoProperty, Social } from '../../common';
@@ -10,6 +11,7 @@ import { InfoHeaderWrapper } from './styles';
 
 export const MovieInfoHeader = (props) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     return (
         <InfoHeaderWrapper 
             className='info-header'
@@ -56,13 +58,13 @@ export const MovieInfoHeader = (props) => {
             <div className='movie-info'>
                 <InfoProperty
                     class='release-date'
-                    name='Release date: '
+                    name={t('movie.release')}
                     value={new Date(props.currentMovie.release_date).toLocaleDateString()}
                     isVisible={true}
                 />
                 <InfoProperty
                     class='production-country'
-                    name='Country: '
+                    name={t('movie.country')}
                     isVisible={props.currentMovie.production_countries.length}
                     value={props.currentMovie.production_countries.map((country, index, countries) =>
                         <span key={index}>
@@ -81,7 +83,7 @@ export const MovieInfoHeader = (props) => {
                 />
                 <InfoProperty
                     class='language'
-                    name='Language: '
+                    name={t('movie.language')}
                     isVisible={props.currentMovie.spoken_languages.length}
                     value={props.currentMovie.spoken_languages.map((language, index, languages) =>
                         <span key={index}>
@@ -98,10 +100,10 @@ export const MovieInfoHeader = (props) => {
                         </span>
                     )}
                 />
-                {!props.currentMovie.crew.error ?
+                {!props.currentMovie.crew.error && props.currentMovie.crew.find(member => member.job === 'Director') ?
                     <InfoProperty
                     class='director'
-                    name='Director: '
+                    name={t('movie.director')}
                     value={
                             <Link 
                                 to={`/person/${props.currentMovie.crew.find(member => member.job === 'Director').id}`}
@@ -117,7 +119,7 @@ export const MovieInfoHeader = (props) => {
                 }
                 <InfoProperty
                     class='prod_companies'
-                    name='Companies: '
+                    name={t('movie.companies')}
                     isVisible={props.currentMovie.production_companies.length}
                     value={props.currentMovie.production_companies.map((company, index, companies) =>
                         <span key={index}>
@@ -136,20 +138,20 @@ export const MovieInfoHeader = (props) => {
                 />
                 <InfoProperty
                     class='time'
-                    name='Time: '
+                    name={t('movie.time')}
                     value={`${props.currentMovie.runtime} min.`}
                     isVisible={props.currentMovie.runtime}
                 />
                 <InfoProperty 
                     class='collection'
-                    name='Collection: '
+                    name={t('movie.collection')}
                     value={props.currentMovie.belongs_to_collection ? <Link to={`/collection/${props.currentMovie.belongs_to_collection.id}`}>{props.currentMovie.belongs_to_collection.name}</Link> : ''}
                     isVisible={props.currentMovie.belongs_to_collection}   
                 />
                 <Social {...props.currentMovie.social} />
                 {props.currentMovie.overview ?
                     <div className='overview'>
-                        <u>What is the movie about?</u><br />{props.currentMovie.overview}
+                        <u>{t('movie.overview')}</u><br />{props.currentMovie.overview}
                     </div>
                     :
                     null

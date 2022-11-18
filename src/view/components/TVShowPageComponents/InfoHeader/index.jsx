@@ -1,6 +1,7 @@
 // Core
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { InfoProperty, Social } from '../../common';
@@ -10,6 +11,7 @@ import { InfoHeaderWrapper } from './styles';
 
 export const TVShowInfoHeader = (props) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     return (
         <InfoHeaderWrapper
             className='info-header'
@@ -56,31 +58,31 @@ export const TVShowInfoHeader = (props) => {
             <div className='movie-info'>
                 <InfoProperty 
                     class='status'
-                    name='Status: '
+                    name={t('tv_show.status')}
                     isVisible={true}
                     value={props.currentTVShow.in_production ? 'In production' : 'Completed'}
                 />
                 <InfoProperty
                     class='released'
-                    name='First air date: '
+                    name={t('tv_show.air_date')}
                     isVisible={props.currentTVShow.first_air_date}
                     value={new Date(props.currentTVShow.first_air_date).toLocaleDateString()}
                 />
                 <InfoProperty 
                     class='seasons-number'
-                    name='Seasons: '
+                    name={t('tv_show.seasons')}
                     isVisible={props.currentTVShow.number_of_seasons}
                     value={props.currentTVShow.number_of_seasons}
                 />
                 <InfoProperty 
                     class='episodes-number'
-                    name='Episodes: '
+                    name={t('tv_show.episodes')}
                     isVisible={props.currentTVShow.number_of_episodes}
                     value={props.currentTVShow.number_of_episodes}
                 />
                 <InfoProperty 
                     class='network'
-                    name='Network: '
+                    name={t('tv_show.network')}
                     isVisible={props.currentTVShow.networks.length}
                     value={props.currentTVShow.networks.map((network, index, networks) =>
                         <span
@@ -101,7 +103,7 @@ export const TVShowInfoHeader = (props) => {
                 />
                 <InfoProperty
                     class='production-country'
-                    name='Country: '
+                    name={t('movie.country')}
                     isVisible={props.currentTVShow.production_countries.length}
                     value={props.currentTVShow.production_countries.map((country, index, countries) =>
                         <span key={country.name}>
@@ -120,7 +122,7 @@ export const TVShowInfoHeader = (props) => {
                 />
                 <InfoProperty
                     class='language'
-                    name='Language: '
+                    name={t('movie.language')}
                     isVisible={props.currentTVShow.spoken_languages.length}
                     value={props.currentTVShow.spoken_languages.map((language, index, languages) =>
                         <span key={language.name}>
@@ -139,7 +141,7 @@ export const TVShowInfoHeader = (props) => {
                 />
                 <InfoProperty
                     class='created-by'
-                    name='Created by: '
+                    name={t('tv_show.created')}
                     value={props.currentTVShow.created_by.map((person, index, crew) =>
                         <NavLink 
                             to={`/person/${person.id}`}
@@ -161,7 +163,7 @@ export const TVShowInfoHeader = (props) => {
                 />
                 <InfoProperty
                     class='prod_companies'
-                    name='Companies: '
+                    name={t('movie.companies')}
                     isVisible={props.currentTVShow.production_companies.length}
                     value={props.currentTVShow.production_companies.map((company, index, companies) =>
                         <span key={company.id}>
@@ -181,7 +183,7 @@ export const TVShowInfoHeader = (props) => {
                 <Social {...props.currentTVShow.social} />
                 {props.currentTVShow.overview ?
                     <div className='overview'>
-                        <u>What is the TV Show about?</u><br />{props.currentTVShow.overview}
+                        <u>{t('tv_show.overview')}</u><br />{props.currentTVShow.overview}
                     </div>
                     :
                     null

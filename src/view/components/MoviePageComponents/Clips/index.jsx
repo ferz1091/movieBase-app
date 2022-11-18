@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { SectionHeader } from '../../';
@@ -11,6 +12,7 @@ import clips from '../../../../assets/icons/clips.png';
 import { ClipsWrapper, YTPreviewWrapper } from './styles';
 
 export const Clips = (props) => {
+    const { t } = useTranslation();
     return (
         <ClipsWrapper 
             className='clips'
@@ -19,7 +21,7 @@ export const Clips = (props) => {
         >
             <SectionHeader 
                 img={clips}
-                value='Clips'
+                value={t('h2.clips')}
                 alt='Clips'
             />
             <div

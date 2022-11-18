@@ -7,13 +7,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useGeneral } from '../../../bus/general';
 
 // Components
-import { Movies, PageSwitcher, Error } from '../../components';
+import { Movies, PageSwitcher, Error, Spinner } from '../../components';
 
 // Styles
 import { CompositionsByParamsWrapper } from './styles';
 
 export const CompositionsByParamsPage = () => {
-    const { compositionsByParams, lang, isFetching, genres } = useSelector(state => state.general);
+    const { compositionsByParams, lang, isFetching, genres, styleMode } = useSelector(state => state.general);
     const { page } = useParams();
     const navigate = useNavigate();
     const { getMoviesByParams, getTVShowsByParams } = useGeneral();
@@ -31,9 +31,9 @@ export const CompositionsByParamsPage = () => {
     }, [page])
     if (isFetching.searchByParams) {
         return (
-            <div>
-                SPINNER
-            </div>
+            <CompositionsByParamsWrapper compositions-by-params>
+                <Spinner />
+            </CompositionsByParamsWrapper>
         )
     } else if (compositionsByParams.data.length && compositionsByParams.data.some(pageData => pageData.page === Number(page))) {
         return (
@@ -41,6 +41,7 @@ export const CompositionsByParamsPage = () => {
                 className='compositions-by-params'
                 length={compositionsByParams.totalPages > 1}
                 error={compositionsByParams.data.length && compositionsByParams.data.find(composition => composition.page === Number(page)).error ? true : null}
+                styleMode={styleMode ? 1 : 0}
             >
                 {compositionsByParams.params.mode && !compositionsByParams.data.find(composition => composition.page === Number(page)).error ?
                     <>

@@ -5,3 +5,4 @@ export * from './usePerson';
 export * from './useCollection';
 export * from './useMain';
 export * from './generateYears';
+export * from './useCustomSearch';

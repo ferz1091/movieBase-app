@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { SectionHeader } from '../../common';
@@ -11,12 +12,13 @@ import bio from '../../../../assets/icons/bio.png';
 import { BiographyWrapper } from './styles';
 
 export const Biography = (props) => {
+    const { t } = useTranslation();
     return (
         <BiographyWrapper>
             <SectionHeader 
                 img={bio}
                 alt='Biography'
-                value='Biography'
+                value={t('h2.bio')}
             />
             <div className='biography-text'>
                 {props.biography}

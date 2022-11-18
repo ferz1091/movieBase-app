@@ -19,7 +19,7 @@ import { getCurrentCollectionThunk,
 export const useGeneral = () => {
     const dispatch = useDispatch();
     function getCurrentMovie(id, lang, isGenresLoaded) {
-        dispatch(getCurrentMovieThunk({id, lang, isGenresLoaded}))
+        dispatch(getCurrentMovieThunk({ id, lang, isGenresLoaded }))
     }
     function getCurrentMovieReviewsByPage(id, lang, page, func, arg) {
         dispatch(getCurrentMovieReviewsByPageThunk({id, lang, page, func, arg}))
@@ -28,7 +28,7 @@ export const useGeneral = () => {
         dispatch(getCurrentPersonThunk({ id, lang, isGenresLoaded }))
     }
     function getCurrentTVShow(id, lang, isGenresLoaded) {
-        dispatch(getCurrentTVShowThunk({ id, lang, isGenresLoaded}))
+        dispatch(getCurrentTVShowThunk({ id, lang, isGenresLoaded }))
     }
     function getSeason(id, season, lang) {
         dispatch(getCurrentTVShowSeasonThunk({id, season, lang}))
@@ -37,7 +37,7 @@ export const useGeneral = () => {
         dispatch(getCurrentTVShowReviewsByPageThunk({id, lang, page, func, arg}))
     }
     function getCurrentCollection(id, lang, isGenresLoaded) {
-        dispatch(getCurrentCollectionThunk({id, lang, isGenresLoaded}))
+        dispatch(getCurrentCollectionThunk({ id, lang, isGenresLoaded }))
     }
     function getCurrentSearchResultByString(query, page, lang) {
         dispatch(getCurrentSearchResultsByStringThunk({query, page, lang}))
@@ -66,6 +66,12 @@ export const useGeneral = () => {
     function toggleStyle(styleMode) {
         dispatch(generalActions.toggleStyle(styleMode))
     }
+    function toggleLanguage(lang) {
+        dispatch(generalActions.toggleLanguage(lang))
+    }
+    function resetGenres() {
+        dispatch(generalActions.resetGenres())
+    }
     return {
         switchMode,
         getCurrentMovie,
@@ -82,6 +88,8 @@ export const useGeneral = () => {
         resetCompositionsByParams,
         getTVShowsByParams,
         setCategory,
-        toggleStyle
+        toggleStyle,
+        toggleLanguage,
+        resetGenres
     }
 }

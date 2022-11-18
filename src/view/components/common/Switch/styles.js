@@ -34,21 +34,18 @@ height: 16px;
     border-radius: 50%;
 }
 .slider-icon {
+    cursor: pointer;
     position: absolute;
-    right: calc(100% + 5px);
+    z-index: 1;
+    right: ${props => props.styleMode ? '20px' : '4px'};
+    bottom: 3px;
     display: inline-block;
-    width: 16px; height: 16px;
+    width: 10px; height: 10px;
+    background: ${props => props.styleMode ? `url(${dark})` : `url(${light})`};
     background-position: center;
     background-repeat: no-repeat;
-    background: ${props => props.styleMode ? `url(${dark})` : `url(${light})`};
 }
 @media (max-width: 300px) {
     right: 5px;
-    .slider-icon {
-        bottom: calc(100% + 5px);
-        right: none;
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
 }
 `;

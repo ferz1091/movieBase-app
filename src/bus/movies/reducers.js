@@ -24,3 +24,12 @@ export const setTotalPages = (state, action) => {
         }
     ]
 }
+export const resetMovies = (state, action) => {
+    return [
+            { name: 'popular', data: [], totalPages: null },
+            { name: 'top_rated', data: [], totalPages: null },
+            { name: 'upcoming', data: [], totalPages: null },
+            { name: 'now_playing', data: [], totalPages: null }
+        ]
+    
+}

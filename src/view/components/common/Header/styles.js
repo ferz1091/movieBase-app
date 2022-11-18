@@ -116,6 +116,15 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
         background-color: ${props => props.styleMode ? 'rgb(50, 50, 50)' : 'rgb(220, 220, 220)'};
     }
 }
+.search-focused, .search {
+    .spinner {
+        top: 0; left: calc(100% - 30px);
+        transform: none;
+        img {
+            width: 20px;
+        }
+    }
+}
 .search-button {
     display: none;
     background: url(${search});
@@ -139,12 +148,11 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
     border-bottom: 1px solid rgb(200, 200, 200);
     box-sizing: border-box;
 }
-.arrow-down, .arrow-up {
+.arrow-down, .arrow-up, .arrow-lang-up, .arrow-lang-down {
     margin-left: 5px;
     display: inline-block;
     width: 10px;
     height: 10px;
-    vertical-align: middle;
     background: ${props => props.styleMode ? `url(${arrow_down_light})` : `url(${arrow_down})`};
     background-size: cover;
     transition: all linear 0.1s;
@@ -179,6 +187,57 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
     .genre:active {
         transform: translateY(5%);
         box-shadow: 1px 1px 2px black;
+    }
+}
+.lang-select {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    top: -4px; right: 50px;
+    width: 100px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: ${props => props.styleMode ? 'black' : 'white'};
+    font-size: 14px;
+    color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'rgb(50, 50, 50)'};
+    border-radius: 15px;
+    border: ${props => props.styleMode ? '1px solid rgb(40, 40, 40)' : 'none'};
+    box-shadow: ${props => props.langSelectIsOpen ? 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px' : ''};
+    .option {
+        position: relative;
+        cursor: pointer;
+        padding: ${props => props.langSelectIsOpen ? '10px' : '2px 10px'};
+        transition: all linear 0.1s;
+    }
+    .option:hover {
+        background-color: ${props => props.styleMode ? 'rgb(40, 40, 40)' : 'rgb(200, 200, 200)'};
+    }
+    .option:active {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+        transform: translate(1%, 5%);
+    }
+    .arrow-lang-up, .arrow-lang-down {
+        position: absolute;
+        top: 50%; right: 5px;
+        transform: translate(0, -50%);
+        margin: 0;
+    }
+    .arrow-lang-up {
+        transform: rotate(180deg) translate(0, 50%);
+    }
+    .current {
+        border-radius: 15px;
+        color: ${props => props.styleMode ? 'rgb(180, 180, 180)' : 'black'};
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    .current:hover {
+        cursor: ${props => props.langSelectIsOpen ? 'not-allowed' : 'pointer'};
+        background-color: ${props => props.styleMode ? 'black' : 'white'};
+    }
+    .current:active {
+        box-shadow: none;
+        transform: none;
     }
 }
 @media (max-width: 768px) {
@@ -220,7 +279,16 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
         }
     }
 }
-@media (max-width: 300px) {
+@media (max-width: 385px) {
+    .lang-select {
+        width: 85px;
+        font-size: 13px;
+        top: -40px;
+        right: 5px;
+        .option {
+            padding: 2px;
+        }
+    }
     .Switch-category {
         font-size: 12px;
         a {

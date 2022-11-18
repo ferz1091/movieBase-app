@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { SectionHeader, Movies } from '../../common';
@@ -11,12 +12,13 @@ import clips from '../../../../assets/icons/clips.png';
 import { PersonMoviesWrapper } from './styles';
 
 export const PersonMovies = (props) => {
+    const { t } = useTranslation();
     return (
         <PersonMoviesWrapper>
             <SectionHeader 
                 img={clips}
                 alt='Clips'
-                value={props.mode ? `Movies with ${props.currentPerson.name}` : `TV series with ${props.currentPerson.name}`}
+                value={props.mode ? `${t('person.compositions.movies')} ${props.currentPerson.name}` : `${t('person.compositions.tv_shows')} ${props.currentPerson.name}`}
             />
             <div className='mode-changer'>
                 {props.currentPerson.credits.tv.length && props.currentPerson.credits.movie.length ?
@@ -30,7 +32,7 @@ export const PersonMovies = (props) => {
                                 }
                             }}
                         >
-                            Movies
+                            {t('switch_mode.movies')}
                         </span>
                         <span
                             className={!props.mode ? 'mode-active' : 'mode'}
@@ -41,7 +43,7 @@ export const PersonMovies = (props) => {
                                 }
                             }}
                         >
-                            TV shows
+                            {t('switch_mode.tv_shows')}
                         </span>
                     </>
                     :
@@ -54,7 +56,7 @@ export const PersonMovies = (props) => {
                                 className='prev-page'
                                 onClick={() => props.setMoviePage(props.moviePage - 1)}
                             >
-                                Previous
+                                {t('person.compositions.prev')}
                             </span>
                             :
                             null
@@ -64,7 +66,7 @@ export const PersonMovies = (props) => {
                                 className='next-page'
                                 onClick={() => props.setMoviePage(props.moviePage + 1)}
                             >
-                                Next
+                                {t('person.compositions.next')}
                             </span>
                             :
                             null

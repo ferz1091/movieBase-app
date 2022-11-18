@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { useGeneral } from '../../../bus/general';
 
 // Components
-import { TVShowInfoHeader, Seasons, Reviews, Similar, Error } from '../../components';
+import { TVShowInfoHeader, Seasons, Reviews, Similar, Error, Spinner } from '../../components';
 
 // Tools
 import { useMovie } from '../../../tools';
@@ -25,7 +25,7 @@ export const TVShowPage = () => {
             reviewPage,
             genres,
             setReviewPage,
-            styleMode } = useMovie();
+            styleMode} = useMovie();
     useEffect(() => {
         if (!currentTVShow || currentTVShow.id !== id) {
             getCurrentTVShow(id, lang, !genres.length);
@@ -33,9 +33,9 @@ export const TVShowPage = () => {
     }, [id, lang])
     if (isFetching.main) {
         return (
-            <div>
-                SPINNER
-            </div>
+            <TVShowWrapper>
+                <Spinner />
+            </TVShowWrapper>
         )
     } else if (currentTVShow && !currentTVShow.error) {
         return (

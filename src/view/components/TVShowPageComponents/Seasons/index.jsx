@@ -1,12 +1,13 @@
 // Core
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Bus
 import { useGeneral } from '../../../../bus/general';
 
 // Components
-import { InfoProperty, Cast, GuestCast, Clips, VideoPlayer, SectionHeader } from '../../';
+import { InfoProperty, Cast, GuestCast, Clips, VideoPlayer, SectionHeader, Spinner } from '../../';
 
 // Tools
 import { useMovie, deleteDuplicates } from '../../../../tools';
@@ -31,6 +32,7 @@ export const Seasons = () => {
     const [activeSeason, setActiveSeason] = useState(null);
     const [activeEpisode, setActiveEpisode] = useState(null);
     const ref = useRef();
+    const { t } = useTranslation();
     useEffect(() => {
         if (typeof activeSeason === 'number' && !currentTVShow.seasons[activeSeason].isLoaded) {
             getSeason(id, activeSeason, lang)
@@ -43,7 +45,7 @@ export const Seasons = () => {
         >
             <SectionHeader 
                 img={seasons}
-                value='Seasons'
+                value={t('h2.seasons')}
             />
             <div className='seasons-list'>
                 {currentTVShow.seasons.map((season, index) =>
@@ -83,9 +85,7 @@ export const Seasons = () => {
                         </SeasonHeadWrapper>
                         {activeSeason === index ?
                             isFetching.seasons ?
-                                <div>
-                                    SPINNEr
-                                </div>
+                                <Spinner />
                                 :
                                 <>
                                     <section className='season-header'>
@@ -93,14 +93,14 @@ export const Seasons = () => {
                                         <div>
                                             <InfoProperty
                                                 class='air-date'
-                                                name='Air date: '
+                                                name={t('tv_show.episode.air')}
                                                 value={new Date(season.air_date).toLocaleDateString()}
                                                 isVisible={season.air_date}
                                             />
                                             {season.credits ?
                                                 <InfoProperty 
                                                     class='producer'
-                                                    name='Producer: '
+                                                    name={t('tv_show.producer')}
                                                     value={<ul>{deleteDuplicates(season.credits.crew.filter(person => 
                                                         person.job.includes('Producer')
                                                     )).map(person => 
@@ -136,7 +136,7 @@ export const Seasons = () => {
                                         </div>
                                         {season.overview ?
                                             <div className='overview'>
-                                                <u>What is the season about?</u><br />{season.overview}
+                                                <u>{t('tv_show.overview_season')}</u><br />{season.overview}
                                             </div>
                                             :
                                             null
@@ -166,7 +166,7 @@ export const Seasons = () => {
                                                     src={episodes}
                                                     alt=''
                                                 />
-                                                Episodes
+                                                {t('h2.episodes')}
                                                 <select
                                                     ref={ref}
                                                     onChange={() => setActiveEpisode(ref.current.value)}
@@ -207,19 +207,19 @@ export const Seasons = () => {
                                                     }
                                                     <InfoProperty 
                                                         class='air_date'
-                                                        name='Air date: '
+                                                        name={t('tv_show.episode.air')}
                                                         value={new Date(season.episodes[activeEpisode - 1].air_date).toLocaleDateString()}
                                                         isVisible={season.episodes[activeEpisode - 1].air_date}
                                                     />
                                                     <InfoProperty
                                                         class='time'
-                                                        name='Time: '
+                                                        name={t('tv_show.episode.time')}
                                                         value={`${season.episodes[activeEpisode - 1].runtime} min.`}
                                                         isVisible={season.episodes[activeEpisode - 1].runtime}
                                                     />
                                                     {season.episodes[activeEpisode - 1].overview ?
                                                         <div className='overview'>
-                                                            <u>What is this series about?</u><br />{season.episodes[activeEpisode - 1].overview}
+                                                            <u>{t('tv_show.episode.overview')}</u><br />{season.episodes[activeEpisode - 1].overview}
                                                         </div>
                                                         :
                                                         null
@@ -233,7 +233,7 @@ export const Seasons = () => {
                                         null
                                     }
                                     {activeEpisode && season.episodes[activeEpisode - 1].guest_stars.length ?
-                                            <GuestCast guests={season.episodes[activeEpisode - 1].guest_stars} />
+                                        <GuestCast guests={season.episodes[activeEpisode - 1].guest_stars} />
                                         :
                                         null
                                     }

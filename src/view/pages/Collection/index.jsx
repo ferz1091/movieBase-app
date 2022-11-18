@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Components
-import { Movies, Error } from '../../components';
+import { Movies, Error, Spinner } from '../../components';
 
 // Tools
 import { useCollection } from '../../../tools';
@@ -15,6 +15,7 @@ export const CollectionPage = () => {
             lang,
             isFetching, genres,
             id,
+            styleMode,
             getCurrentCollection } = useCollection();
     useEffect(() => {
         if (!currentCollection || currentCollection.id !== id) {
@@ -24,24 +25,27 @@ export const CollectionPage = () => {
     
     if (isFetching.main) {
         return (
-            <div>
-                SPINNER
-            </div>
+            <CollectionPageWrapper className='collection-main'>
+                <Spinner />
+            </CollectionPageWrapper>
         )
     } else if (currentCollection && !currentCollection.error) {
         return (
-            <CollectionPageWrapper className='collection-main'>
-            <h2>
-                {currentCollection.name}
-            </h2>
-            <div className='parts'>
-                {currentCollection.parts.map(part => 
-                    <Movies 
-                        key={part.id}
-                        {...part}
-                    />    
-                )}
-            </div>
+            <CollectionPageWrapper 
+                className='collection-main'
+                styleMode={styleMode ? 1 : 0}
+            >
+                <h2>
+                    {currentCollection.name}
+                </h2>
+                <div className='parts'>
+                    {currentCollection.parts.map(part => 
+                        <Movies 
+                            key={part.id}
+                            {...part}
+                        />    
+                    )}
+                </div>
             </CollectionPageWrapper>
         )
     } else if (currentCollection && currentCollection.error) {

@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { ActorCard, SectionHeader } from '../../common';
@@ -11,6 +12,7 @@ import actors from '../../../../assets/icons/actors.png';
 import { CastWrapper } from './styles';
 
 export const Cast = (props) => {
+    const { t } = useTranslation();
     return (
         <CastWrapper 
             className='cast' 
@@ -18,7 +20,7 @@ export const Cast = (props) => {
         >
             <SectionHeader 
                 img={actors}
-                value='Starring'
+                value={t('h2.cast')}
                 alt='Starring'
             />
             <div className='cast-list'>

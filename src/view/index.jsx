@@ -53,7 +53,6 @@ main {
 `;
 
 export const App = () => {
-    console.log(localStorage);
     return (
         <Provider store={store}>
             <BrowserRouter>

@@ -7,12 +7,12 @@ const generalSlice = createSlice({
     name: 'general',
     reducers,
     initialState: {
-        lang: 'en',
+        lang: localStorage.getItem('lang') ? localStorage.getItem('lang') : 'en',
         isFetching: {main: false, reviews: false, seasons: false, search: false, searchByParams: false},
         mode: false, // false - movies / true - tv shows on Main page
         styleMode: localStorage.getItem('styleMode') ? localStorage.getItem('styleMode') : '', // '' - light / '1' - dark Background style
         categoryValue: 'popular',
-        genres: [],
+        genres: localStorage.getItem('genres') ? JSON.parse(localStorage.getItem('genres')) : [],
         currentMovie: null,
         currentTVShow: null,
         currentPerson: null,

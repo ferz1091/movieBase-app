@@ -1,5 +1,6 @@
 // Core
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Components
 import { Movies, SectionHeader } from '../../common';
@@ -11,11 +12,12 @@ import similar from '../../../../assets/icons/similar.png';
 import { SimilarWrapper } from './styles';
 
 export const Similar = (props) => {
+    const { t } = useTranslation();
     return (
         <SimilarWrapper className='similar'>
             <SectionHeader 
                 img={similar}
-                value='Similar'
+                value={t('h2.similar')}
                 alt='Similar'
             />
             <div className='similar-list'>

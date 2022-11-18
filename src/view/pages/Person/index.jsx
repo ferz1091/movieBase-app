@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Components
-import { PersonInfoHeader, Biography, PersonMovies, Error } from '../../components/';
+import { PersonInfoHeader, Biography, PersonMovies, Error, Spinner } from '../../components/';
 
 // Tools
 import { usePerson } from '../../../tools';
@@ -30,9 +30,9 @@ export const PersonPage = () => {
 
     if (isFetching.main) {
         return (
-            <div>
-                SPINNER
-            </div>
+            <PersonWrapper>
+                <Spinner />
+            </PersonWrapper>
         )
     } else if (currentPerson && !currentPerson.error) {
         return (

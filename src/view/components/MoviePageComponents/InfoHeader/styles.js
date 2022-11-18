@@ -80,5 +80,6 @@ a:hover {
 .original-title {
     padding: 10px 25px;
     font-size: 20px;
+    font-style: oblique;
 }
 `;

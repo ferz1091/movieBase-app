@@ -70,6 +70,7 @@ a:hover {
 .original-title {
     padding: 10px 25px;
     font-size: 20px;
+    font-style: oblique;
 }
 .tagline {
     padding: 30px 15px;

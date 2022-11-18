@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useGeneral } from '../bus/general';
 
 export const useCollection = () => {
-    const { currentCollection, lang, isFetching, genres } = useSelector(state => state.general);
+    const { currentCollection, lang, isFetching, genres, styleMode } = useSelector(state => state.general);
     const { id } = useParams();
     const { getCurrentCollection } = useGeneral();
     return {
@@ -15,6 +15,7 @@ export const useCollection = () => {
         isFetching,
         genres,
         id,
+        styleMode,
         getCurrentCollection
     }
 }

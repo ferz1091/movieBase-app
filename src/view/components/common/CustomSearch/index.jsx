@@ -1,17 +1,22 @@
 // Core
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 // Tools
-import { generateYears } from '../../../../tools';
+import { generateYears, useCustomSearch } from '../../../../tools';
 
 // Styles
 import { CustomSearchWrapper } from './styles';
 
 export const CustomSearch = (props) => {
-    const [genresSelectIsOpen, toggleGenresSelect] = useState(false);
-    const [genreInput, setGenreInput] = useState('All genres');
-    const [yearSelectIsOpen, toggleYearSelect] = useState(false);
-    const [yearInput, setYearInput] = useState('During all time');
+    const { genresSelectIsOpen,
+            toggleGenresSelect,
+            genreInput,
+            setGenreInput,
+            yearSelectIsOpen,
+            toggleYearSelect,
+            yearInput,
+            setYearInput,
+            t } = useCustomSearch();
     useEffect(() => {
         if (yearSelectIsOpen) {
             toggleGenresSelect(false);
@@ -45,7 +50,7 @@ export const CustomSearch = (props) => {
                                 className='option'
                                 onClick={() => setGenreInput('All genres')}
                             >
-                                All genres
+                                {t('customSearch.genres')}
                             </span>
                             {props.genres.map(genre => 
                                 <span 
@@ -78,7 +83,7 @@ export const CustomSearch = (props) => {
                                 className='option'
                                 onClick={() => setYearInput('During all time')}
                             >
-                                During all time
+                                {t('customSearch.time')}
                             </span>
                             {generateYears().map(year => 
                                 <span 
@@ -107,7 +112,7 @@ export const CustomSearch = (props) => {
                         props.navigate('/compositions/1');
                     }}
                 >
-                    SEARCH
+                    {t('customSearch.search')}
                 </span>
             </div>
         </CustomSearchWrapper>
