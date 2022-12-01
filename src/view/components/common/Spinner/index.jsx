@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import spinnerDark from '../../../../assets/spinner_for_light.svg';
 import spinnerLight from '../../../../assets/spinner_for_dark.svg';
 
-
 // Styles
 import { SpinnerWrapper } from './styles';
 

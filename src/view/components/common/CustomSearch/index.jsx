@@ -67,7 +67,7 @@ export const CustomSearch = (props) => {
                     }
                     <div>
                         <span>
-                            {genreInput}
+                            {genreInput === 'All genres' ? t('customSearch.genres') : genreInput}
                         </span>
                         <span className='expand-genre'>
                         </span>
@@ -99,7 +99,7 @@ export const CustomSearch = (props) => {
                         null
                     }
                     <span>
-                        {yearInput}
+                        {yearInput === 'During all time' ? t('customSearch.time') : yearInput}
                         <span className='expand-year'>
                         </span>
                     </span>

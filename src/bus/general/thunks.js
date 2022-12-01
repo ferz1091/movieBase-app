@@ -191,13 +191,23 @@ export const getCurrentSearchResultsByStringThunk = createAsyncThunk('general/ge
 })
 
 // MOVIES BY PARAMS 
-export const getMoviesByParamsThunk = createAsyncThunk('general/getMoviesByParams', async ({genre, year, page, lang}) => {
+export const getMoviesByParamsThunk = createAsyncThunk('general/getMoviesByParams', async ({genre, year, page, lang, isGenresLoaded}, {dispatch}) => {
+    if (isGenresLoaded) {
+        getGenres(lang)
+            .then(genres => dispatch(generalActions.setGenres(genres)))
+            .catch(error => dispatch(generalActions.setGenres({ error: error.message })))
+    }
     const response = await movieAPI.getMoviesByParams(genre, year, page, lang);
     return response.data;
 })
 
 // TV SHOWS BY PARAMS
-export const getTVShowsByParamsThunk = createAsyncThunk('general/getTVShowsByParams', async ({genre, year, page, lang}) => {
+export const getTVShowsByParamsThunk = createAsyncThunk('general/getTVShowsByParams', async ({genre, year, page, lang, isGenresLoaded}, {dispatch}) => {
+    if (isGenresLoaded) {
+        getGenres(lang)
+            .then(genres => dispatch(generalActions.setGenres(genres)))
+            .catch(error => dispatch(generalActions.setGenres({ error: error.message })))
+    }
     const response = await movieAPI.getTVShowsByParams(genre, year, page, lang);
     return response.data;
 })

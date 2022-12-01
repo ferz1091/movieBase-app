@@ -39,7 +39,7 @@ position: relative;
 z-index: 1;
 width: 90vw;
 main {
-    position: relative;
+    position: absolute;
     margin-top: 15vh;
     min-height: 85vh;
     box-sizing: border-box;
@@ -60,11 +60,11 @@ export const App = () => {
                     <Header />
                     <ContentWrapper className='Content-container'>
                         <Routes>
-                            <Route 
+                            <Route
                                 path='/:category/:page'
                                 element={<Main />}
                             />
-                            <Route 
+                            <Route
                                 path='/movie/:id'
                                 element={<MoviePage />}
                             />
@@ -72,21 +72,21 @@ export const App = () => {
                                 path='/person/:id'
                                 element={<PersonPage />}
                             />
-                            <Route 
+                            <Route
                                 path='/tv/:id'
                                 element={<TVShowPage />}
                             />
-                            <Route 
-                                 path='/collection/:id'
-                                 element={<CollectionPage />}
+                            <Route
+                                path='/collection/:id'
+                                element={<CollectionPage />}
                             />
-                            <Route 
+                            <Route
                                 path='compositions/:page'
                                 element={<CompositionsByParamsPage />}
                             />
-                            <Route 
+                            <Route
                                 path='*'
-                                element={<Navigate to='/popular/1' replace />}    
+                                element={<Navigate to='/popular/1' replace />}
                             />
                         </Routes>
                     </ContentWrapper>

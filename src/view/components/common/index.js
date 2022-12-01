@@ -13,3 +13,4 @@ export * from './Error';
 export * from './Background';
 export * from './Switch';
 export * from './Spinner';
+export * from './SearchString';

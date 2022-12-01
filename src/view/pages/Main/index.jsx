@@ -12,18 +12,18 @@ import { MainWrapper } from './styles';
 
 export const Main = () => {
     const { category,
-            page,
-            lang,
-            isFetching,
-            genres,
-            mode,
-            movies,
-            tv_shows,
-            getMovies,
-            getTVShows,
-            categoryValue,
-            setCategory,
-            styleMode } = useMain();
+        page,
+        lang,
+        isFetching,
+        genres,
+        mode,
+        movies,
+        tv_shows,
+        getMovies,
+        getTVShows,
+        categoryValue,
+        setCategory,
+        styleMode } = useMain();
     useEffect(() => {
         if (category !== categoryValue) {
             setCategory(category);
@@ -36,20 +36,14 @@ export const Main = () => {
             getMovies(category, page, lang, movies.find(movie => movie.name === category).totalPages, !genres.length);
         }
     }, [mode, category, page, lang])
-    if (isFetching.main) {
-        return (
-            <MainWrapper className='Main page'>
-                <Spinner />
-            </MainWrapper>
-        )
-    } else {
-        return (
-            <MainWrapper 
-                className='Main page'
-                styleMode={styleMode ? 1 : 0}
-            >
-                {mode ? 
-                    <CompositionsList 
+    return (
+        <MainWrapper
+            className='Main page'
+            styleMode={styleMode ? 1 : 0}
+        >
+            {!isFetching.main ?
+                (mode ?
+                    <CompositionsList
                         modeData={tv_shows.find(item => item.name === category).data.find(item => item.page === page)}
                         compositionsData={tv_shows}
                         category={category}
@@ -57,15 +51,17 @@ export const Main = () => {
                         mode={mode}
                     />
                     :
-                    <CompositionsList 
+                    <CompositionsList
                         modeData={movies.find(item => item.name === category).data.find(item => item.page === page)}
                         compositionsData={movies}
                         category={category}
                         page={page}
                         mode={mode}
                     />
-                }
-            </MainWrapper>
-        )
-    }
+                )
+                :
+                <Spinner />
+            }
+        </MainWrapper>
+    )
 }

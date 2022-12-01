@@ -22,3 +22,9 @@ export const setTotalPages = (state, action) => {
         }
     ]
 }
+export const resetTVShows = (state, action) => {
+    return [
+        { name: 'popular', data: [], totalPages: null },
+        { name: 'top_rated', data: [], totalPages: null }
+    ]
+}

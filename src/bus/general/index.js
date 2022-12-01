@@ -42,11 +42,11 @@ export const useGeneral = () => {
     function getCurrentSearchResultByString(query, page, lang) {
         dispatch(getCurrentSearchResultsByStringThunk({query, page, lang}))
     }
-    function getMoviesByParams(genre, year, page, lang) {
-        dispatch(getMoviesByParamsThunk({genre, year, page, lang}))
+    function getMoviesByParams(genre, year, page, lang, isGenresLoaded) {
+        dispatch(getMoviesByParamsThunk({genre, year, page, lang, isGenresLoaded}))
     }
-    function getTVShowsByParams(genre, year, page, lang) {
-        dispatch(getTVShowsByParamsThunk({genre, year, page, lang}))
+    function getTVShowsByParams(genre, year, page, lang, isGenresLoaded) {
+        dispatch(getTVShowsByParamsThunk({genre, year, page, lang, isGenresLoaded}))
     }
     function createSeasonsInfo(length) {
         dispatch(generalActions.createSeasonsInfo(length))

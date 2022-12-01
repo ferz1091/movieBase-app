@@ -52,7 +52,7 @@ export const toggleLanguage = (state, action) => {
         currentTVShow: null,
         currentPerson: null,
         currentCollection: null,
-        compositionsByParams: { data: [], totalPages: null },
+        compositionsByParams: { data: [], totalPages: null, params: state.compositionsByParams.params },
         searchResults: []
     }
 }

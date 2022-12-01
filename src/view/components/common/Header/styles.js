@@ -78,7 +78,7 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
 }
 .search-focused {
     position: absolute;
-    bottom: 10px; left: 5px;
+    bottom: 10px; right: 10px;
     input {
         min-width: calc(90vw - 19px);
         border: 1px solid white;
@@ -90,6 +90,32 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
     }
     input::placeholder {
         color: ${props => props.styleMode ? 'rgb(150, 150, 150)' : 'rgb(90, 90, 90)'};
+    }
+}
+@keyframes input_in {
+    0% {
+        min-width: 25vw;
+    }
+    100% {
+        min-width: calc(90vw - 19px);
+    }
+}
+@keyframes input_out {
+    0% {
+        min-width: calc(90vw - 19px);
+    }
+    100% {
+        min-width: 25vw;
+    }
+}
+.search-enter-active {
+    input {
+        animation: input_in 300ms ease-out; 
+    }
+}
+.search-exit-active {
+    input {
+        animation: input_out 300ms ease-out;
     }
 }
 .search-results {
@@ -114,15 +140,6 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
     .result:hover {
         color: ${props => props.styleMode ? 'white' : 'black'};
         background-color: ${props => props.styleMode ? 'rgb(50, 50, 50)' : 'rgb(220, 220, 220)'};
-    }
-}
-.search-focused, .search {
-    .spinner {
-        top: 0; left: calc(100% - 30px);
-        transform: none;
-        img {
-            width: 20px;
-        }
     }
 }
 .search-button {
@@ -162,11 +179,43 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
 }
 .panel {
     position: absolute;
-    z-index: 1;
     top: 100%;
+    opacity: ${props => props.genresMode ? '1' : '0'};
+    z-index: 1;
     width: 90vw;
     font-weight: 400;
     box-sizing: border-box;
+    overflow: hidden;
+}
+@keyframes panel_in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes panel_out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.panel-enter-active {
+    animation: panel_in 100ms linear;
+}
+.panel-enter-done {
+    opacity: 1;
+    top: 100%;
+}
+.panel-exit-active {
+    animation: panel_out 100ms linear;
+}
+.panel-exit-done {
+    top: 0%;
+    opacity: 0;
 }
 .genres {
     display: grid;
@@ -189,55 +238,19 @@ color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'black'};
         box-shadow: 1px 1px 2px black;
     }
 }
-.lang-select {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 2;
-    top: -4px; right: 50px;
-    width: 100px;
-    box-sizing: border-box;
-    overflow: hidden;
-    background-color: ${props => props.styleMode ? 'black' : 'white'};
-    font-size: 14px;
-    color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'rgb(50, 50, 50)'};
-    border-radius: 15px;
-    border: ${props => props.styleMode ? '1px solid rgb(40, 40, 40)' : 'none'};
-    box-shadow: ${props => props.langSelectIsOpen ? 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px' : ''};
+@keyframes optionIn {
+    0% {
+        opacity: 0;
+        bottom: 20px;
+    }
+    100% {
+        opacity: 1;
+        bottom: 0px;
+    }
+}
+.select-enter-active {
     .option {
-        position: relative;
-        cursor: pointer;
-        padding: ${props => props.langSelectIsOpen ? '10px' : '2px 10px'};
-        transition: all linear 0.1s;
-    }
-    .option:hover {
-        background-color: ${props => props.styleMode ? 'rgb(40, 40, 40)' : 'rgb(200, 200, 200)'};
-    }
-    .option:active {
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-        transform: translate(1%, 5%);
-    }
-    .arrow-lang-up, .arrow-lang-down {
-        position: absolute;
-        top: 50%; right: 5px;
-        transform: translate(0, -50%);
-        margin: 0;
-    }
-    .arrow-lang-up {
-        transform: rotate(180deg) translate(0, 50%);
-    }
-    .current {
-        border-radius: 15px;
-        color: ${props => props.styleMode ? 'rgb(180, 180, 180)' : 'black'};
-        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    }
-    .current:hover {
-        cursor: ${props => props.langSelectIsOpen ? 'not-allowed' : 'pointer'};
-        background-color: ${props => props.styleMode ? 'black' : 'white'};
-    }
-    .current:active {
-        box-shadow: none;
-        transform: none;
+        animation: optionIn 300ms linear;
     }
 }
 @media (max-width: 768px) {
@@ -315,4 +328,56 @@ color: ${props =>
                     props.vote < 7 ? '#f7f10c' :
                         props.vote < 8 ? '#8fce00' : '#00a105'
 };
+`;
+export const LangSelect = styled.div`
+display: flex;
+flex-direction: column;
+position: absolute;
+z-index: 2;
+top: -4px; right: 50px;
+width: 100px;
+box-sizing: border-box;
+overflow: hidden;
+background-color: ${props => props.styleMode ? 'black' : 'white'};
+font-size: 14px;
+color: ${props => props.styleMode ? 'rgb(235, 235, 235)' : 'rgb(50, 50, 50)'};
+border-radius: 15px;
+border: ${props => props.styleMode ? '1px solid rgb(40, 40, 40)' : 'none'};
+box-shadow: ${props => props.langSelectIsOpen ? 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px' : ''};
+.option {
+    position: relative;
+    cursor: pointer;
+    padding: ${props => props.langSelectIsOpen ? '10px' : '2px 10px'};
+    transition: all linear 0.1s;
+}
+.option:hover {
+    background-color: ${props => props.styleMode ? 'rgb(40, 40, 40)' : 'rgb(200, 200, 200)'};
+}
+.option:active {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    transform: translate(1%, 5%);
+}
+.arrow-lang-up, .arrow-lang-down {
+    position: absolute;
+    top: 50%; right: 5px;
+    transform: translate(0, -50%);
+    margin: 0;
+}
+.arrow-lang-up {
+    transform: rotate(180deg) translate(0, 50%);
+}
+.current {
+    animation: none !important;
+    border-radius: 15px;
+    color: ${props => props.styleMode ? 'rgb(180, 180, 180)' : 'black'};
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.current:hover {
+    cursor: ${props => props.langSelectIsOpen ? 'not-allowed' : 'pointer'};
+    background-color: ${props => props.styleMode ? 'black' : 'white'};
+}
+.current:active {
+    box-shadow: none;
+    transform: none;
+}
 `;

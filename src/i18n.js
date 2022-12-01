@@ -76,6 +76,15 @@ i18n
                     genres: 'All genres',
                     time: 'During all time',
                     search: 'SEARCH'
+                },
+                byParams: {
+                    best: 'best',
+                    of: 'of',
+                    all_time: 'all time'
+                },
+                searchString: {
+                    no_matches: 'No matches found',
+                    error: 'Something goes wrong'
                 }
             }
         },
@@ -143,6 +152,15 @@ i18n
                     genres: 'Alle genres',
                     time: 'Während aller Zeit',
                     search: 'SUCHE'
+                },
+                byParams: {
+                    best: 'beste',
+                    of: 'von',
+                    all_time: 'die ganze Zeit'
+                },
+                searchString: {
+                    no_matches: 'Keine Treffer gefunden',
+                    error: 'Etwas läuft schief'
                 }
             }
         },
@@ -210,6 +228,15 @@ i18n
                     genres: 'Tous les genres',
                     time: 'Tout le temps',
                     search: 'CHERCHER'
+                },
+                byParams: {
+                    best: 'meilleur',
+                    of: 'pour',
+                    all_time: 'tout le temps'
+                },
+                searchString: {
+                    no_matches: 'Pas de résultat trouvé',
+                    error: 'Quelque chose ne va pas'
                 }
             }
         },
@@ -277,6 +304,15 @@ i18n
                     genres: 'Todos los generos',
                     time: 'Todo el tiempo',
                     search: 'BÚSQUEDA'
+                },
+                byParams: {
+                    best: 'mejor',
+                    of: 'de',
+                    all_time: 'todo el tiempo'
+                },
+                searchString: {
+                    no_matches: 'No se han encontrado resultados',
+                    error: 'Algo va mal'
                 }
             }
         },
@@ -344,6 +380,15 @@ i18n
                     genres: 'Усi жанри',
                     time: 'За весь час',
                     search: 'ПОШУК'
+                },
+                byParams: {
+                    best: 'найкращі',
+                    of: 'за',
+                    all_time: 'весь час'
+                },
+                searchString: {
+                    no_matches: 'Нічого не знайдено',
+                    error: 'Щось пішло не так'
                 }
             }
         }

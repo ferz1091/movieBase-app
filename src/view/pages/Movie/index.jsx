@@ -2,14 +2,16 @@
 import React, { useEffect } from 'react';
 
 // Component
-import { VideoPlayer, 
-        MovieInfoHeader, 
-        Cast, 
-        Clips,
-        Reviews, 
-        Similar, 
-        Error, 
-        Spinner } from '../../components';
+import {
+    VideoPlayer,
+    MovieInfoHeader,
+    Cast,
+    Clips,
+    Reviews,
+    Similar,
+    Error,
+    Spinner
+} from '../../components';
 
 // Bus
 import { useGeneral } from '../../../bus/general';
@@ -21,10 +23,10 @@ import { useMovie } from '../../../tools';
 import { MoviePageWrapper } from './styles';
 
 export const MoviePage = () => {
-    const { getCurrentMovie, 
-            getCurrentMovieReviewsByPage, 
-            resetCompositionsByParams, 
-            getMoviesByParams } = useGeneral();
+    const { getCurrentMovie,
+        getCurrentMovieReviewsByPage,
+        resetCompositionsByParams,
+        getMoviesByParams } = useGeneral();
     const { reviewPage,
         setReviewPage,
         videoPlayerMode,
@@ -56,7 +58,7 @@ export const MoviePage = () => {
                 videosAmount={currentMovie.videos && !currentMovie.videos.error ? currentMovie.videos.filter(video => video.site === 'YouTube').length : null}
                 styleMode={styleMode ? 1 : 0}
             >
-                <MovieInfoHeader 
+                <MovieInfoHeader
                     currentMovie={currentMovie}
                     lang={lang}
                     resetCompositionsByParams={resetCompositionsByParams}
@@ -71,12 +73,12 @@ export const MoviePage = () => {
                     :
                     null
                 }
-                {!currentMovie.cast.error ? 
-                    <Cast 
-                        cast={currentMovie.cast} 
+                {!currentMovie.cast.error ?
+                    <Cast
+                        cast={currentMovie.cast}
                         styleMode={styleMode ? 1 : 0}
-                    /> 
-                    : 
+                    />
+                    :
                     null
                 }
                 {!currentMovie.reviews.error && currentMovie.reviews.totalPages ?

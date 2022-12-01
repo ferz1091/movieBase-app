@@ -8,9 +8,10 @@ import i18n from 'i18next';
 // Bus
 import { useGeneral } from '../../../../bus/general';
 import { useMovies } from '../../../../bus/movies';
+import { useTVShows } from '../../../../bus/tv_shows';
 
 // Components
-import { CustomSearch, Switch, Spinner } from '../';
+import { CustomSearch, Switch, Spinner, SearchString } from '../';
 
 // Constants
 import { languages } from '../../../../init/constants';
@@ -20,7 +21,8 @@ import logo_light from '../../../../assets/icons/logo-light.png'
 import logo_dark from '../../../../assets/icons/logo-dark.png'
 
 // Styles
-import { HeaderWrapper, RatingWrapper } from './styles';
+import { HeaderWrapper, RatingWrapper, LangSelect } from './styles';
+import { CSSTransition } from 'react-transition-group';
 
 export const Header = () => {
     const { 
@@ -34,6 +36,7 @@ export const Header = () => {
         toggleLanguage,
         resetGenres } = useGeneral();
     const { resetMovies } = useMovies();
+    const { resetTVShows } = useTVShows();
     const navigate = useNavigate();
     const { mode, 
             lang, 
@@ -42,29 +45,17 @@ export const Header = () => {
             genres, 
             categoryValue, 
             styleMode } = useSelector(state => state.general);
-    const searchRef = useRef();
-    const [searchString, setSearchString] = useState('');
-    const [isFocusSearch, toggleIsFocusSearch] = useState(false);
+    const selectRef = useRef();
+    const moviesPanel = useRef();
+    const tvPanel = useRef();
     const [genresMode, setGenresMode] = useState(null);
     const [langSelectIsOpen, toggleLangSelect] = useState(false);
-    const location = useLocation();
     const { t } = useTranslation();
-    useEffect(() => {
-        if (searchResults.length) {
-            resetSearchResults();
-        }
-        if (searchString.length > 2) {
-            getCurrentSearchResultByString(searchString, 1, lang);
-        }
-    }, [searchString])
-    useEffect(() => {
-        searchRef.current.value = '';
-        setSearchString('');
-    }, [location.pathname])
     return (
         <HeaderWrapper 
             styleMode={styleMode}
             langSelectIsOpen={langSelectIsOpen}
+            genresMode={genresMode}
         >
             <div className='logo'>
                 <img 
@@ -89,17 +80,23 @@ export const Header = () => {
                     className={!mode ? 'mode active' : 'mode'}
                     onMouseOver={() => {
                         if (genres.length) {
-                            setGenresMode('movies')
+                            setGenresMode('movies');
                         }
                     }}
-                    onMouseOut={() => setGenresMode(null)}
+                    onMouseOut={() => {
+                            setGenresMode(null);
+                    }}
                 >
                     {t('switch_mode.movies')}
-                    {genresMode === 'movies' ?
-                        <>
-                            <span className='arrow-up'>
-                            </span>
-                            <div className='panel'>
+                    <span className={genresMode === 'movies' ? 'arrow-up' : 'arrow-down'}></span>
+                    <CSSTransition
+                        in={genresMode === 'movies'}
+                        timeout={100}
+                        classNames='panel'
+                        nodeRef={moviesPanel}
+                        unmountOnExit
+                    >
+                            <div className='panel' ref={moviesPanel}>
                                 <div className='genres'>
                                     {genres.length ? 
                                         (genres.filter(genre => !genre.mode).map(genre =>
@@ -133,11 +130,7 @@ export const Header = () => {
                                     null
                                 }
                             </div>
-                        </>
-                        :
-                        <span className='arrow-down'>
-                        </span>
-                    }
+                        </CSSTransition>
                 </span>
                 <input 
                     type='checkbox'
@@ -154,88 +147,100 @@ export const Header = () => {
                     className={mode ? 'mode active' : 'mode'}
                     onMouseOver={() => {
                         if (genres.length) {
-                            setGenresMode('tv')
+                            setGenresMode('tv');
                         }
-                    }
-                    }
+                    }}
                     onMouseOut={() => setGenresMode(null)}
                 >
                     {t('switch_mode.tv_shows')}
-                    {genresMode === 'tv' ?
-                        <>
-                            <span className='arrow-up'>
-                            </span>
-                            <div className='panel'>
-                                <div className='genres'>
-                                    {genres.length ?
-                                        (genres.filter(genre => genre.mode).map(genre =>
-                                            <span 
-                                                className='genre'
-                                                key={genre.id}
-                                                onClick={() => {
-                                                    setGenresMode(null);
-                                                    resetCompositionsByParams();
-                                                    getTVShowsByParams(genre.id, null, 1, lang);
-                                                    navigate('/compositions/1');
-                                                }}
-                                            >
-                                                {genre.name}
-                                            </span>
-                                        ))
-                                        :
-                                        null
-                                    }
-                                </div>
-                                <CustomSearch 
-                                    genres={genres.filter(genre => genre.mode)} 
-                                    getCompositionsByParams={getTVShowsByParams}
-                                    lang={lang}
-                                    resetCompositionsByParams={resetCompositionsByParams}
-                                    navigate={navigate}
-                                    styleMode={styleMode ? 1 : 0}
-                                />
-                            </div>
-                        </>
-                        :
-                        <span className='arrow-down'>
-                        </span>
-                    }
-                </span>
-                <div className='lang-select'>
-                    <span 
-                        className='option current'
-                        onClick={() => {
-                            if (!langSelectIsOpen) {
-                                toggleLangSelect(true);
-                            } else {
-                                toggleLangSelect(false);
-                            }
-                        }}
+                    <span className={genresMode === 'tv' ? 'arrow-up' : 'arrow-down'}></span>
+                    <CSSTransition
+                        in={genresMode === 'tv'}
+                        timeout={100}
+                        classNames='panel'
+                        nodeRef={tvPanel}
+                        unmountOnExit
                     >
-                        {languages.find(language => language.iso === lang).name}
-                        <span className={langSelectIsOpen ? 'arrow-lang-up' : 'arrow-lang-down'}>
-                        </span>
-                    </span>
-                    {langSelectIsOpen ? 
-                        languages.filter(language => language.iso !== lang).map(language => 
-                            <span 
-                                className='option'
-                                key={language.iso}
-                                onClick={() => {
-                                    i18n.changeLanguage(language.iso)
-                                    toggleLanguage(language.iso);
-                                    resetGenres();
-                                    resetMovies();
+                        <div className='panel' ref={tvPanel}>
+                            <div className='genres'>
+                                {genres.length ?
+                                    (genres.filter(genre => genre.mode).map(genre =>
+                                        <span 
+                                            className='genre'
+                                            key={genre.id}
+                                            onClick={() => {
+                                                setGenresMode(null);
+                                                resetCompositionsByParams();
+                                                getTVShowsByParams(genre.id, null, 1, lang);
+                                                navigate('/compositions/1');
+                                            }}
+                                        >
+                                            {genre.name}
+                                        </span>
+                                    ))
+                                    :
+                                    null
+                                }
+                            </div>
+                            <CustomSearch 
+                                genres={genres.filter(genre => genre.mode)} 
+                                getCompositionsByParams={getTVShowsByParams}
+                                lang={lang}
+                                resetCompositionsByParams={resetCompositionsByParams}
+                                navigate={navigate}
+                                styleMode={styleMode ? 1 : 0}
+                            />
+                        </div>
+                    </CSSTransition>
+                </span>
+                <CSSTransition
+                    in={langSelectIsOpen}
+                    timeout={300}
+                    nodeRef={selectRef}
+                    classNames='select'
+                >
+                    <LangSelect
+                        className='lang-select'
+                        ref={selectRef}
+                        styleMode={styleMode}
+                        langSelectIsOpen={langSelectIsOpen}
+                    >
+                        <span
+                            className='option current'
+                            onClick={() => {
+                                if (!langSelectIsOpen) {
+                                    toggleLangSelect(true);
+                                } else {
                                     toggleLangSelect(false);
-                                }}
-                            >
-                                {language.name}
+                                }
+                            }}
+                        >
+                            {languages.find(language => language.iso === lang).name}
+                            <span className={langSelectIsOpen ? 'arrow-lang-up' : 'arrow-lang-down'}>
                             </span>
-                        )
-                        :
-                        null
-                    }
-                </div>
+                        </span>
+                        {langSelectIsOpen ? 
+                            languages.filter(language => language.iso !== lang).map(language => 
+                                <span 
+                                    className='option'
+                                    key={language.iso}
+                                    onClick={() => {
+                                        i18n.changeLanguage(language.iso)
+                                        toggleLanguage(language.iso);
+                                        resetGenres();
+                                        resetMovies();
+                                        resetTVShows();
+                                        toggleLangSelect(false);
+                                    }}
+                                >
+                                    {language.name}
+                                </span>
+                            )
+                            :
+                            null
+                        }
+                    </LangSelect>
+                </CSSTransition>
                 <Switch
                     toggleStyle={toggleStyle}
                     styleMode={styleMode} 
@@ -273,82 +278,15 @@ export const Header = () => {
                     </>
                 }
             </div>
-            {!isFocusSearch ?
-                <span 
-                    className='search-button'
-                    onClick={() => toggleIsFocusSearch(true)}
-                >
-                </span>
-                :
-                null
-            }      
-            <div className={isFocusSearch ? 'search-focused' : 'search'}>
-                <input
-                    onFocus={() => toggleIsFocusSearch(true)}
-                    onBlur={() => setTimeout(() => {
-                        toggleIsFocusSearch(false)
-                    }, 500)}
-                    ref={searchRef} 
-                    type='text' 
-                    onChange={() => setSearchString(searchRef.current.value)} 
-                    placeholder={t('switch_category.search')}
-                />
-                {isFetching.search ?
-                    <Spinner />
-                    :
-                    null
-                }
-                <div className='search-results'>
-                    {!isFetching.search ? 
-                        (searchResults.length && isFocusSearch ?
-                            (searchResults.slice(0, 5).map(result =>
-                                <div 
-                                    className='result'
-                                    key={result.id}
-                                    onClick={() => {
-                                        toggleIsFocusSearch(false);
-                                        navigate(result.title ? `/movie/${result.id}` : `/tv/${result.id}`);
-                                    }}
-                                >
-                                    {result.title ? 
-                                        result.title.length > 59 ? 
-                                            `${result.title.slice(0, 59)}...` 
-                                            : 
-                                            result.title 
-                                        : 
-                                        result.name.length > 59 ? 
-                                            `${result.name.slice(0, 59)}...` 
-                                            : 
-                                            result.name
-                                    }
-                                    <RatingWrapper
-                                        vote={result.vote_average}
-                                        className='rating'
-                                    >
-                                        ★ {result.vote_average}
-                                    </RatingWrapper>
-                                </div>
-                            ))
-                            :
-                            (searchString.length > 2 && !searchResults.length && !searchResults.error ?
-                                <div className='result-no-matches'>
-                                    No matches found
-                                </div>
-                                :
-                                (searchResults.error ?
-                                    <div className='result-error'>
-                                        Something goes wrong
-                                    </div>
-                                    :
-                                    null    
-                                )
-                            )
-                        )
-                        :
-                        null
-                    }
-                </div>
-            </div>
+            <SearchString 
+                navigate={navigate} 
+                isFetching={isFetching} 
+                searchResults={searchResults}
+                resetSearchResults={resetSearchResults}
+                getCurrentSearchResultByString={getCurrentSearchResultByString}
+                lang={lang}
+                t={t}
+            />
         </HeaderWrapper>
     )
 }

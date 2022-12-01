@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 export const useCustomSearch = () => {
     const { t } = useTranslation();
     const [genresSelectIsOpen, toggleGenresSelect] = useState(false);
-    const [genreInput, setGenreInput] = useState(t('customSearch.genres'));
+    const [genreInput, setGenreInput] = useState('All genres');
     const [yearSelectIsOpen, toggleYearSelect] = useState(false);
-    const [yearInput, setYearInput] = useState(t('customSearch.time'));
+    const [yearInput, setYearInput] = useState('During all time');
     return {
         genresSelectIsOpen, 
         toggleGenresSelect,

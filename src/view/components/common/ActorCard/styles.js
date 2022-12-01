@@ -6,6 +6,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: calc(1px + 19 * (100vw / 1400));
+color: ${props => props.styleMode ? 'rgb(235,235,235)' : 'black'};
 .actor-photo {
     cursor: pointer;
     width: 150px;
