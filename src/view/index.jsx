@@ -39,7 +39,7 @@ position: relative;
 z-index: 1;
 width: 90vw;
 main {
-    position: absolute;
+    position: relative;
     margin-top: 15vh;
     min-height: 85vh;
     box-sizing: border-box;
