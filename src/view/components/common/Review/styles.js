@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 // Assets
-import author_null from '../../../../assets/actor_null.png';
+import author_null from '../../../../assets/actor_null.jpg';
 import show from '../../../../assets/icons/show.png';
 import hide from '../../../../assets/icons/hide.png';
 import show_hover from '../../../../assets/icons/show_hover.png';

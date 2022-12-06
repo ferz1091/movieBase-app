@@ -7,7 +7,7 @@ import general from '../../bus/general/slice';
 import movies from '../../bus/movies/slice';
 import tv from '../../bus/tv_shows/slice';
 
-const logger = createLogger({
+const logger = process.env.NODE_ENV === 'development' ? createLogger({
     duration: true,
     collapsed: true,
     colors: {
@@ -17,7 +17,7 @@ const logger = createLogger({
         nextState: () => '#800080',
         error: () => '#FF0000',
     },
-})
+}) : [];
 
 export const store = configureStore({
     reducer: {

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { InfoProperty, Social } from '../../common';
 
 // Assets
-import person_null from '../../../../assets/actor_null.png';
+import person_null from '../../../../assets/actor_null.jpg';
 import person from '../../../../assets/icons/person.png';
 
 // Styles

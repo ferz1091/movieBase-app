@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 // Assets
-import actor_null from '../../../../assets/actor_null.png';
+import actor_null from '../../../../assets/actor_null.jpg';
 
 // Styles
 import { ActorCardWrapper } from './styles';
