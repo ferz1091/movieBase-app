@@ -1,4 +1,4 @@
-# Todo-list
+# MovieBase App
 
 This project was bootstrapped with Create React App.
 MovieBase application - view information about the latest in the film/tv show industry.
